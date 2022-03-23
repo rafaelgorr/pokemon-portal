@@ -1,0 +1,13 @@
+.test {
+  position: absolute;
+  font-size: 25px;
+  top: 50%;
+  right: 50%;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}

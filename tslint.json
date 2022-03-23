@@ -1,0 +1,40 @@
+{
+  "extends": ["tslint:latest", "tslint-react", "tslint-config-standard"],
+  "linterOptions": {
+    "exclude": ["**/node_modules/**", "**/mock/**", "./**/*.test.ts", "./**/*.d.ts"]
+  },
+  "rules": {
+    "ordered-imports": false,
+    "interface-name": false,
+    "no-submodule-imports": false,
+    "no-reference": false,
+    "no-console": false,
+    "no-namespace": false,
+    "object-literal-sort-keys": false,
+    "max-classes-per-file": false,
+    "jsx-boolean-value": false,
+    "jsx-no-multiline-js": false,
+    "jsx-no-lambda": false,
+    "no-empty-interface": false,
+    "no-implicit-dependencies": false,
+    "no-trailing-whitespace": false,
+    "max-line-length": false,
+    "eofline": false,
+    "space-before-function-paren": false,
+    "semicolon": false,
+    "arrow-parens": false,
+    "no-consecutive-blank-lines": false,
+    "trailing-comma": false,
+    "member-ordering": false,
+    "quotemark": false,
+    "no-empty": false,
+    "comment-format": false,
+    "jsx-curly-spacing": false,
+    "brace-style": false,
+    "ter-indent": false,
+    "object-curly-spacing": false,
+    "no-unnecessary-type-assertion": false,
+    "no-object-literal-type-assertion": false,
+    "jsx-wrap-multiline": false
+  }
+}
