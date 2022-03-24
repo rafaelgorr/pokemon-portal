@@ -17,15 +17,16 @@ export const flexColumn: CSSProperties = {
 }
 
 const getPrimaryColor = (mode: PaletteMode) => (mode === 'dark' ? '#0075BE' : '#0075BE')
+const getSecondaryColor = (mode: PaletteMode) => (mode === 'dark' ? '#D5A100' : '#D5A100')
 
 const getPalett = (mode: PaletteMode): PaletteOptions => ({
   mode,
   primary: {
     main: getPrimaryColor(mode),
-    contrastText: '#fafafa',
+    contrastText: '#D5A100',
   },
   secondary: {
-    main: getPrimaryColor(mode),
+    main: getSecondaryColor(mode),
     contrastText: '#fafafa',
   },
   error: {

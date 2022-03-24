@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 
-import { initialState as patientInitialState, reducer as pokemon } from './pokemon'
+import { initialState as moveInitialState, reducer as move } from './move'
+import { initialState as pokemonInitialState, reducer as pokemon } from './pokemon'
 
 export const initialState = {
-  pokemon: patientInitialState,
+  pokemon: pokemonInitialState,
+  move: moveInitialState,
 }
 
 export type UCState = typeof initialState
 
-export default combineReducers<UCState>({ pokemon })
+export default combineReducers<UCState>({ pokemon, move })

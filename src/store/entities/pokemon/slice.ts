@@ -11,7 +11,7 @@ type Adapters = {
 
 export const adapters: WithEntityAdapter<Adapters> = {
   pokemons: createEntityAdapter<DomainPokemon>({
-    selectId: (pokemon) => pokemon.name,
+    selectId: (pokemon) => pokemon.id,
     sortComparer: (a, b) => (Number(a.id) < Number(b.id) ? -1 : 1),
   }),
 } as const

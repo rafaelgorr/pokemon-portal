@@ -55,8 +55,8 @@ const cssLoader = (env) => ({
   test: /\.(s?)css$/,
   use: [
     env.production
-      ? MiniCssExtractPlugin.loader // injeta tags de link para os arquivos css no html
-      : 'style-loader', // injeta o css processados diretamente no arquivo html
+      ? MiniCssExtractPlugin.loader // inject link tags for css file in html
+      : 'style-loader', //  inject parsed css directly to html file
     {
       loader: 'css-loader',
       options: {
@@ -65,7 +65,7 @@ const cssLoader = (env) => ({
         url: false,
       },
     },
-    'postcss-loader', // cria uma AST dos arquivos .css para serem processados por plugins
+    'postcss-loader', // create a AST of the .css files for parsed plugins
   ],
 })
 
@@ -249,12 +249,8 @@ const webpackConfig = (env) => {
     resolve,
     output: output(env),
     optimization: {
-      minimize: true,
-      minimizer: [
-        // For webpack@5 you can use the `...` syntax to extend existing minimizers (i.e. `terser-webpack-plugin`), uncomment the next line
-        `...`,
-        new CssMinimizerPlugin(),
-      ],
+      minimize: env.production === 'production',
+      minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
     },
     experiments: {
       topLevelAwait: true,

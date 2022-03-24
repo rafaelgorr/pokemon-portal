@@ -1,7 +1,11 @@
-export type DomainPokemonType = {
+export type DomainPokemonResource = {
   id: string
   name: string
 }
+
+export type DomainPokemonType = DomainPokemonResource
+
+export type DomainPokemonMoveType = DomainPokemonResource
 
 export type DomainPokemonMove = {
   id: string

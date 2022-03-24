@@ -8,7 +8,7 @@ import {
   DomainPokemonMove,
   DomainPokemonType
 } from '../../interfaces/Pokemon'
-import { getIdFromUrl } from '../../shared'
+import { getIdFromUrl } from './shared'
 
 export const mapListPokemonToDomain = (input: NamedAPIResource): DomainPokemon => ({
   id: getIdFromUrl(input.url),
@@ -26,7 +26,7 @@ const mapPokemonPokemonAbilityToDomain = (ability: PokemonAbility): DomainPokemo
   isHidden: ability.is_hidden,
 })
 
-const mapPokemonPokemonMoveToDomain = (move: PokemonMove): DomainPokemonMove => ({
+const mapListPokemonMoveToDomain = (move: PokemonMove): DomainPokemonMove => ({
   id: getIdFromUrl(move.move.url),
   name: capitalFirstLatter(move.move.name),
 })
@@ -38,5 +38,5 @@ export const mapPokemonToDomain = (pkm: Pokemon): Required<DomainPokemon> => ({
   abilities: pkm.abilities.map(mapPokemonPokemonAbilityToDomain),
   height: pkm.height / 10,
   weight: pkm.weight / 10,
-  moves: pkm.moves.map(mapPokemonPokemonMoveToDomain),
+  moves: pkm.moves.map(mapListPokemonMoveToDomain),
 })

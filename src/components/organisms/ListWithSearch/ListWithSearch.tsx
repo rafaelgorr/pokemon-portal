@@ -19,7 +19,7 @@ const getFuseOptions = <T extends object>(...keys: string[]): Fuse.IFuseOptions<
   keys,
 })
 
-type BaseProps<Item> = {
+type BaseProps<Item extends { id?: string }> = {
   listItems: Item[]
   fetching?: boolean
   listItemProps: {

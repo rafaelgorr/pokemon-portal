@@ -34,7 +34,7 @@ export const getPokemons = async (input?: GetPokemons['input']): Promise<GetPoke
 export const getPokemonById = async (
   input: GetPokemonById['input']
 ): Promise<GetPokemonById['output']> => {
-  const pokemons = await pokemonClient.getPokemonById(Number(input.id))
+  const pokemon = await pokemonClient.getPokemonById(Number(input.id))
 
-  return mapPokemonToDomain(pokemons)
+  return mapPokemonToDomain(pokemon)
 }
