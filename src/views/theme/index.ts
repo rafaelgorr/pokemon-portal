@@ -3,7 +3,7 @@ import green from '@mui/material/colors/green'
 import red from '@mui/material/colors/red'
 import yellow from '@mui/material/colors/yellow'
 import { createTheme } from '@mui/material/styles'
-import { SxProps } from '@mui/system'
+import { SxProps, Theme } from '@mui/system'
 import { CSSProperties } from '@mui/system/CSSProperties'
 
 export const defaultToobarHeight = 64
@@ -54,6 +54,9 @@ export const theme = (mode: 'dark' | 'light') =>
       fontFamily: 'Helvetica',
     },
     components: {
+      MuiCard: {
+        styleOverrides: {},
+      },
       MuiCssBaseline: {
         styleOverrides: {
           '&::-webkit-scrollbar': {
@@ -90,5 +93,6 @@ export const theme = (mode: 'dark' | 'light') =>
     },
   })
 
-export type SxTheme = Record<string, SxProps<typeof theme>>
+export type SxTheme = Record<string, SxProps<Theme>>
+
 export const createSxStyles = <T extends SxTheme>(obj: T) => obj

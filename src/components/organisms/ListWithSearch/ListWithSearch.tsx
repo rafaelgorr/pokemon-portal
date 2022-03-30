@@ -1,8 +1,17 @@
 import Fuse from 'fuse.js'
 import React, { useMemo, useState } from 'react'
 
-import { Search as SearchIcon } from '@mui/icons-material'
-import { Box, InputAdornment, LinearProgress, List, Stack, TextField } from '@mui/material'
+import { ClearOutlined, Search as SearchIcon } from '@mui/icons-material'
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  LinearProgress,
+  List,
+  Stack,
+  TextField,
+  TextFieldProps
+} from '@mui/material'
 import { useTheme } from '@mui/system'
 import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
 
@@ -56,7 +65,15 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
   const fuseOptions: Fuse.IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
   const fuse = useMemo(() => new Fuse(listItems as T[], fuseOptions), [listItems])
 
+  // const [isPending, startTransation] = useTransition()
   const [search, setSearch] = useState('')
+
+  const handleChangeSearch: TextFieldProps['onChange'] = (evt) => {
+    // startTransation(() => {
+    //   setSearch(evt.target.value)
+    // })
+    setSearch(evt.target.value)
+  }
 
   const filteredItems = useMemo(() => {
     if (search) return fuse.search(search).map(({ item }) => item)
@@ -71,7 +88,7 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
           size="small"
           placeholder="Search"
           value={search}
-          onChange={(evt) => setSearch(evt.target.value)}
+          onChange={handleChangeSearch}
           sx={{ width: '100%' }}
           focused
           InputProps={{
@@ -80,13 +97,13 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
                 <SearchIcon color="primary" />
               </InputAdornment>
             ),
-            // endAdornment: search ? (
-            //   <InputAdornment position="start">
-            //     <IconButton onClick={() => setSearch('')}>
-            //       <ClearOutlinedIcon color="primary" />
-            //     </IconButton>
-            //   </InputAdornment>
-            // ) : undefined,
+            endAdornment: search ? (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setSearch('')}>
+                  <ClearOutlined color="primary" />
+                </IconButton>
+              </InputAdornment>
+            ) : undefined,
           }}
           disabled={fetching}
         />

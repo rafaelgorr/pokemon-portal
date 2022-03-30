@@ -1,4 +1,4 @@
-import { DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import {
   fulfilledActions as pokemonFulfilledActions
 } from '@pokemon-portal/src/store/useCases/pokemon'
@@ -6,11 +6,11 @@ import { WithEntityAdapter, WithEntityState } from '@pokemon-portal/utils/method
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
 type Adapters = {
-  pokemons: DomainPokemon
+  pokemons: DomainPokemon | DomainListPokemon
 }
 
 export const adapters: WithEntityAdapter<Adapters> = {
-  pokemons: createEntityAdapter<DomainPokemon>({
+  pokemons: createEntityAdapter<DomainPokemon | DomainListPokemon>({
     selectId: (pokemon) => pokemon.id,
     sortComparer: (a, b) => (Number(a.id) < Number(b.id) ? -1 : 1),
   }),

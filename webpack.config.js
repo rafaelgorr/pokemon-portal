@@ -181,7 +181,7 @@ const output = (env) => ({
   chunkFilename: env.production ? 'js/chunks/[name].[chunkhash].js' : 'js/chunks/[name].js',
   filename: env.production ? 'js/[name].[contenthash].js' : 'js/[name].js',
   path: DIST,
-  publicPath: '',
+  publicPath: '/',
 })
 
 // const devServer = (env) => ({
@@ -208,7 +208,7 @@ const output = (env) => ({
  */
 const devServer = (env) => ({
   static: {
-    publicPath: '',
+    publicPath: '/',
   },
   devMiddleware: {
     stats: {

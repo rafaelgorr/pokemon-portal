@@ -1,3 +1,5 @@
+import { DomainPokemonAbility } from './Ability'
+
 export type DomainPokemonResource = {
   id: string
   name: string
@@ -12,18 +14,14 @@ export type DomainPokemonMove = {
   name: string
 }
 
-export type DomainPokemonAbility = {
-  id: string
-  name: string
-  isHidden: boolean
-}
-
 export type DomainPokemon = {
   id: string
   name: string
-  height?: number
-  weight?: number
-  abilities?: DomainPokemonAbility[]
-  types?: DomainPokemonType[]
-  moves?: DomainPokemonMove[]
+  height: number
+  weight: number
+  abilities: DomainPokemonAbility[]
+  types: DomainPokemonType[]
+  moves: DomainPokemonMove[]
 }
+
+export type DomainListPokemon = Pick<DomainPokemon, 'id' | 'name'>

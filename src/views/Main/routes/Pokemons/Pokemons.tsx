@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
 import config from '@pokemon-portal/config'
-import { DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 
 import { useConnect } from './connect'
@@ -36,7 +36,7 @@ const Pokemons = (props: Props) => {
       <PageTitle label="Pokemons" />
       <Grid container spacing={2} flex={1} height="90%">
         <Grid container item xs={2.5} flexDirection="column" textAlign="center" height="100%">
-          <ListWithSearch<DomainPokemon>
+          <ListWithSearch<DomainListPokemon>
             listItems={pokemons}
             listItemProps={{
               getPrimary: (pkm) => pkm.name,

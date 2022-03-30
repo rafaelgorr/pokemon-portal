@@ -1,7 +1,7 @@
 import { NamedAPIResource } from 'pokenode-ts'
 
 import { mapListPokemonToDomain, mapPokemonToDomain } from '../adapters'
-import { DomainPokemon } from '../interfaces/Pokemon'
+import { DomainListPokemon, DomainPokemon } from '../interfaces/Pokemon'
 import { pokemonClient } from './'
 
 type GetPokemonsInput = {
@@ -13,7 +13,7 @@ type GetPokemonsByIdInput = {
   id: string
 }
 
-type GetPokemonsOutput = DomainPokemon[]
+type GetPokemonsOutput = DomainListPokemon[]
 
 export type GetPokemons = {
   input?: GetPokemonsInput

@@ -2,9 +2,9 @@ import '@pokemon-portal/theme/index.global.scss'
 
 import enUS from 'date-fns/locale/en-US'
 import React from 'react'
-import { hydrate, render } from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { Provider, useDispatch } from 'react-redux'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import { LocalizationProvider } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
@@ -24,10 +24,6 @@ import { theme } from './views/theme'
 
 const isValidBrowser = browser.satisfies(SUPPORTED_BROWSERS)
 
-const root = document.getElementById('root')
-
-const rendered = root?.hasChildNodes() ? hydrate : render
-
 interface Props {}
 
 const ConnectedAdm = (props: Props) => {
@@ -42,10 +38,10 @@ const ConnectedAdm = (props: Props) => {
   return (
     <ThemeProvider theme={themeWithMode}>
       <LocalizationProvider dateAdapter={AdapterDateFns} locale={enUS}>
-        <HashRouter>
+        <BrowserRouter>
           <App />
           <ErrorDialog error={error} setError={(error) => dispatch(errorActions.setError(error))} />
-        </HashRouter>
+        </BrowserRouter>
       </LocalizationProvider>
     </ThemeProvider>
   )
@@ -61,8 +57,14 @@ const Root = (props: Props) => {
   )
 }
 
-if (isValidBrowser) {
-  rendered(<Root />, root)
-} else {
-  rendered(<BrowserIncompatible />, root)
+const root = document.getElementById('root')
+
+if (root) {
+  const clientRoot = createRoot(root)
+
+  if (isValidBrowser) {
+    clientRoot.render(<Root />)
+  } else {
+    clientRoot.render(<BrowserIncompatible />)
+  }
 }

@@ -12,14 +12,15 @@ import useStyles from './styles'
 
 export const PATHS = {
   pokemons: '/pokemons',
-  chat: '/chat',
-  notifications: '/notifications',
+  abilities: '/abilities',
 }
 
 const Pokemons = lazy(() => import('./routes/Pokemons/route'))
+const Abilities = lazy(() => import('./routes/Abilities/route'))
 
 const drawerListItems: DrawerItem[] = [
   { label: 'Pokemons', path: PATHS.pokemons, Icon: PokeballIcon },
+  { label: 'Abilities', path: PATHS.abilities, Icon: PokeballIcon },
 ]
 
 type ExtendedProps = ConnectedProps
@@ -60,9 +61,10 @@ const Main = (props: Props) => {
         logo={DrawerLogo}
       />
       <Box sx={styles.pageContent} component="main">
-        <Suspense fallback={<CircularProgress />}>
+        <Suspense fallback={<CircularProgress sx={styles.circularProgress} />}>
           <Routes>
             <Route path={PATHS.pokemons + '/*'} element={<Pokemons />} />
+            <Route path={PATHS.abilities + '/*'} element={<Abilities />} />
             <Route path="*" element={<Navigate replace to={PATHS.pokemons} />} />
           </Routes>
         </Suspense>

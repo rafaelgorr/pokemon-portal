@@ -14,14 +14,25 @@ export const useStyles = (theme: Theme) =>
       marginRight: theme.spacing(2),
     },
     typeChip: { marginRight: theme.spacing(1) },
-    listeItemText: {
-      '.MuiListItemText-primary': {},
-      '.MuiListItemText-secondary': {},
-    },
+
     list: { display: 'flex', flexDirection: 'column', flex: 1 },
     moveList: { display: 'flex', flexDirection: 'column', flex: 1 },
     cardHeaderTitle: { fontSize: 'xx-large' },
-    moveCard: { width: '50%', filter: 'brightness(1.2)' },
-    moveCardContent: { paddingTop: 0 },
-    moveCardHeader: { '.MuiCardHeader-action': { height: '100%', margin: 0, alignSelf: 'center' } },
+    moveCard: {
+      width: '90%',
+      // filter: theme.palette.mode === 'dark' ? 'brightness(1.2)' : undefined,
+      marginTop: theme.spacing(2),
+    },
+    moveCardContent: { paddingTop: 0, display: 'flex' },
+    moveCardHeader: {
+      '.MuiCardHeader-action': { height: '100%', margin: 0, alignSelf: 'center' },
+    },
+    abilityAnchor: {
+      fontSize: 'inherit',
+      textDecoration: 'none',
+      cursor: 'pointer',
+      textTransform: 'none',
+      marginRight: theme.spacing(0.5),
+      '&:hover': { color: theme.palette.primary.main },
+    },
   })

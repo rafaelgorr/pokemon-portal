@@ -44,7 +44,7 @@ export const useStyles = (theme: Theme) =>
       fontSize: 50,
       color: 'rgba(0,0,0,0)',
     },
-    miniItemLabelSelected: {},
+    miniItemLabelSelected: { color: theme.palette.primary.main },
     miniItemLabel: { color: 'grey' },
     grow: { flex: 1 },
   })

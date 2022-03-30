@@ -1,7 +1,7 @@
 import React from 'react'
 import { Location, useLocation, useNavigate } from 'react-router-dom'
 
-import { Box, ListItemProps, SvgIconProps, Typography } from '@mui/material'
+import { Box, BoxProps, SvgIconProps, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import { useTheme } from '@mui/system'
 
@@ -18,7 +18,7 @@ export const mapPathToTitle = (drawerListItems: DrawerItem[], path: string) => {
 }
 
 interface Props {
-  sx?: ListItemProps['sx']
+  sx?: BoxProps['sx']
   toggleDrawer?: () => void
   drawerListItems: DrawerItem[]
 }
@@ -30,7 +30,7 @@ const isCurrentPath = (location: Location, path: string) => {
 
 const DrawerItems = (props: Props) => {
   const styles = useStyles(useTheme())
-  const { sx, toggleDrawer, drawerListItems } = props
+  const { toggleDrawer, drawerListItems } = props
   const navigate = useNavigate()
   const location = useLocation()
   const handleClick = (path: string) => () => {
@@ -41,15 +41,7 @@ const DrawerItems = (props: Props) => {
   const miniItemComponent = (label: string, path: string, Icon: DrawerItem['Icon']) => {
     const isCurrPath = isCurrentPath(location, path)
     return (
-      <Box
-        key={path}
-        sx={{
-          ...styles.miniListItem,
-          ...sx,
-        }}
-        id={label}
-        onClick={handleClick(path)}
-      >
+      <Box key={path} sx={styles.miniListItem} id={label} onClick={handleClick(path)}>
         <Icon color={isCurrPath ? 'primary' : 'info'} sx={styles.miniItemIcon} />
         <Typography sx={isCurrPath ? styles.miniItemLabelSelected : styles.miniItemLabel}>
           {label}
