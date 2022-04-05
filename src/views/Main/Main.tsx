@@ -5,22 +5,26 @@ import { LightMode, ModeNight } from '@mui/icons-material'
 import { Box, CircularProgress, CssBaseline, IconButton } from '@mui/material'
 import { useTheme } from '@mui/system'
 import DrawerLogo from '@pokemon-portal/assets/logo.png'
-import { AppBar, Drawer, DrawerItem, PokeballIcon } from '@pokemon-portal/components'
+import { AppBar, Drawer, DrawerItem } from '@pokemon-portal/components'
+import PokeAvatar from '@pokemon-portal/src/components/atoms/PokeAvatar'
 
 import connect, { ConnectedProps } from './connect'
 import useStyles from './styles'
 
 export const PATHS = {
   pokemons: '/pokemons',
+  moves: '/moves',
   abilities: '/abilities',
 }
 
 const Pokemons = lazy(() => import('./routes/Pokemons/route'))
+const Moves = lazy(() => import('./routes/Moves/route'))
 const Abilities = lazy(() => import('./routes/Abilities/route'))
 
 const drawerListItems: DrawerItem[] = [
-  { label: 'Pokemons', path: PATHS.pokemons, Icon: PokeballIcon },
-  { label: 'Abilities', path: PATHS.abilities, Icon: PokeballIcon },
+  { label: 'Pokemons', path: PATHS.pokemons, Icon: PokeAvatar, Component: Pokemons },
+  { label: 'Moves', path: PATHS.moves, Icon: PokeAvatar, Component: Moves },
+  { label: 'Abilities', path: PATHS.abilities, Icon: PokeAvatar, Component: Abilities },
 ]
 
 type ExtendedProps = ConnectedProps
@@ -63,8 +67,9 @@ const Main = (props: Props) => {
       <Box sx={styles.pageContent} component="main">
         <Suspense fallback={<CircularProgress sx={styles.circularProgress} />}>
           <Routes>
-            <Route path={PATHS.pokemons + '/*'} element={<Pokemons />} />
-            <Route path={PATHS.abilities + '/*'} element={<Abilities />} />
+            {drawerListItems.map((dI) => (
+              <Route key={dI.path} path={dI.path + '/*'} element={<dI.Component />} />
+            ))}
             <Route path="*" element={<Navigate replace to={PATHS.pokemons} />} />
           </Routes>
         </Suspense>

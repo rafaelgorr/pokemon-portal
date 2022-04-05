@@ -13,3 +13,5 @@ export const isUcFetching = (ucName: keyof State['fetching']) =>
     (state: State) => state.fetching,
     (fetching) => fetching[ucName]
   )
+
+export const getGettedIds = (state: State) => state.gettedIds

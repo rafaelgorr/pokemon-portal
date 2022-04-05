@@ -11,15 +11,18 @@ export const useStyles = (theme: Theme) =>
     avatar: {
       width: theme.spacing(30),
       height: theme.spacing(30),
-      marginRight: theme.spacing(2),
+      margin: `0px ${theme.spacing(1)}`,
     },
     typeChip: { marginRight: theme.spacing(1) },
-
-    list: { display: 'flex', flexDirection: 'column', flex: 1 },
+    list: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
+    },
     moveList: { display: 'flex', flexDirection: 'column', flex: 1 },
     cardHeaderTitle: { fontSize: 'xx-large' },
     moveCard: {
-      width: '90%',
+      // width: '90%',
       // filter: theme.palette.mode === 'dark' ? 'brightness(1.2)' : undefined,
       marginTop: theme.spacing(2),
     },

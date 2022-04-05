@@ -13,4 +13,5 @@ export const useStyles = (theme: Theme) =>
       justifyContent: 'center',
       width: '100%',
     },
+    pokemonList: { height: '100%' },
   })

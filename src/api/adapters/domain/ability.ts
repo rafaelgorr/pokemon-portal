@@ -1,5 +1,6 @@
 import { Ability, AbilityPokemon, PokemonAbility } from 'pokenode-ts'
 
+import { MAX_POKEMON_ID } from '@pokemon-portal/src/constants/pokemon'
 import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
 
 import { DomainAbility, DomainPokemonAbility } from '../../interfaces/Ability'
@@ -23,5 +24,7 @@ export const mapAbilityToDomain = (ability: Ability): DomainAbility => ({
   effect: ability.effect_entries.find((eE) => eE.language.name === 'en')?.effect || '',
   isMainSeries: ability.is_main_series ? 'Yes' : 'No',
   generation: mapNamedAPIResourceToApi(ability.generation),
-  pokemons: ability.pokemon.map(mapAbilityPokemonToDomain),
+  pokemons: ability.pokemon
+    .map(mapAbilityPokemonToDomain)
+    .filter((pkm) => Number(pkm.id) <= MAX_POKEMON_ID),
 })

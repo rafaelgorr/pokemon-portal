@@ -42,7 +42,9 @@ export const useStyles = (theme: Theme) =>
     },
     miniItemIcon: {
       fontSize: 50,
-      color: 'rgba(0,0,0,0)',
+      // color: 'rgba(0,0,0,0)',
+      width: '70px',
+      height: '70px',
     },
     miniItemLabelSelected: { color: theme.palette.primary.main },
     miniItemLabel: { color: 'grey' },

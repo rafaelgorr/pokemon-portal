@@ -1,3 +1,5 @@
+import { RequiredBy } from '@pokemon-portal/src/utils/methods'
+
 import { DomainPokemonAbility } from './Ability'
 
 export type DomainPokemonResource = {
@@ -24,4 +26,4 @@ export type DomainPokemon = {
   moves: DomainPokemonMove[]
 }
 
-export type DomainListPokemon = Pick<DomainPokemon, 'id' | 'name'>
+export type DomainListPokemon = RequiredBy<DomainPokemon, 'id' | 'name'>

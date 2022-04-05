@@ -35,7 +35,13 @@ const styles = (theme: Theme) => {
       padding: theme.spacing(8),
     },
     circularProgress: { position: 'absolute', top: '50%', left: '50%' },
-    container: { display: 'flex', flexDirection: 'column', flex: 1, height: '100%' },
+    circularProgressAction: { display: 'flex' },
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
+      height: '100%',
+    },
     inputContainer: { display, flexWrap: 'wrap' },
     form: { display, flexWrap: 'wrap', alignItems: 'center' },
     formContent: {

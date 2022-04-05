@@ -13,83 +13,88 @@ import {
   Tooltip
 } from '@mui/material'
 import { useTheme } from '@mui/system'
-import { DomainListAbility } from '@pokemon-portal/src/api/interfaces/Ability'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
 import { PageTitle, Table } from '@pokemon-portal/src/components'
-import { useFuse } from '@pokemon-portal/src/utils/hooks/fuse'
+import { useFuse } from '@pokemon-portal/utils/hooks/fuse'
 
 import { useConnect } from './connect'
-import { ABILITIES_PATHS } from './route'
+import { MOVES_PATHS } from './route'
 import { useStyles } from './styles'
 
 type ExtendedProps = Record<string, unknown>
 
+const tableColunms = ['Id', 'Name', 'Details']
+
 interface Props extends ExtendedProps {}
 
-const tableColunms = ['Id', 'Name', 'Details']
-const Abilities = (props: Props) => {
+const Moves = (props: Props) => {
   const styles = useStyles(useTheme())
 
-  const { actions, selectors } = useConnect()
-  const { abilities, gettedAbilities, gettingAbility } = selectors
-
-  const [clickedId, setClickedId] = useState('') // needed this to put the progress only on the row of the clicked item
-
   const navigate = useNavigate()
+
+  const { actions, selectors } = useConnect()
+
+  const [clickedId, setClickedId] = useState('') // need this to put the progress only on the row of the clicked item
+
+  useEffect(() => {
+    actions.getMoves()
+  }, [])
+
+  const { moves, gettedMoves, gettingMove } = selectors
 
   const {
     filteredItems: filteredAbilities,
     search,
     setSearch,
-  } = useFuse({ items: abilities, fuseKeys: ['name'] })
+  } = useFuse({
+    items: moves,
+    fuseKeys: ['name'],
+  })
 
   const handleChangeSearch: TextFieldProps['onChange'] = (evt) => {
     setSearch(evt.target.value)
   }
 
-  useEffect(() => {
-    actions.getAbilities()
-  }, [])
-
   const tableKeys = useMemo(() => {
-    const id = (abl: DomainListAbility) => abl.id
-    const name = (abl: DomainListAbility) => abl.name
+    const id = (mv: DomainListMove) => mv.id
+    const name = (mv: DomainListMove) => mv.name
 
-    const mapActionToAction = (abl: DomainListAbility) => {
+    const mapActionToAction = (mv: DomainListMove) => {
       const handleClickDetails =
-        (abl: DomainListAbility): IconButtonProps['onClick'] =>
+        (mv: DomainListMove): IconButtonProps['onClick'] =>
         (evt) => {
-          setClickedId(abl.id)
+          setClickedId(mv.id)
           const navigateToDetail = (id: string) =>
-            navigate(`.${ABILITIES_PATHS.details}`, { state: { id } })
-          if (!gettedAbilities[abl.id])
-            actions.getAbilityById({
-              id: abl.id,
+            navigate(`.${MOVES_PATHS.details}`, { state: { id } })
+          if (!gettedMoves[mv.id])
+            actions.getMoveById({
+              id: mv.id,
               onSuccess: ({ id }) => navigateToDetail(id),
             })
-          else navigateToDetail(abl.id)
+          else navigateToDetail(mv.id)
 
           evt.stopPropagation()
         }
 
-      return !(gettingAbility && clickedId === abl.id) ? (
+      return !(gettingMove && clickedId === mv.id) ? (
         <Tooltip title="Details">
-          <IconButton color="primary" onClick={handleClickDetails(abl)}>
+          <IconButton color="primary" onClick={handleClickDetails(mv)}>
             <DetailsIcon />
           </IconButton>
         </Tooltip>
       ) : (
         <IconButton sx={styles.circularProgressAction}>
-          <CircularProgress size={20} />
+          <CircularProgress size={22} />
         </IconButton>
       )
     }
 
     return [id, name, mapActionToAction]
-  }, [abilities, gettedAbilities])
+  }, [moves, gettedMoves])
 
   return (
     <Box sx={styles.container}>
-      <PageTitle label="Abilities" />
+      <PageTitle label="Moves" />
       <TextField
         variant="outlined"
         size="small"
@@ -114,7 +119,7 @@ const Abilities = (props: Props) => {
         }}
         // disabled={fetching}
       />
-      <Table<DomainListAbility>
+      <Table<DomainListMove>
         columns={tableColunms}
         keys={tableKeys}
         data={filteredAbilities}
@@ -125,4 +130,4 @@ const Abilities = (props: Props) => {
   )
 }
 
-export default Abilities
+export default Moves

@@ -1,6 +1,5 @@
-import { DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import { entries, keys } from '@pokemon-portal/utils/methods'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 import { addTypeMatcher } from '../../shared'
 import { types } from './'
@@ -19,11 +18,7 @@ export const initialState: State = {
 export default createSlice({
   name: prefix,
   initialState,
-  reducers: {
-    setGettedIds: (state, action: PayloadAction<DomainPokemon>) => {
-      state.gettedIds[action.payload.id] = action.payload.name
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fulfilledActions.getPokemonById, (state, action) => {
       state.gettedIds[action.payload.id] = action.payload.name

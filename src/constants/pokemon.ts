@@ -41,3 +41,5 @@ export const TYPE_ID_COLORS: Record<string, StandardCSSProperties['backgroundCol
   '17': '#705746',
   '18': '#D685AD',
 } as const
+
+export const MAX_POKEMON_ID = 809

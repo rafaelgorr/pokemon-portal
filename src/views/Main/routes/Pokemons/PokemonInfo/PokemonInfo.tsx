@@ -15,7 +15,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
-import { DomainMove } from '@pokemon-portal/src/api/interfaces/Move'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
 import { DomainPokemon, DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 import { formatKg, formatMeters } from '@pokemon-portal/src/utils/masks'
@@ -47,7 +47,9 @@ const PokemonInfo = (props: Props) => {
 
   const { actions, selectors } = useConnect()
 
-  const [selectedMove, setSelectedMove] = useState<DomainMove | null>(null)
+  const { gettedMoves, moves } = selectors
+
+  const [selectedMove, setSelectedMove] = useState<DomainListMove | null>(null)
 
   const StyledListItemText = useCallback(
     (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
@@ -56,9 +58,12 @@ const PokemonInfo = (props: Props) => {
 
   const handleSelectMove: AutocompleteProps = (evt, move) => {
     if (move) {
-      const storeMove = selectors.moves[move.id]
+      const storeMove = gettedMoves[move.id]
       if (!storeMove) actions.getMoveById({ id: move.id, onSuccess: (mv) => setSelectedMove(mv) })
-      else setSelectedMove(storeMove)
+      else {
+        const mv = moves[move.id]
+        if (mv) setSelectedMove(mv)
+      }
     } else setSelectedMove(move)
   }
 
@@ -72,7 +77,14 @@ const PokemonInfo = (props: Props) => {
         <Box display="flex">
           <List
             sx={styles.list}
-            subheader={<Typography sx={styles.cardHeaderTitle}>{pokemon.name}</Typography>}
+            subheader={
+              <Box display="flex" justifyContent="space-between">
+                <Typography sx={styles.cardHeaderTitle}>{pokemon.name}</Typography>
+                <Typography sx={styles.cardHeaderTitle}>
+                  {`#${pokemon.id.padStart(4, '0')}`}
+                </Typography>
+              </Box>
+            }
           >
             <ListItem alignItems="flex-start" sx={styles.listItem}>
               <ListItemText
@@ -112,7 +124,7 @@ const PokemonInfo = (props: Props) => {
             <PokemonMove
               fetching={selectors.fetching}
               moves={pokemon.moves}
-              selectedMove={selectedMove}
+              move={selectedMove}
               onSelectMove={handleSelectMove}
             />
           </List>

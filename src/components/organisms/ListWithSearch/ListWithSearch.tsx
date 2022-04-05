@@ -9,8 +9,10 @@ import {
   LinearProgress,
   List,
   Stack,
+  StackProps,
   TextField,
-  TextFieldProps
+  TextFieldProps,
+  Typography
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
@@ -20,7 +22,7 @@ import { useStyles } from './styles'
 
 const getFuseOptions = <T extends object>(...keys: string[]): Fuse.IFuseOptions<T> => ({
   shouldSort: false,
-  threshold: 0.4,
+  threshold: 0.1,
   location: 0,
   distance: 10,
   minMatchCharLength: 1,
@@ -41,6 +43,9 @@ type BaseProps<Item extends { id?: string }> = {
   handleItemClick(item: Item): () => void
   fuseKeys: NestedKeyOf<Item>[]
   selectorKey?: keyof Item
+  sx?: StackProps['sx']
+  textFieldLabel?: string
+  emptyListLabel?: string
 }
 
 type Props<Item> = Item extends { id: string }
@@ -58,6 +63,9 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
     fuseKeys,
     fetching,
     selectorKey = 'id',
+    sx,
+    textFieldLabel,
+    emptyListLabel = 'Empty list',
   } = props
 
   const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } = listItemProps
@@ -81,7 +89,12 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
   }, [search, listItems])
 
   return (
-    <Stack flexDirection="column" textAlign="center" height="100%">
+    <Stack flexDirection="column" textAlign="center" sx={sx}>
+      {textFieldLabel && (
+        <Typography variant="h6" textAlign="left">
+          {textFieldLabel}
+        </Typography>
+      )}
       <Box sx={styles.searchFieldContainer}>
         <TextField
           variant="outlined"
@@ -113,18 +126,23 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
       </Box>
       <Box sx={styles.listContainer}>
         <List sx={styles.list}>
-          {filteredItems.map((item) => (
-            <ListItem
-              key={item[selectorKey]}
-              primary={getPrimary(item)}
-              secondary={getSecondary?.(item)}
-              onClick={handleItemClick(item)}
-              selected={selectedItem?.[selectorKey] === item[selectorKey]}
-              id={item[selectorKey]}
-              secondaryAction={getSecondaryAction?.(item)}
-              avatarSrc={getAvatarSrc?.(item)}
-            />
-          ))}
+          {filteredItems.length
+            ? filteredItems
+                .slice(0, 100)
+                .filter((item) => !!item)
+                .map((item) => (
+                  <ListItem
+                    key={item[selectorKey]}
+                    primary={getPrimary(item)}
+                    secondary={getSecondary?.(item)}
+                    onClick={handleItemClick(item)}
+                    selected={selectedItem?.[selectorKey] === item[selectorKey]}
+                    id={item[selectorKey]}
+                    secondaryAction={getSecondaryAction?.(item)}
+                    avatarSrc={getAvatarSrc?.(item)}
+                  />
+                ))
+            : !fetching && <Typography>{emptyListLabel}</Typography>}
         </List>
       </Box>
     </Stack>

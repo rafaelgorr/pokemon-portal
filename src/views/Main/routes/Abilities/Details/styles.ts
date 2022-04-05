@@ -13,5 +13,6 @@ export const useStyles = (theme: Theme) =>
       justifyContent: 'center',
       width: '100%',
     },
-    list: { display: 'flex', flexDirection: 'column', flex: 1 },
+    list: { display: 'flex', flexDirection: 'column', height: '20%', paddingTop: 0 },
+    pokemonList: { height: '72%', width: '25%' },
   })

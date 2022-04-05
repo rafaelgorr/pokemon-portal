@@ -1,6 +1,25 @@
+import { NamedAPIResource } from 'pokenode-ts'
+
 import { mapMoveToDomain } from '../adapters'
-import { DomainMove } from '../interfaces/Move'
+import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
+import { DomainListMove, DomainMove } from '../interfaces/Move'
 import { moveClient } from './'
+
+type GetPokemonMovesInput = {
+  offset?: Parameters<typeof moveClient.listMoves>[0]
+  limit?: Parameters<typeof moveClient.listMoves>[1]
+}
+
+export type GetPokemonMoves = {
+  input?: GetPokemonMovesInput
+  output: DomainListMove[]
+}
+
+export const getMoves = async (input: GetPokemonMoves['input']) => {
+  const moves = await moveClient.listMoves(input?.offset, input?.offset || -1)
+
+  return (moves.results as NamedAPIResource[]).map(mapNamedAPIResourceToApi)
+}
 
 type GetPokemonMoveInput = {
   id: string

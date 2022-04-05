@@ -1,4 +1,6 @@
-import { DomainPokemonMove } from './Pokemon'
+import { RequiredBy } from '@pokemon-portal/src/utils/methods'
+
+import { DomainListPokemon, DomainPokemonMove } from './Pokemon'
 
 export interface DomainMove extends DomainPokemonMove {
   type: DomainPokemonMoveType
@@ -9,4 +11,7 @@ export interface DomainMove extends DomainPokemonMove {
   effect: string
   damageClass: string
   target: string
+  learnedByPokemon: DomainListPokemon[]
 }
+
+export type DomainListMove = RequiredBy<DomainMove, 'id' | 'name'>

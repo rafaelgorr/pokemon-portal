@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 import {
   Box,
@@ -6,12 +7,15 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemTextProps,
-  Typography
+  ListItemTextProps
 } from '@mui/material'
 import { useTheme } from '@mui/system'
+import config from '@pokemon-portal/config'
 import { DomainAbility } from '@pokemon-portal/src/api/interfaces/Ability'
+import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 
+import { PATHS } from '../../../Main'
 import { useConnect } from './connect'
 import { useStyles } from './styles'
 
@@ -25,16 +29,18 @@ const Details = (props: Props) => {
   const styles = useStyles(useTheme())
   const { abilityId } = props
 
+  const navigate = useNavigate()
+
   const { selectors, actions } = useConnect()
 
-  const { fetching } = selectors
+  const { fetching, abilities, gettedAbilities } = selectors
 
   const [ability, setAbility] = useState<DomainAbility | null>(null)
 
   useEffect(() => {
-    const entAbl = selectors.abilities[abilityId]
-    if (!entAbl) actions.getAbilityById({ id: abilityId, onSuccess: (abl) => setAbility(abl) })
-    else setAbility(entAbl as DomainAbility)
+    if (!gettedAbilities[abilityId])
+      actions.getAbilityById({ id: abilityId, onSuccess: (abl) => setAbility(abl) })
+    else setAbility(abilities[abilityId] as DomainAbility)
   }, [abilityId, selectors.abilities])
 
   const StyledListItemText = useCallback(
@@ -42,11 +48,15 @@ const Details = (props: Props) => {
     [styles]
   )
 
+  const handleSelectPokemon = (pkm: DomainListPokemon) => () => {
+    if (pkm.id) navigate(PATHS.pokemons, { state: { id: pkm.id } })
+  }
+
   if (fetching) return <CircularProgress sx={styles.circularProgress} />
 
   return (
     <Box sx={styles.container}>
-      <Typography variant="h4">{ability?.name}</Typography>
+      <PageTitle label={ability?.name || ''} />
       <List sx={styles.list}>
         <ListItem sx={styles.listItem}>
           <StyledListItemText primary="Generation" secondary={ability?.generation?.name} />
@@ -56,6 +66,19 @@ const Details = (props: Props) => {
           <StyledListItemText primary="Effect" secondary={ability?.effect} />
         </ListItem>
       </List>
+      <ListWithSearch<DomainListPokemon>
+        listItems={ability?.pokemons || []}
+        listItemProps={{
+          getPrimary: (pkm) => pkm.name,
+          getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),
+        }}
+        handleItemClick={handleSelectPokemon}
+        fuseKeys={['name', 'id']}
+        fetching={fetching}
+        sx={styles.pokemonList}
+        textFieldLabel="Pokemons"
+        emptyListLabel="No pokemons found..."
+      />
     </Box>
   )
 }

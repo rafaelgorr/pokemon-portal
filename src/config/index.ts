@@ -56,7 +56,7 @@ type Game<G extends Generations, K extends GenerationsKeys> = keyof G[K]['games'
 const getters = {
   getSprite: (pokemonId: string) => `${baseUrl}/${pokemonId}.png`,
   getShinySprite: (pokemonId: string) => `${baseUrl}/shiny/${pokemonId}.png`,
-  getOtherSprite: (pokemonId: string) =>
+  getOtherSprite: (pokemonId?: string) =>
     `${baseUrl}/${getBaseUrl('officialArtwork')}/${pokemonId}.png`,
   getGenerationSprite: <G extends Generations, K extends GenerationsKeys>(input: {
     number: K

@@ -15,7 +15,7 @@ const PageTitle = (props: Props) => {
   const { label, ...boxProps } = props
 
   return (
-    <Box {...boxProps}>
+    <Box {...boxProps} sx={styles.container}>
       <Box sx={styles.titleContainer}>
         <Typography variant="h4" color="primary">
           {label}
