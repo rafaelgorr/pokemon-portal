@@ -32,13 +32,22 @@ const Pokemons = (props: Props) => {
 
   const { actions, selectors } = useConnect()
 
-  const { fetching, pokemons, pokemonsEntities } = selectors
+  const { fetching, pokemons, pokemonsEntities, selectedPokemonId } = selectors
 
-  const [selectedPokemon, setSelectedPokemon] = useState<DomainPokemon | undefined>()
+  const [selectedPokemon, setSelectedPokemon] = useState<DomainPokemon | undefined>(() => {
+    const pokemon = pokemonsEntities?.[selectedPokemonId] as DomainPokemon
+    return pokemon
+  })
 
   useEffect(() => {
     if (!pokemons.length) actions.getPokemons()
   }, [])
+
+  useEffect(() => {
+    return () => {
+      actions.setSelectedPokemon(selectedPokemon?.id || '')
+    }
+  }, [selectedPokemon])
 
   useEffect(() => {
     if (pokemonLocationId && pokemonLocationId !== selectedPokemon?.id) {

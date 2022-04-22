@@ -30,7 +30,7 @@ const Abilities = (props: Props) => {
   const styles = useStyles(useTheme())
 
   const { actions, selectors } = useConnect()
-  const { abilities, gettedAbilities, gettingAbility } = selectors
+  const { abilities, gettedAbilities, gettingAbility, fetched } = selectors
 
   const [clickedId, setClickedId] = useState('') // needed this to put the progress only on the row of the clicked item
 
@@ -47,7 +47,7 @@ const Abilities = (props: Props) => {
   }
 
   useEffect(() => {
-    actions.getAbilities()
+    if (!fetched) actions.getAbilities()
   }, [])
 
   const tableKeys = useMemo(() => {

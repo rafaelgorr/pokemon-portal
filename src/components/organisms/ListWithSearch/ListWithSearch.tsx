@@ -73,13 +73,9 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
   const fuseOptions: Fuse.IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
   const fuse = useMemo(() => new Fuse(listItems as T[], fuseOptions), [listItems])
 
-  // const [isPending, startTransation] = useTransition()
   const [search, setSearch] = useState('')
 
   const handleChangeSearch: TextFieldProps['onChange'] = (evt) => {
-    // startTransation(() => {
-    //   setSearch(evt.target.value)
-    // })
     setSearch(evt.target.value)
   }
 

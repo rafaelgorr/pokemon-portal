@@ -57,6 +57,7 @@ export const theme = (mode: 'dark' | 'light') =>
       MuiCard: {
         styleOverrides: {},
       },
+
       MuiCssBaseline: {
         styleOverrides: {
           '&::-webkit-scrollbar': {
@@ -71,6 +72,9 @@ export const theme = (mode: 'dark' | 'light') =>
           '&::-webkit-scrollbar-thumb': {
             background: getPrimaryColor(mode),
             borderRadius: '50px',
+          },
+          '*': {
+            transition: 'background-color 0.1s linear',
           },
         },
       },

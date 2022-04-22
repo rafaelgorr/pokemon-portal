@@ -24,7 +24,7 @@ const DIST = path.join(__dirname, 'dist')
 
 const defaultEnv = {
   production: false,
-  port: 3000,
+  port: 3001,
   analyze: false,
 }
 
@@ -111,6 +111,10 @@ const resolve = {
     '@pokemon-portal/views': pathResolve('src/views'),
   },
   extensions: ['.ts', '.tsx', '.js'],
+  // fallback: {
+  //   url: require.resolve('url/'),
+  //   path: require.resolve('path-browserify/'),
+  // },
 }
 
 const makeCommonPlugins = (env) => [

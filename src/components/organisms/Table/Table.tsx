@@ -159,7 +159,7 @@ function Table<T extends TableRow>(props: Props<T>) {
                               align={j !== 0 ? 'left' : undefined}
                               key={`${i}-key-${row.id}-${j}}`}
                             >
-                              {row[k]}
+                              {row[k] as unknown as React.ReactNode}
                             </TableCell>
                           )
                         }

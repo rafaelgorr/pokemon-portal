@@ -17,6 +17,7 @@ export const useConnect = () => {
     gettingAbility: ucSelectors.isUcFetching('getAbilityById')(state.useCases.ability),
     abilities: pokemonSelectors.getAbilities(state.entities.ability),
     gettedAbilities: ucSelectors.getGettedIds(state.useCases.ability),
+    fetched: ucSelectors.getFetched(state.useCases.ability),
   }))
   const dispatch = useDispatch()
 

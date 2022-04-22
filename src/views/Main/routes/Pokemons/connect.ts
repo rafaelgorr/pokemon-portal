@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 
 import { StoreState } from '@pokemon-portal/store'
 import { selectors as pokemonSelectors } from '@pokemon-portal/store/entities/pokemon'
+import { actions as uiActions, selectors as uiSelectors } from '@pokemon-portal/store/ui/pokemon'
 import { actions, selectors as ucSelectors } from '@pokemon-portal/store/useCases/pokemon'
 
 // const isFetching = createSelector(
@@ -18,6 +19,7 @@ export const useConnect = () => {
     pokemons: pokemonSelectors.getPokemons(state.entities.pokemon),
     pokemonsEntities: pokemonSelectors.getPokemonsEntities(state.entities.pokemon),
     gettedPokemons: ucSelectors.getGettedIds(state.useCases.pokemon),
+    selectedPokemonId: uiSelectors.getSelectedPokemonId(state.ui.pokemon),
   }))
   const dispatch = useDispatch()
 
@@ -25,6 +27,7 @@ export const useConnect = () => {
     {
       getPokemons: actions.getPokemons,
       getPokemonById: actions.getPokemonById,
+      setSelectedPokemon: uiActions.setSelectedPokemon,
     },
     dispatch
   )

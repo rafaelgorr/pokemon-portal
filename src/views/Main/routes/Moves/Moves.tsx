@@ -36,20 +36,17 @@ const Moves = (props: Props) => {
 
   const [clickedId, setClickedId] = useState('') // need this to put the progress only on the row of the clicked item
 
-  useEffect(() => {
-    actions.getMoves()
-  }, [])
+  const { moves, gettedMoves, gettingMove, fetched } = selectors
 
-  const { moves, gettedMoves, gettingMove } = selectors
+  useEffect(() => {
+    if (!fetched) actions.getMoves()
+  }, [])
 
   const {
     filteredItems: filteredAbilities,
     search,
     setSearch,
-  } = useFuse({
-    items: moves,
-    fuseKeys: ['name'],
-  })
+  } = useFuse({ items: moves, fuseKeys: ['name'] })
 
   const handleChangeSearch: TextFieldProps['onChange'] = (evt) => {
     setSearch(evt.target.value)

@@ -12,6 +12,7 @@ export const useConnect = () => {
     gettingMove: ucSelectors.isUcFetching('getMoveById')(state.useCases.move),
     moves: moveSelectors.getMoves(state.entities.move),
     gettedMoves: ucSelectors.getGettedIds(state.useCases.move),
+    fetched: ucSelectors.getFetched(state.useCases.move),
   }))
   const dispatch = useDispatch()
 

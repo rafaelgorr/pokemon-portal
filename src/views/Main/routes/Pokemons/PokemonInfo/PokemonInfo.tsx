@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useState } from 'react'
+import React, { CSSProperties, memo, useCallback, useState } from 'react'
 import { useNavigate } from 'react-router'
 
 import {
@@ -39,7 +39,7 @@ interface Props extends ExtendedProps {
   pokemon: DomainPokemon
 }
 
-const PokemonInfo = (props: Props) => {
+const PokemonInfo = memo((props: Props) => {
   const styles = useStyles(useTheme())
   const { pokemon } = props
 
@@ -137,6 +137,6 @@ const PokemonInfo = (props: Props) => {
       </CardContent>
     </Card>
   )
-}
+})
 
 export default PokemonInfo

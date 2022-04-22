@@ -8,11 +8,13 @@ import { fulfilledActions, prefix } from './actions'
 export interface State {
   fetching: Partial<Record<keyof typeof types, boolean>>
   gettedIds: Record<string, string>
+  fetched: boolean
 }
 
 export const initialState: State = {
   fetching: {},
   gettedIds: {},
+  fetched: false,
 }
 
 export default createSlice({
@@ -20,6 +22,10 @@ export default createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fulfilledActions.getAbilities, (state) => {
+      state.fetched = true
+    })
+
     builder.addCase(fulfilledActions.getAbilityById, (state, action) => {
       state.gettedIds[action.payload.id] = action.payload.name
     })
