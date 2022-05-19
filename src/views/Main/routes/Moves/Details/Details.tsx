@@ -63,7 +63,7 @@ const Details = (props: Props) => {
       <List sx={styles.list}>
         <ListItem sx={styles.listItem}>
           <ListItemText
-            sx={{ alignItems: 'flex-start' }}
+            sx={styles.listItemText}
             primary={'Type'}
             secondary={
               move && (

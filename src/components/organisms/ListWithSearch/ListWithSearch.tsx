@@ -98,7 +98,7 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
           placeholder="Search"
           value={search}
           onChange={handleChangeSearch}
-          sx={{ width: '100%' }}
+          sx={styles.searchTextField}
           focused
           InputProps={{
             startAdornment: (
@@ -116,9 +116,7 @@ const ListWithSearch = <T extends Record<string, any>>(props: Props<T>) => {
           }}
           disabled={fetching}
         />
-        {fetching && (
-          <LinearProgress sx={{ bottom: 0, margin: 0, width: '100%', position: 'absolute' }} />
-        )}
+        {fetching && <LinearProgress sx={styles.linearProgress} />}
       </Box>
       <Box sx={styles.listContainer}>
         <List sx={styles.list}>

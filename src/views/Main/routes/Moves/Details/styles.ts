@@ -16,4 +16,5 @@ export const useStyles = (theme: Theme) =>
     list: { display: 'flex', flexDirection: 'column', height: '20%' },
     pokemonList: { height: '75%', width: '25%' },
     typeChip: { marginRight: theme.spacing(1) },
+    listItemText: { alignItems: 'flex-start' },
   })
