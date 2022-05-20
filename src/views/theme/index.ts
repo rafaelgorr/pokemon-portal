@@ -57,7 +57,6 @@ export const theme = (mode: 'dark' | 'light') =>
       MuiCard: {
         styleOverrides: {},
       },
-
       MuiCssBaseline: {
         styleOverrides: {
           '&::-webkit-scrollbar': {

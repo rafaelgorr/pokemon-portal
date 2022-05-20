@@ -12,6 +12,7 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableContainerProps,
   TableHead,
   TablePagination,
   TableProps,
@@ -47,6 +48,7 @@ interface Props<T extends TableRow> {
   onRowClick?(row: T): void
   elevation?: PaperProps['elevation']
   renderCollapse?: (data: T) => React.ReactElement
+  sx?: TableContainerProps['sx']
 }
 
 interface EmptyDataProps {
@@ -73,6 +75,7 @@ function Table<T extends TableRow>(props: Props<T>) {
     selectedRows,
     elevation = 5,
     renderCollapse,
+    sx,
   } = props
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -117,13 +120,13 @@ function Table<T extends TableRow>(props: Props<T>) {
   }
 
   return (
-    <TableContainer component={Paper} sx={styles.tablePaper} elevation={elevation}>
+    <TableContainer component={Paper} sx={{ ...sx, ...styles.tablePaper }} elevation={elevation}>
       <Box sx={styles.tableContent}>
         <MuiTable
           size={props.size}
           stickyHeader
           aria-label="table-data"
-          // sx={{ bgcolor: 'background.defaulr' }}
+          // sx={{ bgcolor: 'background.default' }}
         >
           <TableHead>
             <MuiRow>

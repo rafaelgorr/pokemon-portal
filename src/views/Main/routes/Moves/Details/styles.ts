@@ -6,15 +6,11 @@ import { useStyles as sharedStyles } from '../styles'
 export const useStyles = (theme: Theme) =>
   createSxStyles({
     ...sharedStyles(theme),
-    patientsGrid: { display: 'flex', flexDirection: 'colunm' },
-    progressContainer: {
-      marginTop: theme.spacing(3),
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
-    },
-    list: { display: 'flex', flexDirection: 'column', height: '20%' },
-    pokemonList: { height: '75%', width: '25%' },
+    gridContainer: { height: '92%' },
+    list: { display: 'flex', flexDirection: 'column', height: '20%', paddingTop: 0 },
+    pokemonListGrid: { height: '100%' },
+    pokemonList: { height: '100%' },
     typeChip: { marginRight: theme.spacing(1) },
     listItemText: { alignItems: 'flex-start' },
+    listItem: { ...sharedStyles(theme).listItem, paddingTop: 0 },
   })

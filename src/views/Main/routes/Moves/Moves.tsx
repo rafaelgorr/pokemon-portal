@@ -5,6 +5,7 @@ import { ClearOutlined, Details as DetailsIcon, Search as SearchIcon } from '@mu
 import {
   Box,
   CircularProgress,
+  Grid,
   IconButton,
   IconButtonProps,
   InputAdornment,
@@ -92,37 +93,43 @@ const Moves = (props: Props) => {
   return (
     <Box sx={styles.container}>
       <PageTitle label="Moves" />
-      <TextField
-        variant="outlined"
-        size="small"
-        placeholder="Search"
-        value={search}
-        onChange={handleChangeSearch}
-        sx={{ width: '20%' }}
-        focused
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon color="primary" />
-            </InputAdornment>
-          ),
-          endAdornment: search ? (
-            <InputAdornment position="end">
-              <IconButton onClick={() => setSearch('')}>
-                <ClearOutlined color="primary" />
-              </IconButton>
-            </InputAdornment>
-          ) : undefined,
-        }}
-        // disabled={fetching}
-      />
-      <Table<DomainListMove>
-        columns={tableColunms}
-        keys={tableKeys}
-        data={filteredAbilities}
-        // renderCollapse={renderCollapse}
-        fetching={selectors.fetching}
-      />
+      <Grid container direction="column" sx={styles.gridContainer}>
+        <Grid item xs={1} sx={styles.searchGridItem}>
+          <TextField
+            variant="outlined"
+            size="small"
+            placeholder="Search"
+            value={search}
+            onChange={handleChangeSearch}
+            sx={styles.searchText}
+            focused
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon color="primary" />
+                </InputAdornment>
+              ),
+              endAdornment: search ? (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setSearch('')}>
+                    <ClearOutlined color="primary" />
+                  </IconButton>
+                </InputAdornment>
+              ) : undefined,
+            }}
+            // disabled={fetching}
+          />
+        </Grid>
+        <Grid item xs="auto" sx={styles.tableGridItem}>
+          <Table<DomainListMove>
+            columns={tableColunms}
+            keys={tableKeys}
+            data={filteredAbilities}
+            // renderCollapse={renderCollapse}
+            fetching={selectors.fetching}
+          />
+        </Grid>
+      </Grid>
     </Box>
   )
 }

@@ -50,11 +50,11 @@ const Main = (props: Props) => {
         }
         actions={
           <>
-            {process.env.NODE_ENV === 'development' && (
+            {
               <IconButton onClick={() => props.setMode(mode === 'light' ? 'dark' : 'light')}>
                 {mode === 'light' ? <LightMode sx={{ color: 'white' }} /> : <ModeNight />}
               </IconButton>
-            )}
+            }
           </>
         }
       />

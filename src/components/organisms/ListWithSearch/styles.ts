@@ -20,7 +20,7 @@ export const useStyles = (theme: Theme) =>
       position: 'relative',
     },
     listContainer: {
-      flex: 1,
+      flex: '1 1 auto',
       overflow: 'auto',
       marginTop: theme.spacing(1),
     },

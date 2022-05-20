@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router'
 import {
   Box,
   CircularProgress,
+  Grid,
   List,
   ListItem,
   ListItemText,
@@ -57,28 +58,34 @@ const Details = (props: Props) => {
   return (
     <Box sx={styles.container}>
       <PageTitle label={ability?.name || ''} />
-      <List sx={styles.list}>
-        <ListItem sx={styles.listItem}>
-          <StyledListItemText primary="Generation" secondary={ability?.generation?.name} />
-          <StyledListItemText primary="Main Series" secondary={ability?.isMainSeries} />
-        </ListItem>
-        <ListItem sx={styles.listItem}>
-          <StyledListItemText primary="Effect" secondary={ability?.effect} />
-        </ListItem>
-      </List>
-      <ListWithSearch<DomainListPokemon>
-        listItems={ability?.pokemons || []}
-        listItemProps={{
-          getPrimary: (pkm) => pkm.name,
-          getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),
-        }}
-        handleItemClick={handleSelectPokemon}
-        fuseKeys={['name', 'id']}
-        fetching={fetching}
-        sx={styles.pokemonList}
-        textFieldLabel="Pokemons"
-        emptyListLabel="No pokemons found..."
-      />
+      <Grid container sx={styles.gridContainer}>
+        <Grid item xs={9}>
+          <List sx={styles.list}>
+            <ListItem sx={styles.listItem}>
+              <StyledListItemText primary="Generation" secondary={ability?.generation?.name} />
+              <StyledListItemText primary="Main Series" secondary={ability?.isMainSeries} />
+            </ListItem>
+            <ListItem sx={styles.listItem}>
+              <StyledListItemText primary="Effect" secondary={ability?.effect} />
+            </ListItem>
+          </List>
+        </Grid>
+        <Grid item sx={styles.pokemonListGrid} xs={3}>
+          <ListWithSearch<DomainListPokemon>
+            listItems={ability?.pokemons || []}
+            listItemProps={{
+              getPrimary: (pkm) => pkm.name,
+              getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),
+            }}
+            handleItemClick={handleSelectPokemon}
+            fuseKeys={['name', 'id']}
+            fetching={fetching}
+            sx={styles.pokemonList}
+            textFieldLabel="Pokemons"
+            emptyListLabel="No pokemons found..."
+          />
+        </Grid>
+      </Grid>
     </Box>
   )
 }

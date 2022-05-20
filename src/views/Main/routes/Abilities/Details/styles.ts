@@ -3,16 +3,14 @@ import { createSxStyles } from '@pokemon-portal/theme'
 
 import { useStyles as sharedStyles } from '../styles'
 
-export const useStyles = (theme: Theme) =>
-  createSxStyles({
+export const useStyles = (theme: Theme) => {
+  return createSxStyles({
     ...sharedStyles(theme),
-    patientsGrid: { display: 'flex', flexDirection: 'colunm' },
-    progressContainer: {
-      marginTop: theme.spacing(3),
-      display: 'flex',
-      justifyContent: 'center',
-      width: '100%',
-    },
+    gridContainer: { height: '92%' },
+
     list: { display: 'flex', flexDirection: 'column', height: '20%', paddingTop: 0 },
-    pokemonList: { height: '72%', width: '25%' },
+    pokemonListGrid: { height: '100%' },
+    pokemonList: { height: '100%' },
+    listItem: { ...sharedStyles(theme).listItem, paddingTop: 0 },
   })
+}

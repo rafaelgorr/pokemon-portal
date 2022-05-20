@@ -5,6 +5,7 @@ import {
   Box,
   Chip,
   CircularProgress,
+  Grid,
   List,
   ListItem,
   ListItemText,
@@ -60,47 +61,53 @@ const Details = (props: Props) => {
   return (
     <Box sx={styles.container}>
       <PageTitle label={move?.name || ''} />
-      <List sx={styles.list}>
-        <ListItem sx={styles.listItem}>
-          <ListItemText
-            sx={styles.listItemText}
-            primary={'Type'}
-            secondary={
-              move && (
-                <Chip
-                  key={move?.type?.id}
-                  label={move?.type?.name}
-                  sx={[styles.typeChip, { bgcolor: TYPE_ID_COLORS[move.type?.id] }]}
-                  size="small"
-                />
-              )
-            }
-            secondaryTypographyProps={{ component: 'div' }}
+      <Grid container sx={styles.gridContainer}>
+        <Grid item xs={9}>
+          <List sx={styles.list}>
+            <ListItem sx={styles.listItem}>
+              <ListItemText
+                sx={styles.listItemText}
+                primary={'Type'}
+                secondary={
+                  move && (
+                    <Chip
+                      key={move?.type?.id}
+                      label={move?.type?.name}
+                      sx={[styles.typeChip, { bgcolor: TYPE_ID_COLORS[move.type?.id] }]}
+                      size="small"
+                    />
+                  )
+                }
+                secondaryTypographyProps={{ component: 'div' }}
+              />
+              <StyledListItemText primary="Power" secondary={move?.power} />
+              <StyledListItemText primary="PP" secondary={move?.pp} />
+              <StyledListItemText primary="Accuracy" secondary={move?.accuracy} />
+              <StyledListItemText primary="Priority" secondary={move?.priority} />
+              <StyledListItemText primary="Category" secondary={move?.damageClass} />
+              <StyledListItemText primary="Target" secondary={move?.target} />
+            </ListItem>
+            <ListItem>
+              <StyledListItemText primary="Effect" secondary={move?.effect} />
+            </ListItem>
+          </List>
+        </Grid>
+        <Grid item xs={3} sx={styles.pokemonListGrid}>
+          <ListWithSearch<DomainListPokemon>
+            listItems={move?.learnedByPokemon || []}
+            listItemProps={{
+              getPrimary: (pkm) => pkm.name,
+              getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),
+            }}
+            handleItemClick={handleSelectPokemon}
+            fuseKeys={['name', 'id']}
+            fetching={fetching}
+            sx={styles.pokemonList}
+            textFieldLabel="Pokemons"
+            emptyListLabel="No pokemons found.."
           />
-          <StyledListItemText primary="Power" secondary={move?.power} />
-          <StyledListItemText primary="PP" secondary={move?.pp} />
-          <StyledListItemText primary="Accuracy" secondary={move?.accuracy} />
-          <StyledListItemText primary="Priority" secondary={move?.priority} />
-          <StyledListItemText primary="Category" secondary={move?.damageClass} />
-          <StyledListItemText primary="Target" secondary={move?.target} />
-        </ListItem>
-        <ListItem>
-          <StyledListItemText primary="Effect" secondary={move?.effect} />
-        </ListItem>
-      </List>
-      <ListWithSearch<DomainListPokemon>
-        listItems={move?.learnedByPokemon || []}
-        listItemProps={{
-          getPrimary: (pkm) => pkm.name,
-          getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),
-        }}
-        handleItemClick={handleSelectPokemon}
-        fuseKeys={['name', 'id']}
-        fetching={fetching}
-        sx={styles.pokemonList}
-        textFieldLabel="Pokemons"
-        emptyListLabel="No pokemons found.."
-      />
+        </Grid>
+      </Grid>
     </Box>
   )
 }

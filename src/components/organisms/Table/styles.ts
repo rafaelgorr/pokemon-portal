@@ -4,9 +4,9 @@ import { createSxStyles } from '@pokemon-portal/src/views/theme'
 export const useStyles = (theme: Theme) => {
   return createSxStyles({
     tablePaper: {
-      marginTop: '20px',
       bottom: '10px',
       width: '100%',
+      height: '100%',
       // flex: 1,
       overflowY: 'hidden',
       display: 'flex',
