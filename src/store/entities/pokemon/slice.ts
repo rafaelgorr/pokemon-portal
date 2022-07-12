@@ -1,7 +1,5 @@
 import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
-import {
-  fulfilledActions as pokemonFulfilledActions
-} from '@pokemon-portal/src/store/useCases/pokemon'
+import { fulfilledActions as pokemonFulfilledActions } from '@pokemon-portal/src/store/useCases/pokemon'
 import { WithEntityAdapter, WithEntityState } from '@pokemon-portal/utils/methods'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
@@ -28,7 +26,7 @@ const session = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(pokemonFulfilledActions.getPokemons, (state, action) => {
-      adapters.pokemons.setAll(state.pokemons, action.payload)
+      adapters.pokemons.addMany(state.pokemons, action.payload)
     })
     builder.addCase(pokemonFulfilledActions.getPokemonById, (state, action) => {
       const pokemon = action.payload

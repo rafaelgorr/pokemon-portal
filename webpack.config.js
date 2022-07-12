@@ -255,6 +255,7 @@ const webpackConfig = (env) => {
     optimization: {
       minimize: env.production === 'production',
       minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
+      usedExports: true,
     },
     experiments: {
       topLevelAwait: true,

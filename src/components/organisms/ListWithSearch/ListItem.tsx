@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {
   Avatar,
   AvatarProps,
@@ -9,10 +7,10 @@ import {
   ListItemButton,
   ListItemProps as MuiListItemProps,
   ListItemText,
-  Typography
+  Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
-
+import React, { forwardRef } from 'react'
 import { useStyles } from './styles'
 
 type ExtendedProps = MuiListItemProps & {
@@ -25,11 +23,11 @@ export interface ListItemProps extends ExtendedProps {
   secondary?: string
 }
 
-export const ListItem = (props: ListItemProps) => {
+export const ListItem = forwardRef<typeof MuiListItem, ListItemProps>((props, ref) => {
   const styles = useStyles(useTheme())
   const { primary, secondary, id, avatarSrc, ...listProps } = props
   return (
-    <MuiListItem {...listProps} id={`conversation-item-${id}`} disablePadding>
+    <MuiListItem {...listProps} id={`conversation-item-${id}`} disablePadding ref={ref as any}>
       <ListItemButton sx={styles.listItem}>
         <ListItemAvatar>
           <Avatar alt={id} src={avatarSrc} sx={styles.avatar} />
@@ -48,4 +46,4 @@ export const ListItem = (props: ListItemProps) => {
       </ListItemButton>
     </MuiListItem>
   )
-}
+})

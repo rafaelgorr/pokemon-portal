@@ -26,4 +26,4 @@ export type DomainPokemon = {
   moves: DomainPokemonMove[]
 }
 
-export type DomainListPokemon = RequiredBy<DomainPokemon, 'id' | 'name'>
+export interface DomainListPokemon extends RequiredBy<DomainPokemon, 'id' | 'name'> {}

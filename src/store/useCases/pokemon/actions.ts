@@ -9,10 +9,10 @@ export const prefix = 'useCases/pokemon'
 export const actions = {
   getPokemons: createAsyncThunk(
     `${prefix}/getPokemons`,
-    async (input: api.GetPokemons['input'], thunkApi) => {
+    async (input: WithSuccess<api.GetPokemons['input'], boolean> | undefined, thunkApi) => {
       try {
         const result = await api.getPokemons(input)
-        // input?.onSuccess?.()
+        input?.onSuccess?.(result.length !== input.limit)
         return result
       } catch (e) {
         return thunkApi.rejectWithValue(e)
