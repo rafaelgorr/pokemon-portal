@@ -9,5 +9,6 @@ module.exports = () => ({
     //   }
     // ],
     require('autoprefixer'), // aplica prefixadores de acordo com a lista de browsers a serem suportados
+    // require('postcss-nested'),
   ],
 })

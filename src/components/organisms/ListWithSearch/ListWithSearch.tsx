@@ -1,3 +1,6 @@
+import Fuse from 'fuse.js'
+import React, { useMemo, useState } from 'react'
+
 import { ClearOutlined, Search as SearchIcon } from '@mui/icons-material'
 import {
   Box,
@@ -12,13 +15,13 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
-import Fuse from 'fuse.js'
-import React, { useMemo, useState } from 'react'
+
 import { ListItem, ListItemProps } from './ListItem'
-import ListItemSkeleton from './ListItemSkeleton'
 import { useStyles } from './styles'
 import { IntersectionObserverParams } from './useIntersectionObserver'
 import SentinelReactVirtual from './Virtualize/SentinelReactVirtual'
+
+// import ReactVirtual from './Virtualize/ReactVirtual'
 
 const getFuseOptions = <T extends object>(...keys: string[]): Fuse.IFuseOptions<T> => ({
   shouldSort: false,
@@ -30,7 +33,7 @@ const getFuseOptions = <T extends object>(...keys: string[]): Fuse.IFuseOptions<
   keys,
 })
 
-type BaseProps<Item extends { id?: string }> = {
+type BaseProps<Item extends Record<string, unknown>> = {
   listItems: Item[]
   fetching?: boolean
   listItemProps: {
@@ -49,7 +52,9 @@ type BaseProps<Item extends { id?: string }> = {
   infiniteScrollProps?: IntersectionObserverParams
 }
 
-type Props<Item> = Item extends { id: string }
+// const rows = new Array(10000).fill(true).map(() => 64 + Math.round(Math.random() * 150))
+
+type Props<Item extends Record<string, unknown>> = Item extends { id: string }
   ? BaseProps<Item>
   : BaseProps<Item> & { selectorKey: keyof Item }
 
@@ -67,7 +72,7 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
     sx,
     textFieldLabel,
     // emptyListLabel = 'Empty list',
-    infiniteScrollProps,
+    // infiniteScrollProps,
   } = props
 
   const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } = listItemProps
@@ -143,17 +148,17 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
         itemsLength={filteredItems.length}
         renderItem={(virtualItem, ref) => {
           const item = filteredItems[virtualItem.index]
-          const isLoaderRow = virtualItem.index >= filteredItems.length - 1
+          // const isLoaderRow = virtualItem.index >= filteredItems.length - 1
 
-          if (isLoaderRow && infiniteScrollProps)
-            return (
-              <React.Fragment key={virtualItem.index}>
-                <div ref={ref} />
-                {[...Array(infiniteScrollProps.loaderCount).keys()].map((i) => (
-                  <ListItemSkeleton key={i} />
-                ))}
-              </React.Fragment>
-            )
+          // if (isLoaderRow && infiniteScrollProps)
+          //   return (
+          //     <React.Fragment key={virtualItem.index}>
+          //       <div ref={ref} />
+          //       {[...Array(infiniteScrollProps.loaderCount).keys()].map((i) => (
+          //         <ListItemSkeleton key={i} />
+          //       ))}
+          //     </React.Fragment>
+          //   )
           return (
             <ListItem
               key={virtualItem.key}
@@ -166,11 +171,12 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
               id={item[selectorKey] as string}
               secondaryAction={getSecondaryAction?.(item)}
               avatarSrc={getAvatarSrc?.(item)}
-              // sx={{ height: virtualItem.size }}
+              // sx={{ height: rows[virtualItem.index] }}
+              sx={{ height: virtualItem.size }}
             />
           )
         }}
-        infiniteScrollProps={infiniteScrollProps}
+        // infiniteScrollProps={infiniteScrollProps}
       />
       {/* <ReactVirtual
         itemsLength={filteredItems.length}
@@ -182,13 +188,13 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
               secondary={getSecondary?.(item)}
               onClick={handleItemClick(item)}
               selected={selectedItem?.[selectorKey] === item[selectorKey]}
-              id={item[selectorKey]}
+              id={item[selectorKey] as string}
               secondaryAction={getSecondaryAction?.(item)}
               avatarSrc={getAvatarSrc?.(item)}
             />
           )
         }}
-        infiniteScrollProps={infiniteScrollProps}
+        // infiniteScrollProps={infiniteScrollProps}
         // renderLoader={() =>
         //   infiniteScrollProps ? (
         //     <>
@@ -219,7 +225,7 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
             )
           }}
         /> */}
-      {/* <Box sx={styles.listContainer}> 
+      {/* <Box sx={styles.listContainer}>
         <List sx={styles.list}>
           {filteredItems.length
             ? filteredItems
@@ -228,12 +234,12 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
                 .map((item) => {
                   return (
                     <ListItem
-                      key={item[selectorKey]}
+                      key={item[selectorKey] as string}
                       primary={getPrimary(item)}
                       secondary={getSecondary?.(item)}
                       onClick={handleItemClick(item)}
                       selected={selectedItem?.[selectorKey] === item[selectorKey]}
-                      id={item[selectorKey]}
+                      id={item[selectorKey] as string}
                       secondaryAction={getSecondaryAction?.(item)}
                       avatarSrc={getAvatarSrc?.(item)}
                     />
@@ -248,8 +254,8 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
               ))}
             </>
           ) : null}
-        </List> 
-      {/* </Box> */}
+        </List>
+      </Box> */}
     </Stack>
   )
 }

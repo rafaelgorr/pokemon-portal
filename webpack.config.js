@@ -6,6 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ForkTSCheckerPlugin = require('fork-ts-checker-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const ReactRefreshTypeScript = require('react-refresh-typescript')
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 // const CompressionPlugin = require('compression-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
@@ -28,24 +30,62 @@ const defaultEnv = {
   analyze: false,
 }
 
-const babelLoader = {
+/**
+ * @param {import('webpack').RuleSetRule['options']} options - Environment configuration
+ * @returns {import('webpack').RuleSetUseItem} *
+ */
+const getBabelLoader = (options) => ({
   loader: require.resolve('babel-loader'),
   options: {
     cacheDirectory: true,
-    babelrc: true,
-    configFile: pathResolve('babel.config.json'),
+    configFile: pathResolve('.babelrc.json'),
+    ...options,
   },
-}
+})
 
-const tsRule = (env) => ({
-  test: /\.ts(x?)$/,
+/**
+ * @param {Enviroment} env - Environment configuration
+ * @returns {import('webpack').RuleSetRule} *
+ */
+const outideFilesLoader = () => ({
+  test: /\.(js|mjs)$/,
+  exclude: {
+    or: [/@babel/, /core-js/],
+  },
+  // loader: require.resolve('babel-loader'),
+  // options: {
+  //   babelrc: false,
+  //   sourceType: 'unambiguous',
+  //   configFile: false,
+  //   compact: false,
+  //   sourceMaps: true,
+  //   inputSourceMap: true,
+  //   configFile: pathResolve('babel.config.json'),
+  // },
   use: [
-    babelLoader,
+    getBabelLoader({
+      sourceType: 'unambiguous',
+    }),
+  ],
+})
+
+/**
+ * @param {Enviroment} env - Environment configuration
+ * @returns {import('webpack').RuleSetRule} *
+ */
+const tsRule = (env) => ({
+  test: /\.(js|mjs|jsx|ts|tsx)$/,
+  exclude: /node_modules/,
+  use: [
+    getBabelLoader(),
     {
       loader: require.resolve('ts-loader'),
       options: {
         transpileOnly: true,
         configFile: path.join(__dirname, 'tsconfig.json'),
+        getCustomTransformers: () => ({
+          before: env.production ? [] : [ReactRefreshTypeScript()],
+        }),
       },
     },
   ],
@@ -69,6 +109,10 @@ const cssLoader = (env) => ({
   ],
 })
 
+const svgLoader = {
+  test: /\.svg$/,
+  use: [{ loader: '@svgr/webpack', options: { dimensions: false } }, 'file-loader'],
+}
 const fileLoader = {
   include: /public/,
   exclude: /\.ejs$/,
@@ -78,18 +122,10 @@ const fileLoader = {
       pathdata.filename.endsWith('.ttf') || pathdata.filename.endsWith('.txt')
         ? 'fonts/[hash][ext]'
         : pathdata.filename.endsWith('.json')
-        ? 'config.json'
+        ? 'json/[hash][ext]'
         : 'images/[hash][ext]',
   },
 }
-
-/**
- * @param {Enviroment} env - Environment configuration
- * @returns {import('webpack').Configuration['module']} *
- */
-const configModule = (env) => ({
-  rules: [cssLoader(env), fileLoader, tsRule(env)],
-})
 
 /**
  * @param {Enviroment} env - Environment configuration
@@ -109,12 +145,28 @@ const resolve = {
     '@pokemon-portal/theme': pathResolve('src/views/theme'),
     '@pokemon-portal/utils': pathResolve('src/utils'),
     '@pokemon-portal/views': pathResolve('src/views'),
+    // '@mui/base': '@mui/base/legacy',
+    // '@mui/lab': '@mui/lab/legacy',
+    // '@mui/material': '@mui/material/legacy',
+    // '@mui/styled-engine': '@mui/styled-engine/legacy',
+    // '@mui/system': '@mui/system/legacy',
+    // '@mui/utils': '@mui/utils/legacy',
+    // '@mui/private-theming': '@mui/private-theming/legacy',
+    // '@mui/x-date-pickers': '@mui/x-date-pickers/legacy',
   },
+  symlinks: false,
+  // include: [path.resolve(__dirname, '../../ui-libs/harmonize-form')],
+
   extensions: ['.ts', '.tsx', '.js'],
-  // fallback: {
-  //   url: require.resolve('url/'),
-  //   path: require.resolve('path-browserify/'),
-  // },
+  fallback: {
+    // url: require.resolve('url/'),
+    // process: 'process/browser',
+    // path: require.resolve('path-browserify/'),
+    // events: require.resolve('events/'),
+    fs: false,
+    tls: false,
+    crypto: false,
+  },
 }
 
 const makeCommonPlugins = (env) => [
@@ -141,17 +193,18 @@ const makeCommonPlugins = (env) => [
     PUBLIC_PATH: '/',
     NODE_ENV: env.production ? 'production' : 'development',
     PRODUCTION: env.production,
-    APP_TITLE: 'Empty React App',
+    APP_TITLE: 'Pokemon Portal',
   }),
   new HtmlWebpackPlugin({
-    template: path.join(__dirname, 'public', 'index.ejs'),
+    template: path.join(PUBLIC, 'index.ejs'),
     favicon: path.join(PUBLIC, 'assets', 'favicon.png'),
-    title: 'Empty React App',
+    title: 'Pokemon Portal',
     inject: false,
   }),
   new webpack.DefinePlugin({
     VERSION: JSON.stringify(require('./package.json').version),
   }),
+  ...(env.production ? [] : [new ReactRefreshPlugin({ overlay: false })]),
   // new BundleAnalyzerPlugin(),
 ]
 
@@ -164,7 +217,7 @@ const makeProdPlugins = (env) => [
       {
         from: PUBLIC,
         to: DIST,
-        globOptions: { ignore: ['**/*.ejs', '**/*.png'] },
+        globOptions: { ignore: ['**/*.ejs'] },
       },
     ],
   }),
@@ -183,36 +236,60 @@ const makeProdPlugins = (env) => [
  */
 const output = (env) => ({
   chunkFilename: env.production ? 'js/chunks/[name].[chunkhash].js' : 'js/chunks/[name].js',
-  filename: env.production ? 'js/[name].[contenthash].js' : 'js/[name].js',
+  filename: env.production ? 'js/[name].[contenthash:6].js' : 'js/[name].js',
   path: DIST,
-  publicPath: '/',
+  publicPath: '',
+  clean: true,
+  // environment: {
+  //   arrowFunction: false,
+  //   bigIntLiteral: false,
+  //   const: false,
+  //   destructuring: false,
+  //   dynamicImport: false,
+  //   forOf: false,
+  //   module: false,
+  //   optionalChaining: false,
+  //   templateLiteral: false,
+  // },
 })
 
-// const devServer = (env) => ({
-//   contentBase: PUBLIC,
-//   disableHostCheck: true,
-//   port: env.port,
-//   stats: {
-//     all: false,
-//     modules: true,
-//     maxModules: 0,
-//     errors: true,
-//     warnings: false,
-//     version: true,
-//     colors: true,
-//   },
-//   inline: true,
-//   host: '0.0.0.0',
-//   historyApiFallback: true,
-// })
+/**
+ * @param {Enviroment} env - Environment configuration
+ * @returns {import('webpack').Configuration['optimization']} *
+ */
+const optimization = (env) => ({
+  minimize: env.production,
+  minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
+  usedExports: true,
+  splitChunks: {
+    chunks: 'all',
+    // chunks: 'initial',
+    // minSize: 40000,
+    // cacheGroups: {
+    //   vendor: {
+    //     test: /[\\/]node_modules[\\/]/,
+    //     chunks: 'all',
+    //     name: (module, chunks) => {
+    //       const allChunksNames = chunks.map(({ name }) => name).join('.')
+    //       const moduleName = (module.context.match(
+    //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+    //       ) || [])[1]
+
+    //       return `${moduleName}.${allChunksNames}`
+    //     },
+    //   },
+    // },
+  },
+})
 
 /**
  * @param {Enviroment} env - Environment configuration
  * @returns {import('webpack').Configuration['devServer']} *
  */
-const devServer = (env) => ({
+const devServer = (env, settings) => ({
   static: {
-    publicPath: '/',
+    publicPath: SRC,
+    watch: true,
   },
   devMiddleware: {
     stats: {
@@ -228,37 +305,65 @@ const devServer = (env) => ({
   client: {
     progress: true,
     logging: 'info',
+    overlay: true,
   },
   allowedHosts: 'all',
   port: env.port,
-  // inline: true,
   host: '0.0.0.0',
   historyApiFallback: true,
+  webSocketServer: 'sockjs',
+  // proxy: {
+  //   '/api': {
+  //     target: 'http://<ip>:8080',
+  //     secure: false,
+  //   },
+  // },
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Add-Header': 'no-cache',
+    Expires: '-1',
+    // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Headers': '*',
+    // 'Access-Control-Allow-Methods': '*',
+  },
+})
+
+/**
+ * @param {Enviroment} env - Environment configuration
+ * @returns {import('webpack').Configuration['module']} *
+ */
+const configModule = (env) => ({
+  rules: [cssLoader(env), fileLoader, svgLoader, outideFilesLoader(env), tsRule(env)],
 })
 
 /**
  * @param {Enviroment} env - Environment configuration
  * @returns {import('webpack').Configuration} *
  */
-const webpackConfig = (env) => {
+const webpackConfig = (env, settings) => {
   env = { ...defaultEnv, ...env }
+
   return {
     context: SRC,
     mode: env.production ? 'production' : 'development',
-    entry: './index.tsx',
-    devtool: env.production ? undefined : 'eval-cheap-module-source-map',
+    entry: [
+      'whatwg-fetch', // necessary to make hot reload work on old browsers
+      './index.tsx',
+    ],
+    devtool: false,
     devServer: devServer(env),
     module: configModule(env),
     plugins: env.production ? makeProdPlugins(env) : makeDevPlugins(env),
     resolve,
     output: output(env),
-    optimization: {
-      minimize: env.production === 'production',
-      minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
-      usedExports: true,
-    },
+    target: ['web', 'es5'],
+    optimization: optimization(env),
     experiments: {
       topLevelAwait: true,
+    },
+    performance: {
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000,
     },
   }
 }

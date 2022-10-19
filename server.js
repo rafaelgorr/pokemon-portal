@@ -8,6 +8,6 @@ server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-server.listen(3000, () => {
-  console.log('Listening at http://localhost:3000/')
+server.listen(3001, () => {
+  console.log('Listening at http://localhost:3001/')
 })

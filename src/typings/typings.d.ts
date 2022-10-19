@@ -1,8 +1,3 @@
-declare module 'curiojs' {
-  const n: any
-  export default n
-}
-
 declare module '*.scss' {
   const obj: any
   export default obj

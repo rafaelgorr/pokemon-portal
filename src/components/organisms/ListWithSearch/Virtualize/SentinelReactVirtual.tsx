@@ -1,6 +1,11 @@
-import { useVirtualizer } from '@tanstack/react-virtual'
 import React, { useMemo, useRef } from 'react'
-import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
+
+import { useVirtualizer } from '@tanstack/react-virtual'
+
+import {
+  IntersectionObserverParams,
+  useIntersectionObserver,
+} from '../useIntersectionObserver'
 import { ReactVirtualItem } from './ReactVirtualTypes'
 
 type ExtendedProps = Record<string, unknown>
@@ -26,6 +31,7 @@ const SentinelReactVirtual = (props: Props) => {
     getScrollElement: () => scrollRef.current,
     estimateSize: () => 64,
     overscan: 10,
+    enableSmoothScroll: false,
   })
 
   const virtualItems = rowVirtualizer.getVirtualItems()

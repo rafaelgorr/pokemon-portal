@@ -1,10 +1,19 @@
-import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
-import config from '@pokemon-portal/config'
-import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
-import { ListWithSearch, ListWithSearchProps, PageTitle } from '@pokemon-portal/src/components'
-import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
+
+import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
+import config from '@pokemon-portal/config'
+import {
+  DomainListPokemon,
+  DomainPokemon,
+} from '@pokemon-portal/src/api/interfaces/Pokemon'
+import {
+  ListWithSearch,
+  ListWithSearchProps,
+  PageTitle,
+} from '@pokemon-portal/src/components'
+import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
+
 import { useConnect } from './connect'
 import PokemonInfo from './PokemonInfo'
 import { useStyles } from './styles'
@@ -54,7 +63,6 @@ const Pokemons = (props: Props) => {
   }, [offset])
 
   const handleInfiniteScroll: IntersectionObserverParams['interObserverCallback'] = (entries) => {
-    console.log(entries)
     const entry = entries[0]
 
     if (entry.isIntersecting) {

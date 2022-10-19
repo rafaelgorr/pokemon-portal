@@ -23,6 +23,7 @@ export const useStyles = (theme: Theme) =>
       flex: '1 1 auto',
       overflow: 'auto',
       marginTop: theme.spacing(1),
+      overflowAnchor: 'none',
     },
     list: { width: '100%' },
     avatar: { width: theme.spacing(6), height: theme.spacing(6), marginRight: theme.spacing(2) },
