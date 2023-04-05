@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 
 import {
   Box,
@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemTextProps
+  ListItemTextProps,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
@@ -17,6 +17,7 @@ import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 
 import { PATHS } from '../../../Main'
+import { ABILITIES_PATHS } from '../route'
 import { useConnect } from './connect'
 import { useStyles } from './styles'
 
@@ -90,4 +91,15 @@ const Details = (props: Props) => {
   )
 }
 
-export default Details
+type AbilityLocationState = {
+  id: string
+}
+
+const DetailsElement = () => {
+  const location = useLocation()
+  const locationState = location?.state as AbilityLocationState
+  if (locationState.id) return <Details abilityId={locationState.id} />
+  else return <Navigate replace to={ABILITIES_PATHS.home} />
+}
+
+export default DetailsElement

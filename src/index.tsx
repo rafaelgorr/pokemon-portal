@@ -8,9 +8,9 @@ import { Provider, useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import smoothscroll from 'smoothscroll-polyfill'
 
-import { LocalizationProvider } from '@mui/lab'
-import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import { ThemeProvider } from '@mui/material/styles'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { ErrorDialog } from '@pokemon-portal/components'
 import {
   actions as errorActions,
@@ -23,6 +23,10 @@ import { store, useAppSelector } from './store'
 import { App } from './views'
 import BrowserIncompatible from './views/BrowserIncompatible'
 import { theme } from './views/theme'
+
+if (!window.crypto) {
+  window.crypto = window.msCrypto
+}
 
 smoothscroll.polyfill()
 
@@ -41,7 +45,7 @@ const ConnectedAdm = (props: ConnnectedAdmProps) => {
   const themeWithMode = React.useMemo(() => theme(mode), [mode])
   return (
     <ThemeProvider theme={themeWithMode}>
-      <LocalizationProvider dateAdapter={AdapterDateFns} locale={enUS}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} locale={enUS}>
         <BrowserRouter>
           <App />
           <ErrorDialog error={error} setError={(error) => dispatch(errorActions.setError(error))} />
@@ -72,3 +76,11 @@ if (root) {
     clientRoot.render(<BrowserIncompatible />)
   }
 }
+
+if (module.hot) {
+  module.hot.accept()
+}
+
+// const test = <const T extends object>() => {
+
+// }

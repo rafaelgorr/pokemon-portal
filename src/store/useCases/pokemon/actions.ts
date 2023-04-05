@@ -13,6 +13,7 @@ export const actions = {
       try {
         const result = await api.getPokemons(input)
         input?.onSuccess?.(result.length !== input.limit)
+
         return result
       } catch (e) {
         return thunkApi.rejectWithValue(e)

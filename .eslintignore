@@ -1,6 +1,7 @@
 /node_modules/**
 /dist/**
 /public/**
+/__test__/**
 *.min.js
 server.js
 setEnvironment.js

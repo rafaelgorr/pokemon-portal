@@ -4,11 +4,13 @@
     "noClassCalls": true
   },
   "compact": true,
+  "sourceMaps": true,
   "presets": [
     [
       "@babel/preset-env",
       {
         "modules": false,
+        // "loose": true,
         "corejs": { "version": "3.8", "proposals": true },
         "useBuiltIns": "usage"
         // "debug": true

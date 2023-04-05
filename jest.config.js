@@ -2,8 +2,14 @@ module.exports = {
   testEnvironment: 'jest-environment-jsdom',
   preset: 'ts-jest',
   transform: {
-    '\\.[jt]sx?$': 'ts-jest',
-    '\\.[jt]sx?$': 'babel-jest',
+    '^.+\\.ts?$': 'ts-jest',
+    '\\.[jt]sx?$': ['babel-jest', { configFile: './.babelrc.jest.json' }],
   },
-  // moduleNameMapper: {},
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^@pokemon-portal/src/(.*)$': '<rootDir>/src/$1',
+    '^@pokemon-portal/config$': '<rootDir>/src/config',
+    '@mui/material': require.resolve('@mui/material'),
+  },
+  moduleDirectories: ['node_modules', __dirname],
 }

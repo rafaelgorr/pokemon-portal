@@ -1,34 +1,23 @@
 import React, { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes, useLocation } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 
 import { Box, CircularProgress } from '@mui/material'
 import { useTheme } from '@mui/system'
 
+import DetailsElement from './Details'
 import { useStyles } from './styles'
 
 const Home = lazy(() => import('./Abilities'))
-const Details = lazy(() => import('./Details'))
 
 export const ABILITIES_PATHS = {
   home: '/',
   details: '/details',
 }
 
-type AbilityLocationState = {
-  id: string
-}
-
 interface Props {}
 
 const Dashboard = (props: Props) => {
   const styles = useStyles(useTheme())
-
-  const DetailsElement = () => {
-    const location = useLocation()
-    const locationState = location?.state as AbilityLocationState
-    if (locationState.id) return <Details abilityId={locationState.id} />
-    else return <Navigate replace to={ABILITIES_PATHS.home} />
-  }
 
   return (
     <Box sx={styles.container}>

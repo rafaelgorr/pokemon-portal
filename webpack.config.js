@@ -31,10 +31,11 @@ const defaultEnv = {
 }
 
 /**
+ * @param {Enviroment} env - Environment configuration
  * @param {import('webpack').RuleSetRule['options']} options - Environment configuration
  * @returns {import('webpack').RuleSetUseItem} *
  */
-const getBabelLoader = (options) => ({
+const getBabelLoader = (env, options) => ({
   loader: require.resolve('babel-loader'),
   options: {
     cacheDirectory: true,
@@ -47,8 +48,9 @@ const getBabelLoader = (options) => ({
  * @param {Enviroment} env - Environment configuration
  * @returns {import('webpack').RuleSetRule} *
  */
-const outideFilesLoader = () => ({
+const nodeModulesLoader = (env) => ({
   test: /\.(js|mjs)$/,
+  include: /node_modules/,
   exclude: {
     or: [/@babel/, /core-js/],
   },
@@ -63,7 +65,7 @@ const outideFilesLoader = () => ({
   //   configFile: pathResolve('babel.config.json'),
   // },
   use: [
-    getBabelLoader({
+    getBabelLoader(env, {
       sourceType: 'unambiguous',
     }),
   ],
@@ -154,7 +156,6 @@ const resolve = {
     // '@mui/private-theming': '@mui/private-theming/legacy',
     // '@mui/x-date-pickers': '@mui/x-date-pickers/legacy',
   },
-  symlinks: false,
   // include: [path.resolve(__dirname, '../../ui-libs/harmonize-form')],
 
   extensions: ['.ts', '.tsx', '.js'],
@@ -204,11 +205,16 @@ const makeCommonPlugins = (env) => [
   new webpack.DefinePlugin({
     VERSION: JSON.stringify(require('./package.json').version),
   }),
-  ...(env.production ? [] : [new ReactRefreshPlugin({ overlay: false })]),
   // new BundleAnalyzerPlugin(),
 ]
 
-const makeDevPlugins = (env) => [...makeCommonPlugins(env)]
+const makeDevPlugins = (env) => [
+  ...makeCommonPlugins(env),
+  new ReactRefreshPlugin({ overlay: false }),
+  new webpack.optimize.LimitChunkCountPlugin({
+    maxChunks: 1, // To make HRM works we need all in one chunk
+  }),
+]
 
 const makeProdPlugins = (env) => [
   ...makeCommonPlugins(env),
@@ -217,7 +223,7 @@ const makeProdPlugins = (env) => [
       {
         from: PUBLIC,
         to: DIST,
-        globOptions: { ignore: ['**/*.ejs'] },
+        globOptions: { ignore: ['**/*.ejs', '**/*.png'] },
       },
     ],
   }),
@@ -238,7 +244,7 @@ const output = (env) => ({
   chunkFilename: env.production ? 'js/chunks/[name].[chunkhash].js' : 'js/chunks/[name].js',
   filename: env.production ? 'js/[name].[contenthash:6].js' : 'js/[name].js',
   path: DIST,
-  publicPath: '',
+  publicPath: '/',
   clean: true,
   // environment: {
   //   arrowFunction: false,
@@ -261,8 +267,9 @@ const optimization = (env) => ({
   minimize: env.production,
   minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
   usedExports: true,
+  runtimeChunk: 'single',
   splitChunks: {
-    chunks: 'all',
+    chunks: 'async',
     // chunks: 'initial',
     // minSize: 40000,
     // cacheGroups: {
@@ -288,7 +295,7 @@ const optimization = (env) => ({
  */
 const devServer = (env, settings) => ({
   static: {
-    publicPath: SRC,
+    publicPath: pathResolve(''),
     watch: true,
   },
   devMiddleware: {
@@ -300,6 +307,7 @@ const devServer = (env, settings) => ({
       warnings: false,
       version: true,
       colors: true,
+      timings: true,
     },
   },
   client: {
@@ -312,6 +320,8 @@ const devServer = (env, settings) => ({
   host: '0.0.0.0',
   historyApiFallback: true,
   webSocketServer: 'sockjs',
+  hot: true,
+  liveReload: false,
   // proxy: {
   //   '/api': {
   //     target: 'http://<ip>:8080',
@@ -333,7 +343,7 @@ const devServer = (env, settings) => ({
  * @returns {import('webpack').Configuration['module']} *
  */
 const configModule = (env) => ({
-  rules: [cssLoader(env), fileLoader, svgLoader, outideFilesLoader(env), tsRule(env)],
+  rules: [cssLoader(env), fileLoader, svgLoader, nodeModulesLoader(env), tsRule(env)],
 })
 
 /**
@@ -350,7 +360,7 @@ const webpackConfig = (env, settings) => {
       'whatwg-fetch', // necessary to make hot reload work on old browsers
       './index.tsx',
     ],
-    devtool: false,
+    devtool: 'source-map',
     devServer: devServer(env),
     module: configModule(env),
     plugins: env.production ? makeProdPlugins(env) : makeDevPlugins(env),

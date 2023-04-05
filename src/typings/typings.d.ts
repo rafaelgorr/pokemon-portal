@@ -33,3 +33,10 @@ declare namespace NodeJS {
     PROFILE: any
   }
 }
+
+interface Window {
+  msCrypto: Crypto
+}
+interface NodeModule {
+  hot: any
+}

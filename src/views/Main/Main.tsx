@@ -70,6 +70,7 @@ const Main = (props: Props) => {
             {drawerListItems.map((dI) => (
               <Route key={dI.path} path={dI.path + '/*'} element={<dI.Component />} />
             ))}
+
             <Route path="*" element={<Navigate replace to={PATHS.pokemons} />} />
           </Routes>
         </Suspense>

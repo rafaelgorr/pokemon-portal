@@ -6,7 +6,7 @@ type ActionType<Type, Payload> = {
   type: Type
   payload: Payload
 }
-export const getTypesActions = <Actions>(actions: Actions) => {
+export const getTypesActions = <Actions extends Record<string, unknown>>(actions: Actions) => {
   type Types = {
     [key in keyof Actions]: string
   }
@@ -41,7 +41,7 @@ export const getTypesThunkActions = <Actions extends Record<string, unknown>>(ac
   }, {} as Types)
 }
 
-export const getActionTypes = <Actions>(actions: Actions) => {
+export const getActionTypes = <Actions extends Record<string, unknown>>(actions: Actions) => {
   type Types = {
     [key in keyof Actions]: string
   }
