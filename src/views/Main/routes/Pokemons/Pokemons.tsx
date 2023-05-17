@@ -3,17 +3,11 @@ import { useLocation } from 'react-router'
 
 import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
 import config from '@pokemon-portal/config'
-import {
-  DomainListPokemon,
-  DomainPokemon,
-} from '@pokemon-portal/src/api/interfaces/Pokemon'
-import {
-  ListWithSearch,
-  ListWithSearchProps,
-  PageTitle,
-} from '@pokemon-portal/src/components'
+import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { ListWithSearch, ListWithSearchProps, PageTitle } from '@pokemon-portal/src/components'
 import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
 
+import { useAppDispatch } from '../../../../store'
 import { useConnect } from './connect'
 import PokemonInfo from './PokemonInfo'
 import { useStyles } from './styles'
@@ -51,8 +45,11 @@ const Pokemons = (props: Props) => {
     return pokemon
   })
 
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    actions.getPokemons()
+    void dispatch(actions.getPokemons())
+
     // actions.getPokemons({
     //   limit: pokemonsLimit,
     //   offset,
@@ -81,13 +78,17 @@ const Pokemons = (props: Props) => {
       const pokemon = pokemonsEntities[pokemonLocationId]
       if (pokemon) {
         if (!selectors.gettedPokemons[pokemon.id])
-          actions.getPokemonById({
-            id: pokemon.id,
-            onSuccess: (pkm) => {
+          dispatch(
+            actions.getPokemonById({
+              id: pokemon.id,
+            })
+          )
+            .unwrap()
+            .then((pkm) => {
               setSelectedPokemon(pkm)
               setPokemonLocationId('')
-            },
-          })
+            })
+            .catch(console.error)
         else {
           setSelectedPokemon(pokemon as DomainPokemon)
           setPokemonLocationId('')
@@ -98,7 +99,10 @@ const Pokemons = (props: Props) => {
 
   const handleSelectPokemon = (pkm: DomainPokemon) => () => {
     if (!selectors.gettedPokemons[pkm.id])
-      actions.getPokemonById({ id: pkm.id, onSuccess: (pokemon) => setSelectedPokemon(pokemon) })
+      dispatch(actions.getPokemonById({ id: pkm.id }))
+        .unwrap()
+        .then((pokemon) => setSelectedPokemon(pokemon))
+        .catch(console.error)
     else setSelectedPokemon(pkm)
   }
 
@@ -109,7 +113,8 @@ const Pokemons = (props: Props) => {
 
   return (
     <Box sx={styles.container}>
-      <PageTitle label="Pokemons" />
+      <PageTitle label="Pokemonss" />
+
       <Grid container spacing={2} flex={1} height="90%">
         <Grid container item xs={2.5} flexDirection="column" textAlign="center" height="100%">
           <ListWithSearch<DomainListPokemon>

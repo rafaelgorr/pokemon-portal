@@ -1,6 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-
-import { keys } from './methods'
+import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit'
 
 type ActionType<Type, Payload> = {
   type: Type
@@ -16,29 +14,28 @@ export const getTypesActions = <Actions extends Record<string, unknown>>(actions
 }
 
 export type { ActionType }
-
-export type AsyncReducers = {
-  [k in 'pending' | 'fulfilled' | 'rejected']: string
-}
+export type ThunkActionsTypes = Record<
+  keyof Omit<AsyncThunk<unknown, unknown, any>, 'typePrefix'>,
+  string
+>
 
 export const getTypesThunkActions = <Actions extends Record<string, unknown>>(actions: Actions) => {
-  type Types = {
-    [key in keyof Actions]: AsyncReducers
-  }
-
-  return keys(actions).reduce((acc, curr) => {
+  return Object.keys(actions).reduce((acc, curr) => {
     const thunkAction = actions[curr as keyof Actions] as unknown as ReturnType<
       typeof createAsyncThunk
     >
+
+    const types: ThunkActionsTypes = {
+      pending: thunkAction.pending.type,
+      fulfilled: thunkAction.fulfilled.type,
+      rejected: thunkAction.rejected.type,
+    }
+
     return {
       ...acc,
-      [curr]: {
-        pending: thunkAction.pending.type,
-        fulfilled: thunkAction.fulfilled.type,
-        rejected: thunkAction.rejected.type,
-      },
+      [curr]: types,
     }
-  }, {} as Types)
+  }, {} as Record<keyof Actions, ThunkActionsTypes>)
 }
 
 export const getActionTypes = <Actions extends Record<string, unknown>>(actions: Actions) => {
@@ -51,7 +48,7 @@ export const getActionTypes = <Actions extends Record<string, unknown>>(actions:
 }
 
 export const createAsyncReducers = <State extends { [k: string]: any }>(
-  types: AsyncReducers,
+  types: ThunkActionsTypes,
   property: keyof State = 'fetching'
 ) => {
   return {

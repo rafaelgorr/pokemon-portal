@@ -8,8 +8,13 @@ const ForkTSCheckerPlugin = require('fork-ts-checker-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const ReactRefreshTypeScript = require('react-refresh-typescript')
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 // const CompressionPlugin = require('compression-webpack-plugin')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+// const TERSER_WORKERS = process.env.TERSER_WORKERS
+//   ? Number(process.env.TERSER_WORKERS)
+//   : true // used on circleci config file
 
 const pathResolve = (pth) => path.resolve(__dirname, pth)
 
@@ -164,6 +169,8 @@ const resolve = {
     // process: 'process/browser',
     // path: require.resolve('path-browserify/'),
     // events: require.resolve('events/'),
+    // util: require.resolve('util/'),
+    // util: false,
     fs: false,
     tls: false,
     crypto: false,
@@ -187,9 +194,12 @@ const makeCommonPlugins = (env) => [
     devServer: true,
     async: true,
   }),
-  // new webpack.ProvidePlugin({
-  //   process: 'process/browser',
+  // new ESLintPlugin({
+  //   extensions: ['ts', 'tsx'],
   // }),
+  new webpack.ProvidePlugin({
+    process: 'process/browser',
+  }),
   new webpack.EnvironmentPlugin({
     PUBLIC_PATH: '/',
     NODE_ENV: env.production ? 'production' : 'development',
@@ -205,7 +215,6 @@ const makeCommonPlugins = (env) => [
   new webpack.DefinePlugin({
     VERSION: JSON.stringify(require('./package.json').version),
   }),
-  // new BundleAnalyzerPlugin(),
 ]
 
 const makeDevPlugins = (env) => [
@@ -214,6 +223,7 @@ const makeDevPlugins = (env) => [
   new webpack.optimize.LimitChunkCountPlugin({
     maxChunks: 1, // To make HRM works we need all in one chunk
   }),
+  // new BundleAnalyzerPlugin(),
 ]
 
 const makeProdPlugins = (env) => [
@@ -265,7 +275,9 @@ const output = (env) => ({
  */
 const optimization = (env) => ({
   minimize: env.production,
-  minimizer: env.production ? [`...`, new CssMinimizerPlugin()] : [],
+  minimizer: env.production
+    ? [`...`, /*new TerserPlugin({ parallel: TERSER_WORKERS })*/ new CssMinimizerPlugin()]
+    : [],
   usedExports: true,
   runtimeChunk: 'single',
   splitChunks: {
@@ -310,11 +322,11 @@ const devServer = (env, settings) => ({
       timings: true,
     },
   },
-  client: {
-    progress: true,
-    logging: 'info',
-    overlay: true,
-  },
+  // client: {
+  //   progress: true,
+  //   logging: 'info',
+  //   overlay: true,
+  // },
   allowedHosts: 'all',
   port: env.port,
   host: '0.0.0.0',

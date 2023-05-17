@@ -1,7 +1,7 @@
 import '@pokemon-portal/theme/index.global.scss'
 import 'intersection-observer'
+import 'dayjs/locale/en'
 
-import enUS from 'date-fns/locale/en-US'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider, useDispatch } from 'react-redux'
@@ -45,7 +45,7 @@ const ConnectedAdm = (props: ConnnectedAdmProps) => {
   const themeWithMode = React.useMemo(() => theme(mode), [mode])
   return (
     <ThemeProvider theme={themeWithMode}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} locale={enUS}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
         <BrowserRouter>
           <App />
           <ErrorDialog error={error} setError={(error) => dispatch(errorActions.setError(error))} />
@@ -80,7 +80,3 @@ if (root) {
 if (module.hot) {
   module.hot.accept()
 }
-
-// const test = <const T extends object>() => {
-
-// }

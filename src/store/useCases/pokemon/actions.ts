@@ -1,12 +1,11 @@
 import * as api from '@pokemon-portal/api/useCases/pokemon'
-import { DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
 import { WithSuccess } from '@pokemon-portal/src/utils/methods'
 import { getTypesThunkActions } from '@pokemon-portal/src/utils/redux'
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const prefix = 'useCases/pokemon'
 
-export const actions = {
+export const pokemonAsyncActions = {
   getPokemons: createAsyncThunk(
     `${prefix}/getPokemons`,
     async (input: WithSuccess<api.GetPokemons['input'], boolean> | undefined, thunkApi) => {
@@ -22,10 +21,9 @@ export const actions = {
   ),
   getPokemonById: createAsyncThunk(
     `${prefix}/getPokemonById`,
-    async (input: WithSuccess<api.GetPokemonById['input'], DomainPokemon>, thunkApi) => {
+    async (input: api.GetPokemonById['input'], thunkApi) => {
       try {
         const result = await api.getPokemonById(input)
-        input?.onSuccess?.(result)
         return result
       } catch (e) {
         return thunkApi.rejectWithValue(e)
@@ -33,7 +31,7 @@ export const actions = {
     }
   ),
 } as const
-export const types = getTypesThunkActions(actions)
+export const types = getTypesThunkActions(pokemonAsyncActions)
 
 export const fulfilledActions = {
   getPokemons: createAction<api.GetPokemons['output']>(types.getPokemons.fulfilled),

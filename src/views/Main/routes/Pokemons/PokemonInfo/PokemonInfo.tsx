@@ -11,7 +11,7 @@ import {
   ListItemText,
   ListItemTextProps,
   Typography,
-  UseAutocompleteProps
+  UseAutocompleteProps,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'

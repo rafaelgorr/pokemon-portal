@@ -1,4 +1,4 @@
-import { NamedAPIResource } from 'pokenode-ts'
+
 
 import { mapMoveToDomain } from '../adapters'
 import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
@@ -18,7 +18,7 @@ export type GetPokemonMoves = {
 export const getMoves = async (input: GetPokemonMoves['input']) => {
   const moves = await moveClient.listMoves(input?.offset, input?.offset || -1)
 
-  return (moves.results as NamedAPIResource[]).map(mapNamedAPIResourceToApi)
+  return moves.results.map(mapNamedAPIResourceToApi)
 }
 
 type GetPokemonMoveInput = {

@@ -1,10 +1,12 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 import { StoreState } from '@pokemon-portal/store'
 import { selectors as pokemonSelectors } from '@pokemon-portal/store/entities/pokemon'
 import { actions as uiActions, selectors as uiSelectors } from '@pokemon-portal/store/ui/pokemon'
-import { actions, selectors as ucSelectors } from '@pokemon-portal/store/useCases/pokemon'
+import {
+  pokemonAsyncActions,
+  selectors as ucSelectors,
+} from '@pokemon-portal/store/useCases/pokemon'
 
 // const isFetching = createSelector(
 //   (state: StoreState) => ucSelectors.isFetching(state.useCases.pokemon),
@@ -21,16 +23,15 @@ export const useConnect = () => {
     gettedPokemons: ucSelectors.getGettedIds(state.useCases.pokemon),
     selectedPokemonId: uiSelectors.getSelectedPokemonId(state.ui.pokemon),
   }))
-  const dispatch = useDispatch()
 
-  const dispatchedActions = bindActionCreators(
-    {
-      getPokemons: actions.getPokemons,
-      getPokemonById: actions.getPokemonById,
-      setSelectedPokemon: uiActions.setSelectedPokemon,
-    },
-    dispatch
-  )
+  const actions = {
+    getPokemons: pokemonAsyncActions.getPokemons,
+    getPokemonById: pokemonAsyncActions.getPokemonById,
+    setSelectedPokemon: uiActions.setSelectedPokemon,
+  }
 
-  return { actions: dispatchedActions, selectors }
+  return {
+    actions,
+    selectors,
+  }
 }

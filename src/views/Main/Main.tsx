@@ -64,7 +64,7 @@ const Main = (props: Props) => {
         drawerListItems={drawerListItems}
         logo={DrawerLogo}
       />
-      <Box sx={styles.pageContent} component="main">
+      <Box sx={styles.pageContent} component="div">
         <Suspense fallback={<CircularProgress sx={styles.circularProgress} />}>
           <Routes>
             {drawerListItems.map((dI) => (

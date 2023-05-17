@@ -1,4 +1,4 @@
-import { NamedAPIResource } from 'pokenode-ts'
+
 
 import { mapAbilityToDomain } from '../adapters/domain/ability'
 import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
@@ -20,7 +20,7 @@ export const getAbilities = async (
 ): Promise<GetAbilities['output']> => {
   const abilities = await pokemonClient.listAbilities(input?.offset, input?.limit || -1)
 
-  return (abilities.results as NamedAPIResource[]).map(mapNamedAPIResourceToApi)
+  return abilities.results.map(mapNamedAPIResourceToApi)
 }
 
 type GetAbilityByIdInput = {

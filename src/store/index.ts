@@ -1,7 +1,7 @@
-import { TypedUseSelectorHook, useSelector } from 'react-redux'
-import { AnyAction, combineReducers, Reducer } from 'redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { Action, AnyAction, combineReducers, Reducer } from 'redux'
 
-import { configureStore, Middleware } from '@reduxjs/toolkit'
+import { configureStore, ThunkDispatch } from '@reduxjs/toolkit'
 
 import entitiesReducers, { EntitiesState, initialState as entitiesInitState } from './entities'
 import { errorMiddleware, printMiddleware } from './middlewares'
@@ -38,11 +38,12 @@ const middlewares = !process.env.PRODUCTION ? [printMiddleware] : []
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    [
-      ...getDefaultMiddleware({ serializableCheck: false }),
-      ...middlewares,
-      errorMiddleware,
-    ] as Middleware[],
+    getDefaultMiddleware({ serializableCheck: false }).concat([...middlewares, errorMiddleware]),
+  // [
+  //   ...getDefaultMiddleware({ serializableCheck: false }),
+  //   ...middlewares,
+  //   errorMiddleware,
+  // ] as const,
   preloadedState: {
     ui: uiInitState,
     useCases: ucInitState,
@@ -54,5 +55,11 @@ const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>
 
 export const useAppSelector: TypedUseSelectorHook<StoreState> = useSelector
+
+export type AppDispatch = typeof store.dispatch
+
+export type ThunkAppDispatch = ThunkDispatch<RootState, void, Action>
+
+export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export { store }

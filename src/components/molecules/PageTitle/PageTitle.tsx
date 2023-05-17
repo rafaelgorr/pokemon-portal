@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import dayjs from 'dayjs'
 import React from 'react'
 
 import { Box, BoxProps, Divider, Typography } from '@mui/material'
@@ -20,7 +20,7 @@ const PageTitle = (props: Props) => {
         <Typography variant="h4" color="primary">
           {label}
         </Typography>
-        <Typography>{format(new Date(), 'MMMM do, yyyy')}</Typography>
+        <Typography>{dayjs().format('MMMM, YYYY')}</Typography>
       </Box>
       <Divider sx={styles.divider} />
     </Box>

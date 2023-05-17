@@ -1,10 +1,10 @@
 import { ActionReducerMapBuilder, AnyAction } from '@reduxjs/toolkit'
 
 import { entries, values } from '../utils/methods'
-import { AsyncReducers } from '../utils/redux'
+import { ThunkActionsTypes } from '../utils/redux'
 
 export const addTypeMatcher = <State extends { fetching: Record<string, boolean> }>(
-  type: Record<string, AsyncReducers>,
+  type: Record<string, ThunkActionsTypes>,
   builder: ActionReducerMapBuilder<State>
 ) => {
   entries(type).forEach(([ucType, actionTypes]) => {

@@ -13,7 +13,7 @@ const styles = (theme: Theme) =>
     },
     listItem: { flexWrap: 'wrap' },
     gridContainer: { height: '92%' },
-    searchGridItem: { minHeight: '48px', height: '9%' },
+    searchGridItem: { minHeight: '48px', height: '9%', display: 'flex' },
     tableGridItem: { height: '91%' },
     searchText: { width: '20%' },
   })

@@ -1,4 +1,4 @@
-import { NamedAPIResource } from 'pokenode-ts'
+
 
 import { MAX_POKEMON_ID } from '@pokemon-portal/src/constants/pokemon'
 
@@ -30,7 +30,7 @@ export type GetPokemonById = {
 export const getPokemons = async (input?: GetPokemons['input']): Promise<GetPokemons['output']> => {
   const pokemons = await pokemonClient.listPokemons(input?.offset, input?.limit || MAX_POKEMON_ID)
 
-  return (pokemons.results as NamedAPIResource[]).map(mapListPokemonToDomain)
+  return pokemons.results.map(mapListPokemonToDomain)
 }
 
 export const getPokemonById = async (

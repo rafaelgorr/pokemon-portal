@@ -11,7 +11,7 @@ import {
   InputAdornment,
   TextField,
   TextFieldProps,
-  Tooltip
+  Tooltip,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
