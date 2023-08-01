@@ -1,9 +1,7 @@
-
-
 import { MAX_POKEMON_ID } from '@pokemon-portal/src/constants/pokemon'
 
 import { mapListPokemonToDomain, mapPokemonToDomain } from '../adapters'
-import { DomainListPokemon, DomainPokemon } from '../interfaces/Pokemon'
+import { DomainListPokemon, DomainPokemon } from '../interfaces/domain/Pokemon'
 import { pokemonClient } from './'
 
 type GetPokemonsInput = {
@@ -38,5 +36,7 @@ export const getPokemonById = async (
 ): Promise<GetPokemonById['output']> => {
   const pokemon = await pokemonClient.getPokemonById(Number(input.id))
 
-  return mapPokemonToDomain(pokemon)
+  const species = await pokemonClient.getPokemonSpeciesById(pokemon.id)
+
+  return mapPokemonToDomain(pokemon, species)
 }

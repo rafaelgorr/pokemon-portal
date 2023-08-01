@@ -1,4 +1,4 @@
-import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
 import { fulfilledActions as moveFulfilledActions } from '@pokemon-portal/src/store/useCases/move'
 import { WithEntityAdapter, WithEntityState } from '@pokemon-portal/utils/methods'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'

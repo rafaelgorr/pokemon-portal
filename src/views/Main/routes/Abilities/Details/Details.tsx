@@ -12,8 +12,8 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
-import { DomainAbility } from '@pokemon-portal/src/api/interfaces/Ability'
-import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
+import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 
 import { PATHS } from '../../../Main'

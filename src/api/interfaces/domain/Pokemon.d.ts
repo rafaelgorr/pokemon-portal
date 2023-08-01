@@ -16,6 +16,17 @@ export type DomainPokemonMove = {
   name: string
 }
 
+export type DomainPokemonSpeciesFlavorTextEntry = {
+  flavorText: string
+  version: string
+}
+
+export type DomainPokemonSpecies = {
+  id: string
+  name: string
+  flavorTextEntries: DomainPokemonSpeciesFlavorTextEntry[]
+}
+
 export type DomainPokemon = {
   id: string
   name: string
@@ -24,6 +35,7 @@ export type DomainPokemon = {
   abilities: DomainPokemonAbility[]
   types: DomainPokemonType[]
   moves: DomainPokemonMove[]
+  species: DomainPokemonSpecies
 }
 
 export interface DomainListPokemon extends RequiredBy<DomainPokemon, 'id' | 'name'> {}

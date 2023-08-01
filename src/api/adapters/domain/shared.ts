@@ -2,7 +2,7 @@ import { NamedAPIResource } from 'pokenode-ts'
 
 import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
 
-import { DomainPokemonResource } from '../../interfaces/Pokemon'
+import { DomainPokemonResource } from '../../interfaces/domain/Pokemon'
 
 export const getIdFromUrl = (url: string) => url.replace(/.*\/(\d*)\/$/g, '$1')
 

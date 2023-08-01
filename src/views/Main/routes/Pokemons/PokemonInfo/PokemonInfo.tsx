@@ -15,14 +15,15 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
-import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
-import { DomainPokemon, DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
+import { DomainPokemon, DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 import { formatKg, formatMeters } from '@pokemon-portal/src/utils/masks'
 
 import { PATHS } from '../../../Main'
 import { ABILITIES_PATHS } from '../../Abilities'
 import { useConnect } from './connect'
+import { PokemonDescription } from './PokemonDescription'
 import PokemonMove from './PokemonMove'
 import { useStyles } from './styles'
 
@@ -121,6 +122,7 @@ const PokemonInfo = memo((props: Props) => {
                 ))}
               />
             </ListItem>
+            <PokemonDescription species={pokemon.species} />
             <PokemonMove
               fetching={selectors.fetching}
               moves={pokemon.moves}

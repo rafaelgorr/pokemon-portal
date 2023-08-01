@@ -8,9 +8,8 @@ export const isFetching = createSelector(
   (fetching) => values(fetching).some((ft) => ft)
 )
 
-export const isUcFetching = (ucName: keyof State['fetching']) =>
-  createSelector(
-    (state: State) => state.fetching,
-    (fetching) => fetching[ucName]
-  )
+export const isUcFetching = createSelector(
+  [(state: State) => state.fetching, (state: State, ucName: keyof State['fetching']) => ucName],
+  (fetching, ucName) => fetching[ucName]
+)
 export const getGettedIds = (state: State) => state.gettedIds

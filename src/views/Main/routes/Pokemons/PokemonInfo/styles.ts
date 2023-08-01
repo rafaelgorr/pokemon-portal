@@ -21,13 +21,13 @@ export const useStyles = (theme: Theme) =>
     },
     moveList: { display: 'flex', flexDirection: 'column', flex: 1 },
     cardHeaderTitle: { fontSize: 'xx-large' },
-    moveCard: {
+    cardContainer: {
       // width: '90%',
       // filter: theme.palette.mode === 'dark' ? 'brightness(1.2)' : undefined,
       marginTop: theme.spacing(2),
     },
     moveCardContent: { paddingTop: 0, display: 'flex' },
-    moveCardHeader: {
+    cardHeader: {
       '.MuiCardHeader-action': { height: '100%', margin: 0, alignSelf: 'center' },
     },
     abilityAnchor: {

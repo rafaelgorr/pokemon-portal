@@ -1,8 +1,6 @@
-
-
 import { mapAbilityToDomain } from '../adapters/domain/ability'
 import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
-import { DomainAbility, DomainListAbility } from '../interfaces/Ability'
+import { DomainAbility, DomainListAbility } from '../interfaces/domain/Ability'
 import { pokemonClient } from './'
 
 type GetAbilitiesInput = {

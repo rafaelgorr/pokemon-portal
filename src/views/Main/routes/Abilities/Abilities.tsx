@@ -11,10 +11,10 @@ import {
   InputAdornment,
   TextField,
   TextFieldProps,
-  Tooltip
+  Tooltip,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
-import { DomainListAbility } from '@pokemon-portal/src/api/interfaces/Ability'
+import { DomainListAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
 import { PageTitle, Table } from '@pokemon-portal/src/components'
 import { useFuse } from '@pokemon-portal/src/utils/hooks/fuse'
 

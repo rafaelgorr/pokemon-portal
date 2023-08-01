@@ -17,11 +17,11 @@ import {
   ListItemTextProps,
   TextField,
   Tooltip,
-  UseAutocompleteProps
+  UseAutocompleteProps,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
-import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
-import { DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
+import { DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 
 import { PATHS } from '../../../Main'
@@ -66,9 +66,9 @@ const PokemonMove = (props: Props) => {
   }
 
   return (
-    <Card sx={styles.moveCard} elevation={5}>
+    <Card sx={styles.cardContainer} elevation={5}>
       <CardHeader
-        sx={styles.moveCardHeader}
+        sx={styles.cardHeader}
         onClick={() => setMoveOpened(!moveOpened)}
         action={
           <>

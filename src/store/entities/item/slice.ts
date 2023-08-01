@@ -1,7 +1,5 @@
-import { DomainAbility } from '@pokemon-portal/src/api/interfaces/Ability'
-import {
-  fulfilledActions as moveFulfilledActions
-} from '@pokemon-portal/src/store/useCases/ability'
+import { DomainAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
+import { fulfilledActions as moveFulfilledActions } from '@pokemon-portal/src/store/useCases/ability'
 import { RequiredBy, WithEntityAdapter, WithEntityState } from '@pokemon-portal/utils/methods'
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 

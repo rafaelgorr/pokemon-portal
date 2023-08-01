@@ -1,8 +1,6 @@
-
-
 import { mapMoveToDomain } from '../adapters'
 import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
-import { DomainListMove, DomainMove } from '../interfaces/Move'
+import { DomainListMove, DomainMove } from '../interfaces/domain/Move'
 import { moveClient } from './'
 
 type GetPokemonMovesInput = {

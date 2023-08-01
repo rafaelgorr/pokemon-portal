@@ -21,6 +21,9 @@ export const extractLetters = (str?: string): string =>
         .trim()
     : ''
 
+export const capitalizeFirstLetter = (string = '') =>
+  string.charAt(0).toUpperCase() + string.slice(1)
+
 export type ValueOf<T> = T[keyof T]
 
 export type RequiredBy<T, K extends keyof T> = Pick<T, K> & Partial<Omit<T, K>>

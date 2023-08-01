@@ -9,12 +9,12 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemTextProps
+  ListItemTextProps,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
-import { DomainListMove, DomainMove } from '@pokemon-portal/src/api/interfaces/Move'
-import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
+import { DomainListMove, DomainMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
+import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 

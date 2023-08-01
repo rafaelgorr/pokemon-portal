@@ -14,7 +14,7 @@ import {
   Tooltip,
 } from '@mui/material'
 import { useTheme } from '@mui/system'
-import { DomainListMove } from '@pokemon-portal/src/api/interfaces/Move'
+import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
 import { PageTitle, Table } from '@pokemon-portal/src/components'
 import { useFuse } from '@pokemon-portal/utils/hooks/fuse'
 

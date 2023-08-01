@@ -2,7 +2,7 @@ import { Move } from 'pokenode-ts'
 
 import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
 
-import { DomainMove } from '../../interfaces/Move'
+import { DomainMove } from '../../interfaces/domain/Move'
 import { mapNamedAPIResourceToApi } from './shared'
 
 const mapMoveTargetToDomain = (tgt: Move['target']): DomainMove['target'] =>

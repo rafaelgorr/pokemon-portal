@@ -3,8 +3,15 @@ import { useLocation } from 'react-router'
 
 import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
 import config from '@pokemon-portal/config'
-import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/Pokemon'
-import { ListWithSearch, ListWithSearchProps, PageTitle } from '@pokemon-portal/src/components'
+import {
+  DomainListPokemon,
+  DomainPokemon,
+} from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
+import {
+  ListWithSearch,
+  ListWithSearchProps,
+  PageTitle,
+} from '@pokemon-portal/src/components'
 import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
 
 import { useAppDispatch } from '../../../../store'
@@ -113,7 +120,7 @@ const Pokemons = (props: Props) => {
 
   return (
     <Box sx={styles.container}>
-      <PageTitle label="Pokemonss" />
+      <PageTitle label="Pokemons" />
 
       <Grid container spacing={2} flex={1} height="90%">
         <Grid container item xs={2.5} flexDirection="column" textAlign="center" height="100%">

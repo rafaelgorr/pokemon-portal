@@ -4,7 +4,7 @@ import 'dayjs/locale/en'
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider, useDispatch } from 'react-redux'
+import { Provider, shallowEqual, useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import smoothscroll from 'smoothscroll-polyfill'
 
@@ -35,10 +35,13 @@ const isValidBrowser = browser.satisfies(SUPPORTED_BROWSERS)
 interface ConnnectedAdmProps {}
 
 const ConnectedAdm = (props: ConnnectedAdmProps) => {
-  const { mode, error } = useAppSelector((state) => ({
-    mode: selectors.getMode(state.ui.theme),
-    error: errorSelectors.getError(state.ui.error),
-  }))
+  const { mode, error } = useAppSelector(
+    (state) => ({
+      mode: selectors.getMode(state.ui.theme),
+      error: errorSelectors.getError(state.ui.error),
+    }),
+    shallowEqual
+  )
 
   const dispatch = useDispatch()
 
