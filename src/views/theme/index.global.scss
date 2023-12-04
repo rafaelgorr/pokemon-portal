@@ -1,14 +1,20 @@
 @font-face {
   font-family: 'Proxima Nova';
-  src: local('Proxima Nova'), url('../fonts/ProximaNova/Proxima_Nova-Regular.woff2') format('woff2');
+  src:
+    local('Proxima Nova'),
+    url('../fonts/ProximaNova/Proxima_Nova-Regular.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Helvetica';
-  src: local('Helvetica'), url('../fonts/Helvetica/Helvetica.ttf') format('ttf');
+  src:
+    local('Helvetica'),
+    url('../fonts/Helvetica/Helvetica.ttf') format('ttf');
 }
 @font-face {
   font-family: 'Roboto';
-  src: local('Roboto'), url('../fonts/Roboto/Roboto.ttf') format('ttf');
+  src:
+    local('Roboto'),
+    url('../fonts/Roboto/Roboto.ttf') format('ttf');
 }
 html,
 body {

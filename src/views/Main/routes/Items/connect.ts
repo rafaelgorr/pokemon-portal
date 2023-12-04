@@ -21,7 +21,7 @@ export const useConnect = () => {
       getMoves: actions.getMoves,
       getMoveById: actions.getMoveById,
     },
-    dispatch
+    dispatch,
   )
 
   return { actions: dispatchedActions, selectors }

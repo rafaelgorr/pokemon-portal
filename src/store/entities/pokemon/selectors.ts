@@ -1,7 +1,10 @@
-import { adapters, State } from './slice'
+import { StoreState } from '../..'
+import { adapter } from './slice'
 
-export const getPokemons = (state: State) =>
-  adapters.pokemons.getSelectors<State>((state) => state.pokemons).selectAll(state)
+export const getPokemons = adapter.getSelectors<StoreState>(
+  (state) => state.entities.pokemon.pokemons,
+).selectAll
 
-export const getPokemonsEntities = (state: State) =>
-  adapters.pokemons.getSelectors?.<State>((state) => state.pokemons).selectEntities(state)
+export const getPokemonsEntities = adapter.getSelectors?.<StoreState>(
+  (state) => state.entities.pokemon.pokemons,
+).selectEntities

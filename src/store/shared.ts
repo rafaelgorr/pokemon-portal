@@ -5,7 +5,7 @@ import { ThunkActionsTypes } from '../utils/redux'
 
 export const addTypeMatcher = <State extends { fetching: Record<string, boolean> }>(
   type: Record<string, ThunkActionsTypes>,
-  builder: ActionReducerMapBuilder<State>
+  builder: ActionReducerMapBuilder<State>,
 ) => {
   entries(type).forEach(([ucType, actionTypes]) => {
     values(actionTypes).forEach((actionType) => {
@@ -13,7 +13,7 @@ export const addTypeMatcher = <State extends { fetching: Record<string, boolean>
         (action: AnyAction) => action.type === actionType,
         (state) => {
           state.fetching[ucType] = actionType.endsWith('/pending')
-        }
+        },
       )
     })
   })

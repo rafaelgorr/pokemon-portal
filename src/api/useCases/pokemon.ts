@@ -32,7 +32,7 @@ export const getPokemons = async (input?: GetPokemons['input']): Promise<GetPoke
 }
 
 export const getPokemonById = async (
-  input: GetPokemonById['input']
+  input: GetPokemonById['input'],
 ): Promise<GetPokemonById['output']> => {
   const pokemon = await pokemonClient.getPokemonById(Number(input.id))
 

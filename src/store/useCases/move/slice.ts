@@ -31,12 +31,12 @@ export default createSlice({
     })
 
     entries(types).forEach(([ucType, actionType]) =>
-      addTypeMatcher({ [ucType]: actionType }, builder)
+      addTypeMatcher({ [ucType]: actionType }, builder),
     )
     builder.addDefaultCase((state) => {
       state.fetching = keys(types).reduce(
         (ftch, type) => ({ ...ftch, [type]: false }),
-        {} as Record<keyof typeof types, boolean>
+        {} as Record<keyof typeof types, boolean>,
       )
     })
   },

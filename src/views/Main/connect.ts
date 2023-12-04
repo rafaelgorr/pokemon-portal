@@ -4,12 +4,12 @@ import { bindActionCreators, Dispatch } from 'redux'
 import { StoreState } from '@pokemon-portal/store'
 import {
   actions as drawerActions,
-  selectors as drawerSelectors
+  selectors as drawerSelectors,
 } from '@pokemon-portal/store/ui/drawer'
 import {
   actions as systemActions,
   selectors as systemSelectors,
-  State as ThemeState
+  State as ThemeState,
 } from '@pokemon-portal/store/ui/theme'
 
 export interface ConnectedProps {
@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
       toggleDrawer: drawerActions.toggleDrawer,
       setMode: systemActions.setMode,
     },
-    dispatch
+    dispatch,
   )
 
 export default connect(mapStateToProps, mapDispatchToProps)

@@ -18,7 +18,7 @@ export const useConnect = () => {
     {
       getAbilityById: actions.getAbilityById,
     },
-    dispatch
+    dispatch,
   )
 
   return { actions: dispatchedActions, selectors }

@@ -31,7 +31,7 @@ const DIST = path.join(__dirname, 'dist')
 
 const defaultEnv = {
   production: false,
-  port: 3001,
+  port: 3002,
   analyze: false,
 }
 
@@ -129,8 +129,8 @@ const fileLoader = {
       pathdata.filename.endsWith('.ttf') || pathdata.filename.endsWith('.txt')
         ? 'fonts/[hash][ext]'
         : pathdata.filename.endsWith('.json')
-        ? 'json/[hash][ext]'
-        : 'images/[hash][ext]',
+          ? 'json/[hash][ext]'
+          : 'images/[hash][ext]',
   },
 }
 
@@ -197,9 +197,9 @@ const makeCommonPlugins = (env) => [
   // new ESLintPlugin({
   //   extensions: ['ts', 'tsx'],
   // }),
-  new webpack.ProvidePlugin({
-    process: 'process/browser',
-  }),
+  // new webpack.ProvidePlugin({
+  //   process: 'process/browser',
+  // }),
   new webpack.EnvironmentPlugin({
     PUBLIC_PATH: '/',
     NODE_ENV: env.production ? 'production' : 'development',

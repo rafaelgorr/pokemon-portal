@@ -29,7 +29,7 @@ export type GetPokemonMove = {
 }
 
 export const getMoveById = async (
-  input: GetPokemonMove['input']
+  input: GetPokemonMove['input'],
 ): Promise<GetPokemonMove['output']> => {
   const move = await moveClient.getMoveById(Number(input.id))
 

@@ -1,12 +1,11 @@
-import React, { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
-
 import { LightMode, ModeNight } from '@mui/icons-material'
 import { Box, CircularProgress, CssBaseline, IconButton } from '@mui/material'
 import { useTheme } from '@mui/system'
 import DrawerLogo from '@pokemon-portal/assets/logo.png'
 import { AppBar, Drawer, DrawerItem } from '@pokemon-portal/components'
 import PokeAvatar from '@pokemon-portal/src/components/atoms/PokeAvatar'
+import React, { lazy, Suspense } from 'react'
+import { Navigate, Route, Routes } from 'react-router'
 
 import connect, { ConnectedProps } from './connect'
 import useStyles from './styles'
@@ -50,11 +49,9 @@ const Main = (props: Props) => {
         }
         actions={
           <>
-            {
-              <IconButton onClick={() => props.setMode(mode === 'light' ? 'dark' : 'light')}>
-                {mode === 'light' ? <LightMode sx={{ color: 'white' }} /> : <ModeNight />}
-              </IconButton>
-            }
+            <IconButton onClick={() => props.setMode(mode === 'light' ? 'dark' : 'light')}>
+              {mode === 'light' ? <LightMode sx={{ color: 'white' }} /> : <ModeNight />}
+            </IconButton>
           </>
         }
       />

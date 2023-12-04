@@ -1,6 +1,3 @@
-import _ from 'lodash'
-import { TypedUseSelectorHook, useSelector } from 'react-redux'
-
 import { StoreState } from '@pokemon-portal/store'
 import { selectors as pokemonSelectors } from '@pokemon-portal/store/entities/pokemon'
 import { actions as uiActions, selectors as uiSelectors } from '@pokemon-portal/store/ui/pokemon'
@@ -8,6 +5,7 @@ import {
   pokemonAsyncActions,
   selectors as ucSelectors,
 } from '@pokemon-portal/store/useCases/pokemon'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 
 // const isFetching = createSelector(
 //   (state: StoreState) => ucSelectors.isFetching(state.useCases.pokemon),
@@ -41,17 +39,21 @@ export const useConnect = () => {
   //   ),
   // }
 
-  const selectors = useAppSelector(
-    (state) => ({
-      fetching: ucSelectors.isUcFetching(state.useCases.pokemon, 'getPokemons'),
-      isGettingPokemon: ucSelectors.isUcFetching(state.useCases.pokemon, 'getPokemonById'),
-      pokemons: pokemonSelectors.getPokemons(state.entities.pokemon),
-      pokemonsEntities: pokemonSelectors.getPokemonsEntities(state.entities.pokemon),
-      gettedPokemons: ucSelectors.getGettedIds(state.useCases.pokemon),
-      selectedPokemonId: uiSelectors.getSelectedPokemonId(state.ui.pokemon),
-    }),
-    { equalityFn: _.isEqual }
-  )
+  // fetching: ucSelectors.isUcFetching(state.useCases.pokemon, 'getPokemons'),
+  //     isGettingPokemon: ucSelectors.isUcFetching(state.useCases.pokemon, 'getPokemonById'),
+  //     pokemons: pokemonSelectors.getPokemons(state.entities.pokemon),
+  //     pokemonsEntities: pokemonSelectors.getPokemonsEntities(state.entities.pokemon),
+  //     gettedPokemons: ucSelectors.getGettedIds(state.useCases.pokemon),
+  //     selectedPokemonId: uiSelectors.getSelectedPokemonId(state.ui.pokemon),
+
+  const selectors = {
+    fetching: useAppSelector(ucSelectors.isUcFetching('getPokemons')),
+    isGettingPokemon: useAppSelector(ucSelectors.isUcFetching('getPokemonById')),
+    pokemons: useAppSelector(pokemonSelectors.getPokemons),
+    pokemonsEntities: useAppSelector(pokemonSelectors.getPokemonsEntities),
+    gettedPokemons: useAppSelector(ucSelectors.getGettedIds),
+    selectedPokemonId: useAppSelector(uiSelectors.getSelectedPokemonId),
+  }
 
   const actions = {
     getPokemons: pokemonAsyncActions.getPokemons,

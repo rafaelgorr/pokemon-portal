@@ -1,13 +1,7 @@
 import React from 'react'
 import { Location, useLocation, useNavigate } from 'react-router-dom'
 
-import {
-  AvatarProps,
-  Box,
-  BoxProps,
-  SvgIconProps,
-  Typography,
-} from '@mui/material'
+import { AvatarProps, Box, BoxProps, SvgIconProps, Typography } from '@mui/material'
 import List from '@mui/material/List'
 import { useTheme } from '@mui/system'
 

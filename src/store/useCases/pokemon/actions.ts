@@ -17,7 +17,7 @@ export const pokemonAsyncActions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
   getPokemonById: createAsyncThunk(
     `${prefix}/getPokemonById`,
@@ -28,7 +28,7 @@ export const pokemonAsyncActions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
 } as const
 export const types = getTypesThunkActions(pokemonAsyncActions)

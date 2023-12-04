@@ -15,13 +15,13 @@ export const actions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
   getAbilityById: createAsyncThunk(
     `${prefix}/getAbilityById`,
     async (
       input: WithSuccess<api.GetAbilityById['input'], api.GetAbilityById['output']>,
-      thunkApi
+      thunkApi,
     ) => {
       try {
         const result = await api.getAbilityById(input)
@@ -30,7 +30,7 @@ export const actions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
 } as const
 export const types = getTypesThunkActions(actions)

@@ -24,7 +24,7 @@ const reducers: ReducerMap<keyof StoreState> = {
 
 const rootReducer = <S extends StoreState, A extends AnyAction>(
   state: S | undefined,
-  action: A
+  action: A,
 ) => {
   if (action.type === 'RESET_STORE') {
     state = undefined

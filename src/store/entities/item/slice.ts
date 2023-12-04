@@ -1,37 +1,24 @@
-import { DomainAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
-import { fulfilledActions as moveFulfilledActions } from '@pokemon-portal/src/store/useCases/ability'
-import { RequiredBy, WithEntityAdapter, WithEntityState } from '@pokemon-portal/utils/methods'
-import { createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+import { DomainItem } from '@pokemon-portal/src/api/interfaces'
 
-type Adapters = {
-  abilities: RequiredBy<DomainAbility, 'id' | 'name'>
+import { EntityState, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
+
+export const adapter = createEntityAdapter<DomainItem>({
+  sortComparer: (a, b) => (Number(a.id) < Number(b.id) ? -1 : 1),
+})
+
+export type State = {
+  items: EntityState<DomainItem, string>
 }
 
-export const adapters: WithEntityAdapter<Adapters> = {
-  abilities: createEntityAdapter<Adapters['abilities']>({
-    selectId: (pokemon) => pokemon.id,
-    sortComparer: (a, b) => (Number(a.id) < Number(b.id) ? -1 : 1),
-  }),
-} as const
-
-export type State = WithEntityState<Adapters>
-
 export const initialState: State = {
-  abilities: adapters.abilities.getInitialState(),
+  items: adapter.getInitialState(),
 }
 
 const session = createSlice({
-  name: 'entities/move',
+  name: 'entities/item',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(moveFulfilledActions.getAbilities, (state, action) => {
-      adapters.abilities.addMany(state.abilities, action.payload)
-    })
-    builder.addCase(moveFulfilledActions.getAbilityById, (state, action) => {
-      adapters.abilities.setOne(state.abilities, action.payload)
-    })
-  },
+  extraReducers: (builder) => {},
 })
 
 export default session

@@ -34,7 +34,7 @@ export const PokemonDescription = (props: PokemonDescriptionProps) => {
 
   const StyledListItemText = useCallback(
     (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
-    [styles]
+    [styles],
   )
 
   useEffect(() => {

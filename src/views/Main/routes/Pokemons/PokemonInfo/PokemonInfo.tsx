@@ -54,7 +54,7 @@ const PokemonInfo = memo((props: Props) => {
 
   const StyledListItemText = useCallback(
     (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
-    [styles]
+    [styles],
   )
 
   const handleSelectMove: AutocompleteProps = (evt, move) => {

@@ -15,13 +15,13 @@ export const actions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
   getMoveById: createAsyncThunk(
     `${prefix}/getMoveById`,
     async (
       input: WithSuccess<api.GetPokemonMove['input'], api.GetPokemonMove['output']>,
-      thunkApi
+      thunkApi,
     ) => {
       try {
         const result = await api.getMoveById(input)
@@ -30,7 +30,7 @@ export const actions = {
       } catch (e) {
         return thunkApi.rejectWithValue(e)
       }
-    }
+    },
   ),
 } as const
 export const types = getTypesThunkActions(actions)

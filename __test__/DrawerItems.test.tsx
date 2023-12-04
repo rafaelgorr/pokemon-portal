@@ -24,7 +24,7 @@ test('click test', async () => {
       <BrowserRouter>
         <DrawerItems drawerListItems={drawerItemsMock.mock.instances} />
       </BrowserRouter>
-    </ThemeProvider>
+    </ThemeProvider>,
   )
   fireEvent.click(screen.getByText('Test Button'))
 

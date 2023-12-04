@@ -20,22 +20,26 @@ export type ThunkActionsTypes = Record<
 >
 
 export const getTypesThunkActions = <Actions extends Record<string, unknown>>(actions: Actions) => {
-  return Object.keys(actions).reduce((acc, curr) => {
-    const thunkAction = actions[curr as keyof Actions] as unknown as ReturnType<
-      typeof createAsyncThunk
-    >
+  return Object.keys(actions).reduce(
+    (acc, curr) => {
+      const thunkAction = actions[curr as keyof Actions] as unknown as ReturnType<
+        typeof createAsyncThunk
+      >
 
-    const types: ThunkActionsTypes = {
-      pending: thunkAction.pending.type,
-      fulfilled: thunkAction.fulfilled.type,
-      rejected: thunkAction.rejected.type,
-    }
+      const types: ThunkActionsTypes = {
+        pending: thunkAction.pending.type,
+        fulfilled: thunkAction.fulfilled.type,
+        rejected: thunkAction.rejected.type,
+        settled: thunkAction.settled.name,
+      }
 
-    return {
-      ...acc,
-      [curr]: types,
-    }
-  }, {} as Record<keyof Actions, ThunkActionsTypes>)
+      return {
+        ...acc,
+        [curr]: types,
+      }
+    },
+    {} as Record<keyof Actions, ThunkActionsTypes>,
+  )
 }
 
 export const getActionTypes = <Actions extends Record<string, unknown>>(actions: Actions) => {
@@ -49,7 +53,7 @@ export const getActionTypes = <Actions extends Record<string, unknown>>(actions:
 
 export const createAsyncReducers = <State extends { [k: string]: any }>(
   types: ThunkActionsTypes,
-  property: keyof State = 'fetching'
+  property: keyof State = 'fetching',
 ) => {
   return {
     [types.pending]: (state: State) => {

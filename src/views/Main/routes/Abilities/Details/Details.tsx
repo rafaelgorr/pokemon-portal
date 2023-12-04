@@ -47,7 +47,7 @@ const Details = (props: Props) => {
 
   const StyledListItemText = useCallback(
     (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
-    [styles]
+    [styles],
   )
 
   const handleSelectPokemon = (pkm: DomainListPokemon) => () => {

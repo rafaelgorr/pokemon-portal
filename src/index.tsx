@@ -40,7 +40,7 @@ const ConnectedAdm = (props: ConnnectedAdmProps) => {
       mode: selectors.getMode(state.ui.theme),
       error: errorSelectors.getError(state.ui.error),
     }),
-    shallowEqual
+    shallowEqual,
   )
 
   const dispatch = useDispatch()

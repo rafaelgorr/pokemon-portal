@@ -1,15 +1,15 @@
 import { EntityAdapter, EntityState } from '@reduxjs/toolkit'
 
 export const values: typeof Object.values = <T>(obj: T | undefined) => {
-  return Object.values(obj || {})
+  return Object.values(obj ?? {})
 }
 
 export const entries: typeof Object.entries = <T>(obj?: T) => {
-  return Object.entries(obj || {})
+  return Object.entries(obj ?? {})
 }
 
 export const keys: typeof Object.keys = <T>(obj?: T): string[] => {
-  return Object.keys(obj || {})
+  return Object.keys(obj ?? {})
 }
 
 export const extractNumbers = (str?: string): string => (str ? str.replace(/\D/g, '') : '')
@@ -33,8 +33,8 @@ export type ArrayElement<ArrayType extends readonly unknown[]> =
 
 export const filterLetters = (str?: string): string => (str ? str.replace(/[A-Za-z]/g, '') : '')
 
-export type WithEntityState<T> = { [k in keyof T]: EntityState<T[k]> }
-export type WithEntityAdapter<T> = { [k in keyof T]: EntityAdapter<T[k]> }
+export type WithEntityState<T> = { [k in keyof T]: EntityState<T[k], string> }
+export type WithEntityAdapter<T> = { [k in keyof T]: EntityAdapter<T[k], string> }
 export type WithSuccess<T, A = void> = T & { onSuccess?: (args: A) => void }
 
 export interface NormalizedEntity<T> {
@@ -47,7 +47,7 @@ export interface EntityStore<T> {
 }
 
 export type WithEntityStore<T> = {
-  [K in keyof T]: T[K] extends Array<any> ? EntityStore<T[K][0]> : unknown
+  [K in keyof T]: T[K] extends any[] ? EntityStore<T[K][0]> : unknown
 }
 
 type Join<K, P> = K extends string | number

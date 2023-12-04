@@ -1,6 +1,3 @@
-import Fuse from 'fuse.js'
-import React, { useMemo, useState } from 'react'
-
 import { ClearOutlined, Search as SearchIcon } from '@mui/icons-material'
 import {
   Box,
@@ -15,11 +12,13 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
+import Fuse from 'fuse.js'
+import React, { useMemo, useState } from 'react'
 
 import { ListItem, ListItemProps } from './ListItem'
+import SentinelReactVirtual from './Virtualize/SentinelReactVirtual'
 import { useStyles } from './styles'
 import { IntersectionObserverParams } from './useIntersectionObserver'
-import SentinelReactVirtual from './Virtualize/SentinelReactVirtual'
 
 // import ReactVirtual from './Virtualize/ReactVirtual'
 

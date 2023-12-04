@@ -1,21 +1,14 @@
 import React, { useMemo, useRef } from 'react'
 
-import { useVirtualizer } from '@tanstack/react-virtual'
+import { VirtualItem, useVirtualizer } from '@tanstack/react-virtual'
 
-import {
-  IntersectionObserverParams,
-  useIntersectionObserver,
-} from '../useIntersectionObserver'
-import { ReactVirtualItem } from './ReactVirtualTypes'
+import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
 
 type ExtendedProps = Record<string, unknown>
 
 interface Props extends ExtendedProps {
   itemsLength: number
-  renderItem: (
-    virtualItem: ReactVirtualItem,
-    ref?: React.LegacyRef<HTMLDivElement>
-  ) => React.ReactNode
+  renderItem: (virtualItem: VirtualItem, ref?: React.LegacyRef<HTMLDivElement>) => React.ReactNode
   renderLoader?: () => React.ReactChild | null
   infiniteScrollProps?: IntersectionObserverParams
 }
@@ -31,7 +24,7 @@ const SentinelReactVirtual = (props: Props) => {
     getScrollElement: () => scrollRef.current,
     estimateSize: () => 64,
     overscan: 10,
-    enableSmoothScroll: false,
+    // enableSmoothScroll: false,
   })
 
   const virtualItems = rowVirtualizer.getVirtualItems()
@@ -46,7 +39,7 @@ const SentinelReactVirtual = (props: Props) => {
             top: 0,
             bottom: 0,
           },
-    [rowVirtualizer, virtualItems]
+    [rowVirtualizer, virtualItems],
   )
 
   return (
@@ -60,12 +53,12 @@ const SentinelReactVirtual = (props: Props) => {
     >
       <div id="list" ref={parentRef}>
         <div style={{ height: space.top }} />
-        {(virtualItems as ReactVirtualItem[])
+        {virtualItems
           .filter((item) => !!item)
           .map((virtualItem) => {
             const isLoaderRow = virtualItem.index >= itemsLength - 1
 
-            return renderItem(virtualItem, !isLoaderRow ? virtualItem.measureElement : loaderRef)
+            return renderItem(virtualItem, !isLoaderRow ? undefined : loaderRef)
           })}
         <div style={{ height: space.bottom }} />
       </div>

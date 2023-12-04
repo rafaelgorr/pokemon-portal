@@ -6,7 +6,7 @@ export const useCollapseRow = <T extends { id: string }>(data: T[], collapse: bo
   useEffect(() => {
     if (data.length)
       setCollapses(
-        Object.values(data).reduce((clls, dt) => ({ ...clls, [dt.id]: !!collapses[dt.id] }), {})
+        Object.values(data).reduce((clls, dt) => ({ ...clls, [dt.id]: !!collapses[dt.id] }), {}),
       )
     else setCollapses({})
   }, [data])

@@ -1,10 +1,6 @@
 import Fuse from 'fuse.js'
 import { useMemo, useState } from 'react'
 
-
-
-
-
 export const getFuseOptions = (
   ...keys: Array<keyof Record<string, any>>
 ): Fuse.IFuseOptions<Record<string, any>> => ({
@@ -27,7 +23,7 @@ export const useFuse = <T extends Record<string, any>>(input: Input<T>) => {
 
   const fuseOptions: Fuse.IFuseOptions<T> = useMemo(
     () => getFuseOptions(...(fuseKeys as string[])),
-    []
+    [],
   )
   const fuse = useMemo(() => new Fuse(items, fuseOptions), [items])
 

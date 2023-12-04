@@ -14,7 +14,7 @@ export type GetAbilities = {
 }
 
 export const getAbilities = async (
-  input: GetAbilities['input']
+  input: GetAbilities['input'],
 ): Promise<GetAbilities['output']> => {
   const abilities = await pokemonClient.listAbilities(input?.offset, input?.limit || -1)
 
@@ -31,7 +31,7 @@ export type GetAbilityById = {
 }
 
 export const getAbilityById = async (
-  input: GetAbilityById['input']
+  input: GetAbilityById['input'],
 ): Promise<GetAbilityById['output']> => {
   const ability = await pokemonClient.getAbilityById(Number(input.id))
 

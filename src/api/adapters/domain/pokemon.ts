@@ -35,14 +35,14 @@ const mapListPokemonMoveToDomain = (move: PokemonMove): DomainPokemonMove => ({
 })
 
 const mapPokemonSpeciesFlavorTextEntryToDomain = (
-  speciesFTE: FlavorText & { version?: NamedAPIResource }
+  speciesFTE: FlavorText & { version?: NamedAPIResource },
 ): DomainPokemonSpeciesFlavorTextEntry => ({
   flavorText: speciesFTE.flavor_text,
   version: capitalizeFirstLetter(speciesFTE.version?.name),
 })
 
 const mapPokemonSpeciesToDomain = (
-  pkmSpecies: PokemonSpecies
+  pkmSpecies: PokemonSpecies,
 ): Required<DomainPokemon>['species'] => ({
   id: pkmSpecies.id.toString(),
   name: pkmSpecies.name,
@@ -53,7 +53,7 @@ const mapPokemonSpeciesToDomain = (
 
 export const mapPokemonToDomain = (
   pkm: Pokemon,
-  pkmSpecies: PokemonSpecies
+  pkmSpecies: PokemonSpecies,
 ): Required<DomainPokemon> => ({
   id: pkm.id.toString(),
   name: capitalFirstLatter(pkm.name),

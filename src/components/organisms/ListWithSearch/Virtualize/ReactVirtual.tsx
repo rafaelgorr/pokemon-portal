@@ -3,10 +3,7 @@ import React, { useRef } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
 
 import ListItemSkeleton from '../ListItemSkeleton'
-import {
-  IntersectionObserverParams,
-  useIntersectionObserver,
-} from '../useIntersectionObserver'
+import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
 
 type ExtendedProps = Record<string, unknown>
 

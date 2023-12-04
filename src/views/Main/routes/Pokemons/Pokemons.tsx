@@ -1,23 +1,15 @@
+import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
+import config from '@pokemon-portal/config'
+import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
+import { ListWithSearch, ListWithSearchProps, PageTitle } from '@pokemon-portal/src/components'
+import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
-import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
-import config from '@pokemon-portal/config'
-import {
-  DomainListPokemon,
-  DomainPokemon,
-} from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
-import {
-  ListWithSearch,
-  ListWithSearchProps,
-  PageTitle,
-} from '@pokemon-portal/src/components'
-import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
-
-import { useAppDispatch } from '../../../../store'
-import { useConnect } from './connect'
 import PokemonInfo from './PokemonInfo'
+import { useConnect } from './connect'
 import { useStyles } from './styles'
+import { useAppDispatch } from '../../../../store'
 
 type PokemonLocationState = {
   id: string
@@ -88,7 +80,7 @@ const Pokemons = (props: Props) => {
           dispatch(
             actions.getPokemonById({
               id: pokemon.id,
-            })
+            }),
           )
             .unwrap()
             .then((pkm) => {

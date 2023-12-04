@@ -16,7 +16,7 @@ import {
   TableHead,
   TablePagination,
   TableProps,
-  TableRow as MuiRow
+  TableRow as MuiRow,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
