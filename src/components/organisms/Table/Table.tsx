@@ -1,5 +1,3 @@
-import React, { useEffect, useMemo, useState } from 'react'
-
 import { Warning as WarningIcon } from '@mui/icons-material'
 import {
   Box,
@@ -19,6 +17,7 @@ import {
   TableRow as MuiRow,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import { useCollapseRow } from './hooks'
 import { useStyles } from './styles'
@@ -31,9 +30,10 @@ export type CollapseBoxProps<T> = {
   data: T
 } & Pick<MuiCollapseProps, 'in'>
 
-export type TableKeys<T extends TableRow> = Array<
-  keyof T | ((object: T, selected: boolean, index: number) => React.ReactNode)
->
+export type TableKeys<T extends TableRow> = (
+  | keyof T
+  | ((object: T, selected: boolean, index: number) => React.ReactNode)
+)[]
 
 interface Props<T extends TableRow> {
   className?: string

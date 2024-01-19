@@ -1,5 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react'
-
 import {
   Autocomplete,
   Card,
@@ -13,12 +11,13 @@ import {
   TextField,
   useTheme,
 } from '@mui/material'
+import React, { useCallback, useEffect, useState } from 'react'
 
+import { useStyles } from './styles'
 import {
   DomainPokemonSpecies,
   DomainPokemonSpeciesFlavorTextEntry,
 } from '../../../../../api/interfaces'
-import { useStyles } from './styles'
 
 interface PokemonDescriptionProps {
   species: DomainPokemonSpecies

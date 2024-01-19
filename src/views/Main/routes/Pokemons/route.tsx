@@ -1,8 +1,7 @@
-import React, { lazy, Suspense } from 'react'
-import { Navigate, Route, Routes } from 'react-router'
-
 import { Box, CircularProgress } from '@mui/material'
 import { useTheme } from '@mui/system'
+import React, { lazy, Suspense } from 'react'
+import { Navigate, Route, Routes } from 'react-router'
 
 import { useStyles } from './styles'
 

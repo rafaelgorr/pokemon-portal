@@ -1,11 +1,10 @@
-import React from 'react'
-
 import { Box } from '@mui/material'
 import MUIDrawer from '@mui/material/Drawer'
 import { useTheme } from '@mui/system'
+import React from 'react'
 
-import DrawerItems, { DrawerItemProps } from '../DrawerItems'
 import { useStyles } from './styles'
+import DrawerItems, { DrawerItemProps } from '../DrawerItems'
 
 export interface Props {
   drawerOpen?: boolean

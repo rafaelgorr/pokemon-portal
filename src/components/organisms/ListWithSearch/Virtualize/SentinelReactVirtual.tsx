@@ -1,6 +1,5 @@
-import React, { useMemo, useRef } from 'react'
-
 import { VirtualItem, useVirtualizer } from '@tanstack/react-virtual'
+import React, { useMemo, useRef } from 'react'
 
 import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
 

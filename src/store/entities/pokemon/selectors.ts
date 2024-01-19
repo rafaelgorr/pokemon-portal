@@ -1,5 +1,5 @@
-import { StoreState } from '../..'
 import { adapter } from './slice'
+import { StoreState } from '../..'
 
 export const getPokemons = adapter.getSelectors<StoreState>(
   (state) => state.entities.pokemon.pokemons,

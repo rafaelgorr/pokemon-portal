@@ -1,10 +1,9 @@
-import { Ability, AbilityPokemon, PokemonAbility } from 'pokenode-ts'
-
 import { MAX_POKEMON_ID } from '@pokemon-portal/src/constants/pokemon'
 import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
+import { Ability, AbilityPokemon, PokemonAbility } from 'pokenode-ts'
 
-import { DomainAbility, DomainPokemonAbility } from '../../interfaces/domain/Ability'
 import { getIdFromUrl, mapNamedAPIResourceToApi } from './shared'
+import { DomainAbility, DomainPokemonAbility } from '../../interfaces/domain/Ability'
 
 export const mapPokemonAbilityToDomain = (ability: PokemonAbility): DomainPokemonAbility => ({
   id: getIdFromUrl(ability.ability.url),

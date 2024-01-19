@@ -1,6 +1,5 @@
-import React from 'react'
-
 import { SvgIcon, SvgIconProps } from '@mui/material'
+import React from 'react'
 
 type ExtendedProps = SvgIconProps
 
@@ -181,21 +180,21 @@ const MoveIcon = (props: Props) => {
           />
         </g>
       </g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
-      <g></g>
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
+      <g />
     </SvgIcon>
   )
 }

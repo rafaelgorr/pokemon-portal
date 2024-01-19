@@ -1,6 +1,3 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router'
-
 import { ClearOutlined, Details as DetailsIcon, Search as SearchIcon } from '@mui/icons-material'
 import {
   Box,
@@ -17,6 +14,8 @@ import { useTheme } from '@mui/system'
 import { DomainListAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
 import { PageTitle, Table } from '@pokemon-portal/src/components'
 import { useFuse } from '@pokemon-portal/src/utils/hooks/fuse'
+import React, { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router'
 
 import { useConnect } from './connect'
 import { ABILITIES_PATHS } from './route'

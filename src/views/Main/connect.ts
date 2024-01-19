@@ -1,6 +1,3 @@
-import { connect } from 'react-redux'
-import { bindActionCreators, Dispatch } from 'redux'
-
 import { StoreState } from '@pokemon-portal/store'
 import {
   actions as drawerActions,
@@ -11,6 +8,8 @@ import {
   selectors as systemSelectors,
   State as ThemeState,
 } from '@pokemon-portal/store/ui/theme'
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
 
 export interface ConnectedProps {
   drawerOpen: boolean

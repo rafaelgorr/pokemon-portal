@@ -1,7 +1,8 @@
 import { values } from '@pokemon-portal/src/utils/methods'
 import { createSelector } from '@reduxjs/toolkit'
-import { StoreState } from '../..'
+
 import { State } from './slice'
+import { StoreState } from '../..'
 
 export const isFetching = createSelector(
   (state: StoreState) => state.useCases.pokemon.fetching,

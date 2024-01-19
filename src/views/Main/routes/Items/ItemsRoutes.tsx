@@ -1,7 +1,6 @@
+import { Box, CircularProgress, useTheme } from '@mui/material'
 import React, { Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router'
-
-import { Box, CircularProgress, useTheme } from '@mui/material'
 
 import { useStyles } from './styles'
 

@@ -1,7 +1,7 @@
+import { moveClient } from './'
 import { mapMoveToDomain } from '../adapters'
 import { mapNamedAPIResourceToApi } from '../adapters/domain/shared'
 import { DomainListMove, DomainMove } from '../interfaces/domain/Move'
-import { moveClient } from './'
 
 type GetPokemonMovesInput = {
   offset?: Parameters<typeof moveClient.listMoves>[0]

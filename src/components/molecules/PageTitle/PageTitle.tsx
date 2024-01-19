@@ -1,8 +1,7 @@
-import dayjs from 'dayjs'
-import React from 'react'
-
 import { Box, BoxProps, Divider, Typography } from '@mui/material'
 import { useTheme } from '@mui/system'
+import dayjs from 'dayjs'
+import React from 'react'
 
 import useStyles from './styles'
 

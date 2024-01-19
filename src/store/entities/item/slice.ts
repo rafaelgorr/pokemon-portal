@@ -1,5 +1,4 @@
 import { DomainItem } from '@pokemon-portal/src/api/interfaces'
-
 import { EntityState, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 
 export const adapter = createEntityAdapter<DomainItem>({

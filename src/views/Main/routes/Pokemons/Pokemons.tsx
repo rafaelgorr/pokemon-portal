@@ -47,7 +47,7 @@ const Pokemons = (props: Props) => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    void dispatch(actions.getPokemons())
+    dispatch(actions.getPokemons())
 
     // actions.getPokemons({
     //   limit: pokemonsLimit,
@@ -68,7 +68,7 @@ const Pokemons = (props: Props) => {
 
   useEffect(() => {
     return () => {
-      actions.setSelectedPokemon(selectedPokemon?.id || '')
+      actions.setSelectedPokemon(selectedPokemon?.id ?? '')
     }
   }, [selectedPokemon])
 

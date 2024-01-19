@@ -1,9 +1,8 @@
+import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
 import { Move } from 'pokenode-ts'
 
-import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
-
-import { DomainMove } from '../../interfaces/domain/Move'
 import { mapNamedAPIResourceToApi } from './shared'
+import { DomainMove } from '../../interfaces/domain/Move'
 
 const mapMoveTargetToDomain = (tgt: Move['target']): DomainMove['target'] =>
   capitalFirstLatter(tgt.name.replace(/(-)/g, ' '))

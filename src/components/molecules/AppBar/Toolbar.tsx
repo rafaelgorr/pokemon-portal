@@ -1,8 +1,7 @@
-import React from 'react'
-
 import { Box } from '@mui/material'
 import MuiToolbar from '@mui/material/Toolbar'
 import { useTheme } from '@mui/system'
+import React from 'react'
 
 import { useStyles } from './styles'
 

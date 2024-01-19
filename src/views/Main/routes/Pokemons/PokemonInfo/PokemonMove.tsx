@@ -1,6 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-
 import { ArrowForward as ArrowForwardIcon, ExpandLess, ExpandMore } from '@mui/icons-material'
 import {
   Autocomplete,
@@ -23,10 +20,12 @@ import { useTheme } from '@mui/system'
 import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
 import { DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 
+import { useStyles } from './styles'
 import { PATHS } from '../../../Main'
 import { MOVES_PATHS } from '../../../routes/Moves/route'
-import { useStyles } from './styles'
 
 type AutocompleteOnChangeProps = UseAutocompleteProps<
   DomainPokemonMove,
@@ -119,7 +118,7 @@ const PokemonMove = (props: Props) => {
               <ListItem sx={styles.listItem}>
                 <ListItemText
                   sx={{ alignItems: 'flex-start' }}
-                  primary={'Type'}
+                  primary="Type"
                   secondary={
                     move && (
                       <Chip

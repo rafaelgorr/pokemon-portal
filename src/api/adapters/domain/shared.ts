@@ -1,6 +1,5 @@
-import { NamedAPIResource } from 'pokenode-ts'
-
 import { capitalFirstLatter } from '@pokemon-portal/src/utils/methods'
+import { NamedAPIResource } from 'pokenode-ts'
 
 import { DomainPokemonResource } from '../../interfaces/domain/Pokemon'
 

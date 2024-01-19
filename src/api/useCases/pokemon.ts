@@ -1,8 +1,8 @@
 import { MAX_POKEMON_ID } from '@pokemon-portal/src/constants/pokemon'
 
+import { pokemonClient } from './'
 import { mapListPokemonToDomain, mapPokemonToDomain } from '../adapters'
 import { DomainListPokemon, DomainPokemon } from '../interfaces/domain/Pokemon'
-import { pokemonClient } from './'
 
 type GetPokemonsInput = {
   offset?: Parameters<typeof pokemonClient.listPokemons>[0]

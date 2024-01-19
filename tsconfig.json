@@ -28,7 +28,7 @@
       "@pokemon-portal/utils": ["src/utils"],
       "@pokemon-portal/utils/*": ["src/utils/*"],
       "@pokemon-portal/views": ["src/views"],
-      "@pokemon-portal/views/*": ["src/views/*"]
+      "@pokemon-portal/views/*": ["src/views/*"],
     },
     "outDir": "./tsDist",
     "target": "ES5",
@@ -56,8 +56,8 @@
     "noUnusedLocals": true,
     "pretty": true,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
   },
   "include": ["src", "__test__", "postcss.config.ts"],
-  "exclude": ["node_modules", "dist", "public", "**/*.test.tsx", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist", "public", "**/*.test.tsx", "**/*.test.ts"],
 }

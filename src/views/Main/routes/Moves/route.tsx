@@ -1,12 +1,11 @@
+import { Box, CircularProgress } from '@mui/material'
+import { useTheme } from '@mui/system'
 import React, { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes, useLocation } from 'react-router'
 
-import { Box, CircularProgress } from '@mui/material'
-import { useTheme } from '@mui/system'
-
-import { ABILITIES_PATHS } from '../Abilities'
 import Details from './Details'
 import { useStyles } from './styles'
+import { ABILITIES_PATHS } from '../Abilities'
 
 const Home = lazy(() => import('./Moves'))
 

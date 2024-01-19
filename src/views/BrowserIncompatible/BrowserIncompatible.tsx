@@ -2,8 +2,8 @@ import Bowser from 'bowser'
 import cn from 'classnames'
 import React from 'react'
 
-import { SUPPORTED_BROWSERS } from '../../constants/browsers'
 import styles from './styles.scss'
+import { SUPPORTED_BROWSERS } from '../../constants/browsers'
 
 export const lightFormatDateFormat = "yyyy-MM-dd'T'hh:mm:ss"
 
@@ -41,7 +41,7 @@ const BrowserIncompatible = (props: Props) => {
           Firefox {firefox}
         </a>
         <a target="#" className={styles.anchorBrowser} href="https://www.microsoft.com/en-us/edge">
-          <i className={cn('fab fa-edge', styles.icon)}></i>
+          <i className={cn('fab fa-edge', styles.icon)} />
           Edge {edge}
         </a>
         <a
@@ -49,7 +49,7 @@ const BrowserIncompatible = (props: Props) => {
           className={styles.anchorBrowser}
           href="https://support.apple.com/downloads/safari"
         >
-          <i className={cn('fab fa-safari', styles.icon)}></i>
+          <i className={cn('fab fa-safari', styles.icon)} />
           Safari {safari}
         </a>
       </div>

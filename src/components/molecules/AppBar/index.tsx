@@ -1,9 +1,8 @@
-import React from 'react'
-
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import { Theme } from '@mui/material/styles'
 import { useTheme } from '@mui/system'
 import { createSxStyles } from '@pokemon-portal/src/views/theme'
+import React from 'react'
 
 import { Toolbar, ToolbarProps } from './Toolbar'
 

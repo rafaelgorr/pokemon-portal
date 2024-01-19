@@ -1,6 +1,3 @@
-import React, { CSSProperties, memo, useCallback, useState } from 'react'
-import { useNavigate } from 'react-router'
-
 import {
   Box,
   Card,
@@ -19,13 +16,15 @@ import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
 import { DomainPokemon, DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 import { formatKg, formatMeters } from '@pokemon-portal/src/utils/masks'
+import React, { CSSProperties, memo, useCallback, useState } from 'react'
+import { useNavigate } from 'react-router'
 
-import { PATHS } from '../../../Main'
-import { ABILITIES_PATHS } from '../../Abilities'
-import { useConnect } from './connect'
 import { PokemonDescription } from './PokemonDescription'
 import PokemonMove from './PokemonMove'
+import { useConnect } from './connect'
 import { useStyles } from './styles'
+import { PATHS } from '../../../Main'
+import { ABILITIES_PATHS } from '../../Abilities'
 
 type AutocompleteProps = UseAutocompleteProps<
   DomainPokemonMove,

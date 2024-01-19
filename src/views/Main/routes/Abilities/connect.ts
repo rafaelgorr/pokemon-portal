@@ -1,9 +1,8 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { bindActionCreators } from 'redux'
-
 import { StoreState } from '@pokemon-portal/store'
 import { selectors as pokemonSelectors } from '@pokemon-portal/store/entities/ability'
 import { actions, selectors as ucSelectors } from '@pokemon-portal/store/useCases/ability'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 // const isFetching = createSelector(
 //   (state: StoreState) => ucSelectors.isFetching(state.useCases.pokemon),

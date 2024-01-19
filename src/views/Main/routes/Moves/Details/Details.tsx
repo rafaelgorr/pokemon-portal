@@ -1,6 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-
 import {
   Box,
   Chip,
@@ -17,10 +14,12 @@ import { DomainListMove, DomainMove } from '@pokemon-portal/src/api/interfaces/d
 import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router'
 
-import { PATHS } from '../../../Main'
 import { useConnect } from './connect'
 import { useStyles } from './styles'
+import { PATHS } from '../../../Main'
 
 type ExtendedProps = Record<string, unknown>
 
@@ -67,7 +66,7 @@ const Details = (props: Props) => {
             <ListItem sx={styles.listItem}>
               <ListItemText
                 sx={styles.listItemText}
-                primary={'Type'}
+                primary="Type"
                 secondary={
                   move && (
                     <Chip

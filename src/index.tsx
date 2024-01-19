@@ -2,12 +2,6 @@ import '@pokemon-portal/theme/index.global.scss'
 import 'intersection-observer'
 import 'dayjs/locale/en'
 
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import { Provider, shallowEqual, useDispatch } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
-import smoothscroll from 'smoothscroll-polyfill'
-
 import { ThemeProvider } from '@mui/material/styles'
 import { LocalizationProvider } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -17,6 +11,11 @@ import {
   selectors as errorSelectors,
 } from '@pokemon-portal/store/ui/error'
 import { selectors } from '@pokemon-portal/store/ui/theme'
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import { Provider, shallowEqual, useDispatch } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import smoothscroll from 'smoothscroll-polyfill'
 
 import { browser, SUPPORTED_BROWSERS } from './constants/browsers'
 import { store, useAppSelector } from './store'

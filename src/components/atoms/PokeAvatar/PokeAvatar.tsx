@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react'
-
 import { Avatar, AvatarProps } from '@mui/material'
 import config from '@pokemon-portal/config'
+import React, { useMemo } from 'react'
 
 type ExtendedProps = AvatarProps
 

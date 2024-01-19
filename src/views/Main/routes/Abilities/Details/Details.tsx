@@ -1,6 +1,3 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { Navigate, useLocation, useNavigate } from 'react-router'
-
 import {
   Box,
   CircularProgress,
@@ -15,11 +12,13 @@ import config from '@pokemon-portal/config'
 import { DomainAbility } from '@pokemon-portal/src/api/interfaces/domain/Ability'
 import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 
-import { PATHS } from '../../../Main'
-import { ABILITIES_PATHS } from '../route'
 import { useConnect } from './connect'
 import { useStyles } from './styles'
+import { PATHS } from '../../../Main'
+import { ABILITIES_PATHS } from '../route'
 
 type ExtendedProps = Record<string, unknown>
 

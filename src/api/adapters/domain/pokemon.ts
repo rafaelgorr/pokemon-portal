@@ -1,3 +1,4 @@
+import { capitalFirstLatter, capitalizeFirstLetter } from '@pokemon-portal/src/utils/methods'
 import {
   FlavorText,
   NamedAPIResource,
@@ -7,8 +8,8 @@ import {
   PokemonType,
 } from 'pokenode-ts'
 
-import { capitalFirstLatter, capitalizeFirstLetter } from '@pokemon-portal/src/utils/methods'
-
+import { mapPokemonAbilityToDomain } from './ability'
+import { getIdFromUrl } from './shared'
 import { DomainPokemonSpeciesFlavorTextEntry } from '../../interfaces'
 import {
   DomainListPokemon,
@@ -16,8 +17,6 @@ import {
   DomainPokemonMove,
   DomainPokemonType,
 } from '../../interfaces/domain/Pokemon'
-import { mapPokemonAbilityToDomain } from './ability'
-import { getIdFromUrl } from './shared'
 
 export const mapListPokemonToDomain = (input: NamedAPIResource): DomainListPokemon => ({
   id: getIdFromUrl(input.url),
