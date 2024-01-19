@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from '@reduxjs/toolkit'
 
 import { initialState as abilityInitialState, reducer as ability } from './ability'
 import { initialState as moveInitialState, reducer as move } from './move'
@@ -12,4 +12,4 @@ export const initialState = {
 
 export type UCState = typeof initialState
 
-export default combineReducers<UCState>({ pokemon, move, ability })
+export default combineReducers({ pokemon, move, ability } satisfies Record<keyof UCState, unknown>)

@@ -1,7 +1,6 @@
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { Action, AnyAction, combineReducers, Reducer } from 'redux'
-
 import { configureStore, ThunkDispatch } from '@reduxjs/toolkit'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { Action, combineReducers, Reducer } from 'redux'
 
 import entitiesReducers, { EntitiesState, initialState as entitiesInitState } from './entities'
 import { errorMiddleware, printMiddleware } from './middlewares'
@@ -22,10 +21,7 @@ const reducers: ReducerMap<keyof StoreState> = {
   entities: entitiesReducers,
 }
 
-const rootReducer = <S extends StoreState, A extends AnyAction>(
-  state: S | undefined,
-  action: A,
-) => {
+const rootReducer = <S extends StoreState, A extends Action>(state: S | undefined, action: A) => {
   if (action.type === 'RESET_STORE') {
     state = undefined
   }

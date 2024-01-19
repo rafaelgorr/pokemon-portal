@@ -1,9 +1,9 @@
 import { entries, keys } from '@pokemon-portal/utils/methods'
 import { createSlice } from '@reduxjs/toolkit'
 
-import { addTypeMatcher } from '../../shared'
 import { types } from './'
 import { fulfilledActions, prefix } from './actions'
+import { addTypeMatcher } from '../../shared'
 
 export interface State {
   fetching: Partial<Record<keyof typeof types, boolean>>

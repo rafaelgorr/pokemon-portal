@@ -1,4 +1,5 @@
 import { AsyncThunk, createAsyncThunk } from '@reduxjs/toolkit'
+import { Reducer } from 'redux'
 
 type ActionType<Type, Payload> = {
   type: Type
@@ -69,3 +70,7 @@ export const createAsyncReducers = <State extends { [k: string]: any }>(
 }
 
 export type ThunkApi = Parameters<Parameters<typeof createAsyncThunk>[1]>[1]
+
+export type WithReducer<T extends Record<string, unknown>> = {
+  [k in keyof T]: Reducer<T[k]>
+}

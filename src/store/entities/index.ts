@@ -9,7 +9,9 @@ export const initialState = {
   move: moveInitialState,
   ability: abilityInitialState,
 }
-
 export type EntitiesState = typeof initialState
 
-export default combineReducers<EntitiesState>({ pokemon, move, ability })
+export default combineReducers({ pokemon, move, ability } satisfies Record<
+  keyof EntitiesState,
+  unknown
+>)

@@ -14,4 +14,7 @@ export const initialState = {
 
 export type UIState = typeof initialState
 
-export default combineReducers<UIState>({ theme, drawer, error, pokemon })
+export default combineReducers({ theme, drawer, error, pokemon } satisfies Record<
+  keyof UIState,
+  unknown
+>)

@@ -12,7 +12,7 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
-import Fuse from 'fuse.js'
+import Fuse, { IFuseOptions } from 'fuse.js'
 import React, { useMemo, useState } from 'react'
 
 import { ListItem, ListItemProps } from './ListItem'
@@ -22,7 +22,7 @@ import { IntersectionObserverParams } from './useIntersectionObserver'
 
 // import ReactVirtual from './Virtualize/ReactVirtual'
 
-const getFuseOptions = <T extends object>(...keys: string[]): Fuse.IFuseOptions<T> => ({
+const getFuseOptions = <T extends object>(...keys: string[]): IFuseOptions<T> => ({
   shouldSort: false,
   threshold: 0.1,
   location: 0,
@@ -76,7 +76,7 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
 
   const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } = listItemProps
 
-  const fuseOptions: Fuse.IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
+  const fuseOptions: IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
   const fuse = useMemo(() => new Fuse(listItems as T[], fuseOptions), [listItems])
 
   const [search, setSearch] = useState('')
