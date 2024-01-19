@@ -1,3 +1,3 @@
-import { State } from './slice'
+import { StoreState } from '@pokemon-portal/src/store'
 
-export const getError = (state: State) => state.error
+export const getError = (state: StoreState) => state.ui.error.error

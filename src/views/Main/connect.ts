@@ -19,8 +19,8 @@ export interface ConnectedProps {
 }
 
 const mapStateToProps = (state: StoreState) => ({
-  drawerOpen: drawerSelectors.isDrawerOpen(state.ui.drawer),
-  mode: systemSelectors.getMode(state.ui.theme),
+  drawerOpen: drawerSelectors.isDrawerOpen(state),
+  mode: systemSelectors.getMode(state),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

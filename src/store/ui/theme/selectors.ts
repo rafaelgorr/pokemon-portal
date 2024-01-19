@@ -1,3 +1,3 @@
-import { State } from './slice'
+import { StoreState } from '@pokemon-portal/src/store'
 
-export const getMode = (state: State) => state.mode
+export const getMode = (state: StoreState) => state.ui.theme.mode

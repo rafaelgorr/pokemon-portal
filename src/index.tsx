@@ -13,7 +13,7 @@ import {
 import { selectors } from '@pokemon-portal/store/ui/theme'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider, shallowEqual, useDispatch } from 'react-redux'
+import { Provider, useDispatch } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import smoothscroll from 'smoothscroll-polyfill'
 
@@ -34,13 +34,10 @@ const isValidBrowser = browser.satisfies(SUPPORTED_BROWSERS)
 interface ConnnectedAdmProps {}
 
 const ConnectedAdm = (props: ConnnectedAdmProps) => {
-  const { mode, error } = useAppSelector(
-    (state) => ({
-      mode: selectors.getMode(state.ui.theme),
-      error: errorSelectors.getError(state.ui.error),
-    }),
-    shallowEqual,
-  )
+  const { mode, error } = {
+    mode: useAppSelector(selectors.getMode),
+    error: useAppSelector(errorSelectors.getError),
+  }
 
   const dispatch = useDispatch()
 

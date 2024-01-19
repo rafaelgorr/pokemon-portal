@@ -1,7 +1,11 @@
-import { adapter, State } from './slice'
+import { StoreState } from '@pokemon-portal/src/store'
 
-export const getAbilities = (state: State) =>
-  adapter.getSelectors<State>((state) => state.abilities).selectAll(state)
+import { adapter } from './slice'
 
-export const getAbilitiesEntities = (state: State) =>
-  adapter.getSelectors<State>((state) => state.abilities).selectEntities(state)
+export const getAbilities = adapter.getSelectors<StoreState>(
+  (state) => state.entities.ability.abilities,
+).selectAll
+
+export const getAbilitiesEntities = adapter.getSelectors<StoreState>(
+  (state) => state.entities.ability.abilities,
+).selectEntities
