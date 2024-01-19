@@ -14,7 +14,7 @@ export type DrawerItem = {
 }
 
 export const mapPathToTitle = (drawerListItems: DrawerItem[], path: string) => {
-  return drawerListItems.find((dL) => dL.path === path)?.label || ''
+  return drawerListItems.find((dL) => dL.path === path)?.label ?? ''
 }
 
 interface Props {

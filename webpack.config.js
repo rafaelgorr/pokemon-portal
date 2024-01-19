@@ -126,7 +126,7 @@ const fileLoader = {
   type: 'asset/resource',
   generator: {
     filename: (pathdata) =>
-      pathdata.filename.endsWith('.ttf') || pathdata.filename.endsWith('.txt')
+      pathdata.filename.endsWith('.ttf') ?? pathdata.filename.endsWith('.txt')
         ? 'fonts/[hash][ext]'
         : pathdata.filename.endsWith('.json')
           ? 'json/[hash][ext]'
@@ -194,9 +194,9 @@ const makeCommonPlugins = (env) => [
     devServer: true,
     async: true,
   }),
-  // new ESLintPlugin({
-  //   extensions: ['ts', 'tsx'],
-  // }),
+  new ESLintPlugin({
+    extensions: ['ts', 'tsx'],
+  }),
   // new webpack.ProvidePlugin({
   //   process: 'process/browser',
   // }),
@@ -292,7 +292,7 @@ const optimization = (env) => ({
     //       const allChunksNames = chunks.map(({ name }) => name).join('.')
     //       const moduleName = (module.context.match(
     //         /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-    //       ) || [])[1]
+    //       ) ?? [])[1]
 
     //       return `${moduleName}.${allChunksNames}`
     //     },

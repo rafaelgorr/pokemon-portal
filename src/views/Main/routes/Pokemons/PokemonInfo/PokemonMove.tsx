@@ -97,7 +97,7 @@ const PokemonMove = (props: Props) => {
         title={
           <Autocomplete<DomainPokemonMove>
             id="auto-complete"
-            options={moves || []}
+            options={moves ?? []}
             getOptionLabel={(pkm) => pkm.name}
             isOptionEqualToValue={(option, value) => option.id === value.id}
             sx={{ width: '35%', minWidth: '100px' }}

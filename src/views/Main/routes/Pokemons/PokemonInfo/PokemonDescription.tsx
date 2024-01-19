@@ -48,7 +48,7 @@ export const PokemonDescription = (props: PokemonDescriptionProps) => {
         title={
           <Autocomplete<DomainPokemonSpeciesFlavorTextEntry>
             id="auto-complete"
-            options={props.species.flavorTextEntries || []}
+            options={props.species.flavorTextEntries ?? []}
             getOptionLabel={(option) => option.version}
             isOptionEqualToValue={(option, value) => option.version === value.version}
             sx={{ width: '35%', minWidth: '100px' }}

@@ -20,7 +20,7 @@ export const mapAbilityPokemonToDomain = (ability: AbilityPokemon): DomainPokemo
 export const mapAbilityToDomain = (ability: Ability): DomainAbility => ({
   id: ability.id.toString(),
   name: capitalFirstLatter(ability.name),
-  effect: ability.effect_entries.find((eE) => eE.language.name === 'en')?.effect || '',
+  effect: ability.effect_entries.find((eE) => eE.language.name === 'en')?.effect ?? '',
   isMainSeries: ability.is_main_series ? 'Yes' : 'No',
   generation: mapNamedAPIResourceToApi(ability.generation),
   pokemons: ability.pokemon

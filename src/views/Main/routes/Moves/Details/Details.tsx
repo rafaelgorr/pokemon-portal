@@ -59,7 +59,7 @@ const Details = (props: Props) => {
 
   return (
     <Box sx={styles.container}>
-      <PageTitle label={move?.name || ''} />
+      <PageTitle label={move?.name ?? ''} />
       <Grid container sx={styles.gridContainer}>
         <Grid item xs={9}>
           <List sx={styles.list}>
@@ -93,7 +93,7 @@ const Details = (props: Props) => {
         </Grid>
         <Grid item xs={3} sx={styles.pokemonListGrid}>
           <ListWithSearch<DomainListPokemon>
-            listItems={move?.learnedByPokemon || []}
+            listItems={move?.learnedByPokemon ?? []}
             listItemProps={{
               getPrimary: (pkm) => pkm.name,
               getAvatarSrc: (pkm) => config.getOtherSprite(pkm.id),

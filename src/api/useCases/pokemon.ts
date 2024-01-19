@@ -26,7 +26,7 @@ export type GetPokemonById = {
 }
 
 export const getPokemons = async (input?: GetPokemons['input']): Promise<GetPokemons['output']> => {
-  const pokemons = await pokemonClient.listPokemons(input?.offset, input?.limit || MAX_POKEMON_ID)
+  const pokemons = await pokemonClient.listPokemons(input?.offset, input?.limit ?? MAX_POKEMON_ID)
 
   return pokemons.results.map(mapListPokemonToDomain)
 }

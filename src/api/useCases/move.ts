@@ -14,7 +14,7 @@ export type GetPokemonMoves = {
 }
 
 export const getMoves = async (input: GetPokemonMoves['input']) => {
-  const moves = await moveClient.listMoves(input?.offset, input?.offset || -1)
+  const moves = await moveClient.listMoves(input?.offset, input?.offset ?? -1)
 
   return moves.results.map(mapNamedAPIResourceToApi)
 }

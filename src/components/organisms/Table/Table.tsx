@@ -136,8 +136,8 @@ function Table<T extends TableRow>(props: Props<T>) {
             </MuiRow>
           </TableHead>
           <TableBody>
-            {progress ||
-              emptyData ||
+            {progress ??
+              emptyData ??
               (rowsPerPage > 0
                 ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 : data
