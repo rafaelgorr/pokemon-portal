@@ -1,7 +1,10 @@
 import React from 'react'
 
 type ExtendedProps = Pick<
-  React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
+  React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  >,
   'onClick' | 'style'
 >
 

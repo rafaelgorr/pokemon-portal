@@ -32,7 +32,9 @@ export const PokemonDescription = (props: PokemonDescriptionProps) => {
   const [collapsed, setCollapsed] = useState(false)
 
   const StyledListItemText = useCallback(
-    (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
+    (props: ListItemTextProps) => (
+      <ListItemText {...props} sx={styles.listItemText} />
+    ),
     [styles],
   )
 
@@ -50,7 +52,9 @@ export const PokemonDescription = (props: PokemonDescriptionProps) => {
             id="auto-complete"
             options={props.species.flavorTextEntries ?? []}
             getOptionLabel={(option) => option.version}
-            isOptionEqualToValue={(option, value) => option.version === value.version}
+            isOptionEqualToValue={(option, value) =>
+              option.version === value.version
+            }
             sx={{ width: '35%', minWidth: '100px' }}
             renderInput={(params) => (
               <TextField
@@ -70,7 +74,10 @@ export const PokemonDescription = (props: PokemonDescriptionProps) => {
           <CardContent sx={styles.moveCardContent}>
             <List sx={styles.list}>
               <ListItem sx={styles.listItem}>
-                <StyledListItemText primary="Description" secondary={flavorTextEntry.flavorText} />
+                <StyledListItemText
+                  primary="Description"
+                  secondary={flavorTextEntry.flavorText}
+                />
               </ListItem>
             </List>
           </CardContent>

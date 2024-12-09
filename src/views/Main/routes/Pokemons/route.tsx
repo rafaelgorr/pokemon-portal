@@ -20,7 +20,10 @@ const Dashboard = (props: Props) => {
       <Suspense fallback={<CircularProgress sx={styles.circularProgress} />}>
         <Routes>
           <Route path={DASHBOARD_PATHS.home} element={<Home />} />
-          <Route path="*" element={<Navigate replace to={DASHBOARD_PATHS.home} />} />
+          <Route
+            path="*"
+            element={<Navigate replace to={DASHBOARD_PATHS.home} />}
+          />
         </Routes>
       </Suspense>
     </Box>

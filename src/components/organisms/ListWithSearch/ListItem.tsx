@@ -24,27 +24,36 @@ export interface ListItemProps extends ExtendedProps {
   secondary?: string
 }
 
-export const ListItem = forwardRef<typeof MuiListItem, ListItemProps>((props, ref) => {
-  const styles = useStyles(useTheme())
-  const { primary, secondary, id, avatarSrc, ...listProps } = props
-  return (
-    <MuiListItem {...listProps} id={`conversation-item-${id}`} disablePadding ref={ref as any}>
-      <ListItemButton sx={styles.listItem}>
-        <ListItemAvatar>
-          <Avatar alt={id} src={avatarSrc} sx={styles.avatar} />
-        </ListItemAvatar>
-        <ListItemText
-          primary={primary}
-          secondaryTypographyProps={{ component: 'span' }}
-          secondary={
-            secondary ? (
-              <Box sx={{ display: 'flex' }}>
-                <Typography sx={{ wordBreak: 'break-word' }}>{secondary}</Typography>
-              </Box>
-            ) : undefined
-          }
-        />
-      </ListItemButton>
-    </MuiListItem>
-  )
-})
+export const ListItem = forwardRef<typeof MuiListItem, ListItemProps>(
+  (props, ref) => {
+    const styles = useStyles(useTheme())
+    const { primary, secondary, id, avatarSrc, ...listProps } = props
+    return (
+      <MuiListItem
+        {...listProps}
+        id={`conversation-item-${id}`}
+        disablePadding
+        ref={ref as any}
+      >
+        <ListItemButton sx={styles.listItem}>
+          <ListItemAvatar>
+            <Avatar alt={id} src={avatarSrc} sx={styles.avatar} />
+          </ListItemAvatar>
+          <ListItemText
+            primary={primary}
+            secondaryTypographyProps={{ component: 'span' }}
+            secondary={
+              secondary ? (
+                <Box sx={{ display: 'flex' }}>
+                  <Typography sx={{ wordBreak: 'break-word' }}>
+                    {secondary}
+                  </Typography>
+                </Box>
+              ) : undefined
+            }
+          />
+        </ListItemButton>
+      </MuiListItem>
+    )
+  },
+)

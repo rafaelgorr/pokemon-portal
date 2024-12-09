@@ -16,7 +16,9 @@ export const mapMoveToDomain = (move: Move): DomainMove => ({
   power: move.power ?? 0,
   pp: move.pp ?? 0,
   priority: move.priority,
-  damageClass: move.damage_class ? capitalFirstLatter(move.damage_class?.name) : '',
+  damageClass: move.damage_class
+    ? capitalFirstLatter(move.damage_class?.name)
+    : '',
   target: mapMoveTargetToDomain(move.target),
   learnedByPokemon: move.learned_by_pokemon.map(mapNamedAPIResourceToApi),
 })

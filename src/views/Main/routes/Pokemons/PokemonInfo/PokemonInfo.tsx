@@ -13,7 +13,10 @@ import {
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
 import { DomainListMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
-import { DomainPokemon, DomainPokemonMove } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
+import {
+  DomainPokemon,
+  DomainPokemonMove,
+} from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
 import { formatKg, formatMeters } from '@pokemon-portal/src/utils/masks'
 import React, { CSSProperties, memo, useCallback, useState } from 'react'
@@ -52,14 +55,20 @@ const PokemonInfo = memo((props: Props) => {
   const [selectedMove, setSelectedMove] = useState<DomainListMove | null>(null)
 
   const StyledListItemText = useCallback(
-    (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
+    (props: ListItemTextProps) => (
+      <ListItemText {...props} sx={styles.listItemText} />
+    ),
     [styles],
   )
 
   const handleSelectMove: AutocompleteProps = (evt, move) => {
     if (move) {
       const storeMove = gettedMoves[move.id]
-      if (!storeMove) actions.getMoveById({ id: move.id, onSuccess: (mv) => setSelectedMove(mv) })
+      if (!storeMove)
+        actions.getMoveById({
+          id: move.id,
+          onSuccess: (mv) => setSelectedMove(mv),
+        })
       else {
         const mv = moves[move.id]
         if (mv) setSelectedMove(mv)
@@ -68,7 +77,9 @@ const PokemonInfo = memo((props: Props) => {
   }
 
   const handleClickAbility = (ablId: string) => () => {
-    navigate(PATHS.abilities + ABILITIES_PATHS.details, { state: { id: ablId } })
+    navigate(PATHS.abilities + ABILITIES_PATHS.details, {
+      state: { id: ablId },
+    })
   }
 
   return (
@@ -79,7 +90,9 @@ const PokemonInfo = memo((props: Props) => {
             sx={styles.list}
             subheader={
               <Box display="flex" justifyContent="space-between">
-                <Typography sx={styles.cardHeaderTitle}>{pokemon.name}</Typography>
+                <Typography sx={styles.cardHeaderTitle}>
+                  {pokemon.name}
+                </Typography>
                 <Typography sx={styles.cardHeaderTitle}>
                   {`#${pokemon.id.padStart(4, '0')}`}
                 </Typography>
@@ -100,8 +113,14 @@ const PokemonInfo = memo((props: Props) => {
                 ))}
                 secondaryTypographyProps={{ component: 'div' }}
               />
-              <StyledListItemText primary="Height" secondary={formatMeters(pokemon.height)} />
-              <StyledListItemText primary="Weight" secondary={formatKg(pokemon.weight)} />
+              <StyledListItemText
+                primary="Height"
+                secondary={formatMeters(pokemon.height)}
+              />
+              <StyledListItemText
+                primary="Weight"
+                secondary={formatKg(pokemon.weight)}
+              />
               <StyledListItemText
                 primary="Abilities"
                 secondaryTypographyProps={{

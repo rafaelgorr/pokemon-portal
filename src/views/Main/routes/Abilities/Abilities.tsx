@@ -1,4 +1,8 @@
-import { ClearOutlined, Details as DetailsIcon, Search as SearchIcon } from '@mui/icons-material'
+import {
+  ClearOutlined,
+  Details as DetailsIcon,
+  Search as SearchIcon,
+} from '@mui/icons-material'
 import {
   Box,
   CircularProgress,

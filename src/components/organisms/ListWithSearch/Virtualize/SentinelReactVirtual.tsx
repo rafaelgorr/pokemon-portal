@@ -1,13 +1,19 @@
 import { VirtualItem, useVirtualizer } from '@tanstack/react-virtual'
 import React, { useMemo, useRef } from 'react'
 
-import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
+import {
+  IntersectionObserverParams,
+  useIntersectionObserver,
+} from '../useIntersectionObserver'
 
 type ExtendedProps = Record<string, unknown>
 
 interface Props extends ExtendedProps {
   itemsLength: number
-  renderItem: (virtualItem: VirtualItem, ref?: React.LegacyRef<HTMLDivElement>) => React.ReactNode
+  renderItem: (
+    virtualItem: VirtualItem<HTMLDivElement>,
+    ref?: React.LegacyRef<HTMLDivElement>,
+  ) => React.ReactNode
   renderLoader?: () => React.ReactChild | null
   infiniteScrollProps?: IntersectionObserverParams
 }
@@ -32,13 +38,15 @@ const SentinelReactVirtual = (props: Props) => {
       virtualItems.length > 0
         ? {
             top: virtualItems[0].start,
-            bottom: rowVirtualizer.getTotalSize() - virtualItems[virtualItems.length - 1].end,
+            bottom:
+              rowVirtualizer.getTotalSize() -
+              virtualItems[virtualItems.length - 1].end,
           }
         : {
             top: 0,
             bottom: 0,
           },
-    [rowVirtualizer, virtualItems],
+    [rowVirtualizer, virtualItems.length],
   )
 
   return (

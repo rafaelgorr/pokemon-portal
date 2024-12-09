@@ -1,5 +1,9 @@
 import { Theme } from '@mui/material'
-import { createSxStyles, drawerWidth, toolbarHeight } from '@pokemon-portal/src/views/theme'
+import {
+  createSxStyles,
+  drawerWidth,
+  toolbarHeight,
+} from '@pokemon-portal/src/views/theme'
 
 export const useStyles = (theme: Theme) => {
   const drawerClosedWidth = theme.spacing(0)
@@ -41,7 +45,8 @@ export const useStyles = (theme: Theme) => {
       '& .MuiDrawer-paper': {
         width: drawerWidth,
         boxSizing: 'border-box',
-        bgcolor: theme.palette.mode === 'dark' ? 'background.default' : 'whitesmoke',
+        bgcolor:
+          theme.palette.mode === 'dark' ? 'background.default' : 'whitesmoke',
       },
     },
     drawerOpen: {

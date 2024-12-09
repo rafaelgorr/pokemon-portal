@@ -40,12 +40,17 @@ const Details = (props: Props) => {
 
   useEffect(() => {
     if (!gettedAbilities[abilityId])
-      actions.getAbilityById({ id: abilityId, onSuccess: (abl) => setAbility(abl) })
+      actions.getAbilityById({
+        id: abilityId,
+        onSuccess: (abl) => setAbility(abl),
+      })
     else setAbility(abilities[abilityId] as DomainAbility)
   }, [abilityId, selectors.abilities])
 
   const StyledListItemText = useCallback(
-    (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
+    (props: ListItemTextProps) => (
+      <ListItemText {...props} sx={styles.listItemText} />
+    ),
     [styles],
   )
 
@@ -62,11 +67,20 @@ const Details = (props: Props) => {
         <Grid item xs={9}>
           <List sx={styles.list}>
             <ListItem sx={styles.listItem}>
-              <StyledListItemText primary="Generation" secondary={ability?.generation?.name} />
-              <StyledListItemText primary="Main Series" secondary={ability?.isMainSeries} />
+              <StyledListItemText
+                primary="Generation"
+                secondary={ability?.generation?.name}
+              />
+              <StyledListItemText
+                primary="Main Series"
+                secondary={ability?.isMainSeries}
+              />
             </ListItem>
             <ListItem sx={styles.listItem}>
-              <StyledListItemText primary="Effect" secondary={ability?.effect} />
+              <StyledListItemText
+                primary="Effect"
+                secondary={ability?.effect}
+              />
             </ListItem>
           </List>
         </Grid>

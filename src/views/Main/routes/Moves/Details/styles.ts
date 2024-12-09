@@ -7,7 +7,12 @@ export const useStyles = (theme: Theme) =>
   createSxStyles({
     ...sharedStyles(theme),
     gridContainer: { height: '92%' },
-    list: { display: 'flex', flexDirection: 'column', height: '20%', paddingTop: 0 },
+    list: {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '20%',
+      paddingTop: 0,
+    },
     pokemonListGrid: { height: '100%' },
     pokemonList: { height: '100%' },
     typeChip: { marginRight: theme.spacing(1) },

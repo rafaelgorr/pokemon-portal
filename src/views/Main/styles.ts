@@ -7,7 +7,12 @@ import sharedStyles from '../sharedStyles'
 export default (theme: Theme) => {
   return createSxStyles({
     ...sharedStyles(theme),
-    appTitle: { flexGrow: 1, fontSize: '100%', textTransform: 'uppercase', color: 'white' },
+    appTitle: {
+      flexGrow: 1,
+      fontSize: '100%',
+      textTransform: 'uppercase',
+      color: 'white',
+    },
     titleAnchor: { cursor: 'pointer', display: { xs: 'none', sm: 'block' } },
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,

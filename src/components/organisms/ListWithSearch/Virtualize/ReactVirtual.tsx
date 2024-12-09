@@ -2,7 +2,10 @@ import { useVirtualizer } from '@tanstack/react-virtual'
 import React, { useRef } from 'react'
 
 import ListItemSkeleton from '../ListItemSkeleton'
-import { IntersectionObserverParams, useIntersectionObserver } from '../useIntersectionObserver'
+import {
+  IntersectionObserverParams,
+  useIntersectionObserver,
+} from '../useIntersectionObserver'
 
 type ExtendedProps = Record<string, unknown>
 
@@ -61,9 +64,11 @@ const ReactVirtual = (props: Props) => {
                 {infiniteScrollProps && virtualItem.index >= itemsLength - 1 ? (
                   <>
                     <div ref={loaderRef} />
-                    {[...Array(infiniteScrollProps.loaderCount).keys()].map((i) => (
-                      <ListItemSkeleton key={i} />
-                    ))}
+                    {[...Array(infiniteScrollProps.loaderCount).keys()].map(
+                      (i) => (
+                        <ListItemSkeleton key={i} />
+                      ),
+                    )}
                   </>
                 ) : null}
                 {/* {virtualItem.index >= itemsLength - 1 && renderLoader ? renderLoader() : null} */}

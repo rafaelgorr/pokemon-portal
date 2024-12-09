@@ -24,7 +24,10 @@ const ItemsRoutes = (props: Props) => {
         <Routes>
           {/* <Route path={ITEMS_PATHS.home} element={<Items />} /> */}
           {/* <Route path={ITEMS_PATHS.details} element={<DetailsElement />} /> */}
-          <Route path="*" element={<Navigate replace to={ITEMS_PATHS.home} />} />
+          <Route
+            path="*"
+            element={<Navigate replace to={ITEMS_PATHS.home} />}
+          />
         </Routes>
       </Suspense>
     </Box>

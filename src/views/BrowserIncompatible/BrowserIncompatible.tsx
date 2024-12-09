@@ -28,7 +28,11 @@ const BrowserIncompatible = (props: Props) => {
         É recomendado utilizar o Autopop em um dos seguintes navegadores:
       </p>
       <div className={styles.browserList}>
-        <a target="#" className={styles.anchorBrowser} href="https://www.google.com/chrome/">
+        <a
+          target="#"
+          className={styles.anchorBrowser}
+          href="https://www.google.com/chrome/"
+        >
           <i className={cn('fab fa-chrome', styles.icon)} />
           Chrome {chrome}
         </a>
@@ -40,7 +44,11 @@ const BrowserIncompatible = (props: Props) => {
           <i className={cn('fab fa-firefox-browser', styles.icon)} />
           Firefox {firefox}
         </a>
-        <a target="#" className={styles.anchorBrowser} href="https://www.microsoft.com/en-us/edge">
+        <a
+          target="#"
+          className={styles.anchorBrowser}
+          href="https://www.microsoft.com/en-us/edge"
+        >
           <i className={cn('fab fa-edge', styles.icon)} />
           Edge {edge}
         </a>

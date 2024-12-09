@@ -10,7 +10,10 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/system'
 import config from '@pokemon-portal/config'
-import { DomainListMove, DomainMove } from '@pokemon-portal/src/api/interfaces/domain/Move'
+import {
+  DomainListMove,
+  DomainMove,
+} from '@pokemon-portal/src/api/interfaces/domain/Move'
 import { DomainListPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { ListWithSearch, PageTitle } from '@pokemon-portal/src/components'
 import { TYPE_ID_COLORS } from '@pokemon-portal/src/constants/pokemon'
@@ -45,7 +48,9 @@ const Details = (props: Props) => {
   }, [moveId, moves, gettedAbilities])
 
   const StyledListItemText = useCallback(
-    (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
+    (props: ListItemTextProps) => (
+      <ListItemText {...props} sx={styles.listItemText} />
+    ),
     [styles],
   )
 
@@ -72,7 +77,10 @@ const Details = (props: Props) => {
                     <Chip
                       key={move?.type?.id}
                       label={move?.type?.name}
-                      sx={[styles.typeChip, { bgcolor: TYPE_ID_COLORS[move.type?.id] }]}
+                      sx={[
+                        styles.typeChip,
+                        { bgcolor: TYPE_ID_COLORS[move.type?.id] },
+                      ]}
                       size="small"
                     />
                   )
@@ -81,9 +89,18 @@ const Details = (props: Props) => {
               />
               <StyledListItemText primary="Power" secondary={move?.power} />
               <StyledListItemText primary="PP" secondary={move?.pp} />
-              <StyledListItemText primary="Accuracy" secondary={move?.accuracy} />
-              <StyledListItemText primary="Priority" secondary={move?.priority} />
-              <StyledListItemText primary="Category" secondary={move?.damageClass} />
+              <StyledListItemText
+                primary="Accuracy"
+                secondary={move?.accuracy}
+              />
+              <StyledListItemText
+                primary="Priority"
+                secondary={move?.priority}
+              />
+              <StyledListItemText
+                primary="Category"
+                secondary={move?.damageClass}
+              />
               <StyledListItemText primary="Target" secondary={move?.target} />
             </ListItem>
             <ListItem>

@@ -16,7 +16,10 @@ export type GetAbilities = {
 export const getAbilities = async (
   input: GetAbilities['input'],
 ): Promise<GetAbilities['output']> => {
-  const abilities = await pokemonClient.listAbilities(input?.offset, input?.limit ?? -1)
+  const abilities = await pokemonClient.listAbilities(
+    input?.offset,
+    input?.limit ?? -1,
+  )
 
   return abilities.results.map(mapNamedAPIResourceToApi)
 }

@@ -20,7 +20,10 @@ export const actions = {
   getMoveById: createAsyncThunk(
     `${prefix}/getMoveById`,
     async (
-      input: WithSuccess<api.GetPokemonMove['input'], api.GetPokemonMove['output']>,
+      input: WithSuccess<
+        api.GetPokemonMove['input'],
+        api.GetPokemonMove['output']
+      >,
       thunkApi,
     ) => {
       try {
@@ -36,6 +39,10 @@ export const actions = {
 export const types = getTypesThunkActions(actions)
 
 export const fulfilledActions = {
-  getMoves: createAction<api.GetPokemonMoves['output']>(types.getMoves.fulfilled),
-  getMoveById: createAction<api.GetPokemonMove['output']>(types.getMoveById.fulfilled),
+  getMoves: createAction<api.GetPokemonMoves['output']>(
+    types.getMoves.fulfilled,
+  ),
+  getMoveById: createAction<api.GetPokemonMove['output']>(
+    types.getMoveById.fulfilled,
+  ),
 }

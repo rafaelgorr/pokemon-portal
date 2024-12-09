@@ -30,11 +30,22 @@ export interface AppBarProps extends BaseType {
   style?: MuiAppBarProps['style']
 }
 
-const AppBar = ({ sx, position = 'static', actions, title, onNavClick, style }: AppBarProps) => {
+const AppBar = ({
+  sx,
+  position = 'static',
+  actions,
+  title,
+  onNavClick,
+  style,
+}: AppBarProps) => {
   const styles = useStyles(useTheme())
 
   return (
-    <MuiAppBar sx={{ ...styles.appBar, ...sx }} position={position} style={style}>
+    <MuiAppBar
+      sx={{ ...styles.appBar, ...sx }}
+      position={position}
+      style={style}
+    >
       <Toolbar title={title} actions={actions} /*nav={nav}*/ />
     </MuiAppBar>
   )

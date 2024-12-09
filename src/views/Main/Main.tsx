@@ -21,9 +21,19 @@ const Moves = lazy(() => import('./routes/Moves/route'))
 const Abilities = lazy(() => import('./routes/Abilities/route'))
 
 const drawerListItems: DrawerItem[] = [
-  { label: 'Pokemons', path: PATHS.pokemons, Icon: PokeAvatar, Component: Pokemons },
+  {
+    label: 'Pokemons',
+    path: PATHS.pokemons,
+    Icon: PokeAvatar,
+    Component: Pokemons,
+  },
   { label: 'Moves', path: PATHS.moves, Icon: PokeAvatar, Component: Moves },
-  { label: 'Abilities', path: PATHS.abilities, Icon: PokeAvatar, Component: Abilities },
+  {
+    label: 'Abilities',
+    path: PATHS.abilities,
+    Icon: PokeAvatar,
+    Component: Abilities,
+  },
 ]
 
 type ExtendedProps = ConnectedProps
@@ -49,8 +59,14 @@ const Main = (props: Props) => {
         }
         actions={
           <>
-            <IconButton onClick={() => props.setMode(mode === 'light' ? 'dark' : 'light')}>
-              {mode === 'light' ? <LightMode sx={{ color: 'white' }} /> : <ModeNight />}
+            <IconButton
+              onClick={() => props.setMode(mode === 'light' ? 'dark' : 'light')}
+            >
+              {mode === 'light' ? (
+                <LightMode sx={{ color: 'white' }} />
+              ) : (
+                <ModeNight />
+              )}
             </IconButton>
           </>
         }
@@ -65,10 +81,17 @@ const Main = (props: Props) => {
         <Suspense fallback={<CircularProgress sx={styles.circularProgress} />}>
           <Routes>
             {drawerListItems.map((dI) => (
-              <Route key={dI.path} path={dI.path + '/*'} element={<dI.Component />} />
+              <Route
+                key={dI.path}
+                path={dI.path + '/*'}
+                element={<dI.Component />}
+              />
             ))}
 
-            <Route path="*" element={<Navigate replace to={PATHS.pokemons} />} />
+            <Route
+              path="*"
+              element={<Navigate replace to={PATHS.pokemons} />}
+            />
           </Routes>
         </Suspense>
       </Box>

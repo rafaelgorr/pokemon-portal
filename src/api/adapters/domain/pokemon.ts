@@ -1,4 +1,7 @@
-import { capitalFirstLatter, capitalizeFirstLetter } from '@pokemon-portal/src/utils/methods'
+import {
+  capitalFirstLatter,
+  capitalizeFirstLetter,
+} from '@pokemon-portal/src/utils/methods'
 import {
   FlavorText,
   NamedAPIResource,
@@ -18,7 +21,9 @@ import {
   DomainPokemonType,
 } from '../../interfaces/domain/Pokemon'
 
-export const mapListPokemonToDomain = (input: NamedAPIResource): DomainListPokemon => ({
+export const mapListPokemonToDomain = (
+  input: NamedAPIResource,
+): DomainListPokemon => ({
   id: getIdFromUrl(input.url),
   name: capitalFirstLatter(input.name),
 })

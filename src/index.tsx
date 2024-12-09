@@ -47,7 +47,10 @@ const ConnectedAdm = (props: ConnnectedAdmProps) => {
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en">
         <BrowserRouter>
           <App />
-          <ErrorDialog error={error} setError={(error) => dispatch(errorActions.setError(error))} />
+          <ErrorDialog
+            error={error}
+            setError={(error) => dispatch(errorActions.setError(error))}
+          />
         </BrowserRouter>
       </LocalizationProvider>
     </ThemeProvider>
@@ -70,7 +73,11 @@ if (root) {
   const clientRoot = createRoot(root)
 
   if (isValidBrowser) {
-    clientRoot.render(<Root />)
+    clientRoot.render(
+      <React.StrictMode>
+        <Root />
+      </React.StrictMode>,
+    )
   } else {
     clientRoot.render(<BrowserIncompatible />)
   }

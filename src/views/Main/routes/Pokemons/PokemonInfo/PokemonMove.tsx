@@ -1,4 +1,8 @@
-import { ArrowForward as ArrowForwardIcon, ExpandLess, ExpandMore } from '@mui/icons-material'
+import {
+  ArrowForward as ArrowForwardIcon,
+  ExpandLess,
+  ExpandMore,
+} from '@mui/icons-material'
 import {
   Autocomplete,
   Card,
@@ -50,7 +54,9 @@ const PokemonMove = (props: Props) => {
   const navigate = useNavigate()
 
   const StyledListItemText = useCallback(
-    (props: ListItemTextProps) => <ListItemText {...props} sx={styles.listItemText} />,
+    (props: ListItemTextProps) => (
+      <ListItemText {...props} sx={styles.listItemText} />
+    ),
     [styles],
   )
 
@@ -61,7 +67,9 @@ const PokemonMove = (props: Props) => {
   }, [move])
 
   const handleGoToDetails = () => {
-    navigate(`${PATHS.moves}${MOVES_PATHS.details}`, { state: { id: move?.id } })
+    navigate(`${PATHS.moves}${MOVES_PATHS.details}`, {
+      state: { id: move?.id },
+    })
   }
 
   return (
@@ -83,7 +91,11 @@ const PokemonMove = (props: Props) => {
                 </IconButton>
               </Tooltip>
             )}
-            <IconButton aria-label="expand" size="small" sx={{ verticalAlign: 'middle' }}>
+            <IconButton
+              aria-label="expand"
+              size="small"
+              sx={{ verticalAlign: 'middle' }}
+            >
               {fetching ? (
                 <CircularProgress size={20} />
               ) : moveOpened ? (
@@ -102,7 +114,11 @@ const PokemonMove = (props: Props) => {
             isOptionEqualToValue={(option, value) => option.id === value.id}
             sx={{ width: '35%', minWidth: '100px' }}
             renderInput={(params) => (
-              <TextField {...params} label="Moves" onClick={(evt) => evt.stopPropagation()} />
+              <TextField
+                {...params}
+                label="Moves"
+                onClick={(evt) => evt.stopPropagation()}
+              />
             )}
             size="small"
             value={move}
@@ -124,7 +140,10 @@ const PokemonMove = (props: Props) => {
                       <Chip
                         key={move?.type?.id}
                         label={move?.type?.name}
-                        sx={[styles.typeChip, { bgcolor: TYPE_ID_COLORS[move.type?.id] }]}
+                        sx={[
+                          styles.typeChip,
+                          { bgcolor: TYPE_ID_COLORS[move.type?.id] },
+                        ]}
                         size="small"
                       />
                     )
@@ -133,9 +152,18 @@ const PokemonMove = (props: Props) => {
                 />
                 <StyledListItemText primary="Power" secondary={move?.power} />
                 <StyledListItemText primary="PP" secondary={move?.pp} />
-                <StyledListItemText primary="Accuracy" secondary={move?.accuracy} />
-                <StyledListItemText primary="Priority" secondary={move?.priority} />
-                <StyledListItemText primary="Category" secondary={move?.damageClass} />
+                <StyledListItemText
+                  primary="Accuracy"
+                  secondary={move?.accuracy}
+                />
+                <StyledListItemText
+                  primary="Priority"
+                  secondary={move?.priority}
+                />
+                <StyledListItemText
+                  primary="Category"
+                  secondary={move?.damageClass}
+                />
                 <StyledListItemText primary="Target" secondary={move?.target} />
               </ListItem>
               <ListItem>

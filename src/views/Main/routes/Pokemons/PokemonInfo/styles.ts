@@ -7,7 +7,12 @@ export const useStyles = (theme: Theme) =>
   createSxStyles({
     ...sharedStyles(theme),
     card: { width: '100%', flex: 1, height: '100%', overflow: 'auto' },
-    cardContent: { height: '100%', width: '100%', display: 'flex', flexDirection: 'column' },
+    cardContent: {
+      height: '100%',
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+    },
     avatar: {
       width: theme.spacing(30),
       height: theme.spacing(30),
@@ -28,7 +33,11 @@ export const useStyles = (theme: Theme) =>
     },
     moveCardContent: { paddingTop: 0, display: 'flex' },
     cardHeader: {
-      '.MuiCardHeader-action': { height: '100%', margin: 0, alignSelf: 'center' },
+      '.MuiCardHeader-action': {
+        height: '100%',
+        margin: 0,
+        alignSelf: 'center',
+      },
     },
     abilityAnchor: {
       fontSize: 'inherit',

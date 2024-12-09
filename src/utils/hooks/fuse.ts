@@ -21,7 +21,10 @@ type Input<T extends Record<string, any>> = {
 export const useFuse = <T extends Record<string, any>>(input: Input<T>) => {
   const { items, fuseKeys } = input
 
-  const fuseOptions: IFuseOptions<T> = useMemo(() => getFuseOptions(...(fuseKeys as string[])), [])
+  const fuseOptions: IFuseOptions<T> = useMemo(
+    () => getFuseOptions(...(fuseKeys as string[])),
+    [],
+  )
   const fuse = useMemo(() => new Fuse(items, fuseOptions), [items])
 
   // const [isPending, startTransation] = useTransition()

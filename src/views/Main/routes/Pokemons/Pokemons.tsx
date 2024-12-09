@@ -1,7 +1,14 @@
 import { Box, CircularProgress, Grid, useTheme } from '@mui/material'
 import config from '@pokemon-portal/config'
-import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
-import { ListWithSearch, ListWithSearchProps, PageTitle } from '@pokemon-portal/src/components'
+import {
+  DomainListPokemon,
+  DomainPokemon,
+} from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
+import {
+  ListWithSearch,
+  ListWithSearchProps,
+  PageTitle,
+} from '@pokemon-portal/src/components'
 import { IntersectionObserverParams } from '@pokemon-portal/src/components/organisms/ListWithSearch/useIntersectionObserver'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
@@ -39,7 +46,9 @@ const Pokemons = (props: Props) => {
 
   const { fetching, pokemons, pokemonsEntities, selectedPokemonId } = selectors
 
-  const [selectedPokemon, setSelectedPokemon] = useState<DomainPokemon | undefined>(() => {
+  const [selectedPokemon, setSelectedPokemon] = useState<
+    DomainPokemon | undefined
+  >(() => {
     const pokemon = pokemonsEntities?.[selectedPokemonId] as DomainPokemon
     return pokemon
   })
@@ -58,13 +67,14 @@ const Pokemons = (props: Props) => {
     // })
   }, [offset])
 
-  const handleInfiniteScroll: IntersectionObserverParams['interObserverCallback'] = (entries) => {
-    const entry = entries[0]
+  const handleInfiniteScroll: IntersectionObserverParams['interObserverCallback'] =
+    (entries) => {
+      const entry = entries[0]
 
-    if (entry.isIntersecting) {
-      setOffset((oldOffset) => oldOffset + pokemonsLimit)
+      if (entry.isIntersecting) {
+        setOffset((oldOffset) => oldOffset + pokemonsLimit)
+      }
     }
-  }
 
   useEffect(() => {
     return () => {
@@ -105,17 +115,25 @@ const Pokemons = (props: Props) => {
     else setSelectedPokemon(pkm)
   }
 
-  const infiniteScrollProps: ListWithSearchProps<DomainListPokemon>['infiniteScrollProps'] = {
-    interObserverCallback: handleInfiniteScroll,
-    loaderCount: pokemonsLimit,
-  }
+  const infiniteScrollProps: ListWithSearchProps<DomainListPokemon>['infiniteScrollProps'] =
+    {
+      interObserverCallback: handleInfiniteScroll,
+      loaderCount: pokemonsLimit,
+    }
 
   return (
     <Box sx={styles.container}>
       <PageTitle label="Pokemons" />
 
       <Grid container spacing={2} flex={1} height="90%">
-        <Grid container item xs={2.5} flexDirection="column" textAlign="center" height="100%">
+        <Grid
+          container
+          item
+          xs={2.5}
+          flexDirection="column"
+          textAlign="center"
+          height="100%"
+        >
           <ListWithSearch<DomainListPokemon>
             listItems={pokemons}
             listItemProps={{

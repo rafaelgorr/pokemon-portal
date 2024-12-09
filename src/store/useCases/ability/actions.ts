@@ -20,7 +20,10 @@ export const actions = {
   getAbilityById: createAsyncThunk(
     `${prefix}/getAbilityById`,
     async (
-      input: WithSuccess<api.GetAbilityById['input'], api.GetAbilityById['output']>,
+      input: WithSuccess<
+        api.GetAbilityById['input'],
+        api.GetAbilityById['output']
+      >,
       thunkApi,
     ) => {
       try {
@@ -36,6 +39,10 @@ export const actions = {
 export const types = getTypesThunkActions(actions)
 
 export const fulfilledActions = {
-  getAbilities: createAction<api.GetAbilities['output']>(types.getAbilities.fulfilled),
-  getAbilityById: createAction<api.GetAbilityById['output']>(types.getAbilityById.fulfilled),
+  getAbilities: createAction<api.GetAbilities['output']>(
+    types.getAbilities.fulfilled,
+  ),
+  getAbilityById: createAction<api.GetAbilityById['output']>(
+    types.getAbilityById.fulfilled,
+  ),
 }

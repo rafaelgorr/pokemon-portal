@@ -20,10 +20,17 @@ const Drawer = (props: Props) => {
   return (
     <MUIDrawer variant="permanent" anchor="left" sx={styles.drawer}>
       <Box sx={styles.header}>
-        <img src={logo} style={styles.headerLogo as React.CSSProperties} alt="Pokemon" />
+        <img
+          src={logo}
+          style={styles.headerLogo as React.CSSProperties}
+          alt="Pokemon"
+        />
       </Box>
       {drawerListItems ? (
-        <DrawerItems toggleDrawer={toggleDrawer} drawerListItems={drawerListItems} />
+        <DrawerItems
+          toggleDrawer={toggleDrawer}
+          drawerListItems={drawerListItems}
+        />
       ) : null}
     </MUIDrawer>
   )

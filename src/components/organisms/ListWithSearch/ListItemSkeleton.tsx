@@ -18,12 +18,22 @@ const ListItemSkeleton = (props: Props) => {
     <ListItem disablePadding>
       <ListItemButton>
         <ListItemAvatar>
-          <Skeleton variant="circular" sx={(theme) => ({ marginRight: theme.spacing(2) })}>
+          <Skeleton
+            variant="circular"
+            sx={(theme) => ({ marginRight: theme.spacing(2) })}
+          >
             <Avatar />
           </Skeleton>
         </ListItemAvatar>
         <ListItemText
-          primary={<Skeleton variant="text" width="100%" height="100%" sx={{ flex: 1 }} />}
+          primary={
+            <Skeleton
+              variant="text"
+              width="100%"
+              height="100%"
+              sx={{ flex: 1 }}
+            />
+          }
         />
       </ListItemButton>
     </ListItem>

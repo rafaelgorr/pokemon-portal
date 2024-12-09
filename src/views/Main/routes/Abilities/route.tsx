@@ -24,7 +24,10 @@ const Dashboard = (props: Props) => {
         <Routes>
           <Route path={ABILITIES_PATHS.home} element={<Home />} />
           <Route path={ABILITIES_PATHS.details} element={<DetailsElement />} />
-          <Route path="*" element={<Navigate replace to={ABILITIES_PATHS.home} />} />
+          <Route
+            path="*"
+            element={<Navigate replace to={ABILITIES_PATHS.home} />}
+          />
         </Routes>
       </Suspense>
     </Box>

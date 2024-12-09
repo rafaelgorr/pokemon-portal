@@ -2,7 +2,10 @@ import { configureStore, ThunkDispatch } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { Action, combineReducers, Reducer } from 'redux'
 
-import entitiesReducers, { EntitiesState, initialState as entitiesInitState } from './entities'
+import entitiesReducers, {
+  EntitiesState,
+  initialState as entitiesInitState,
+} from './entities'
 import { errorMiddleware, printMiddleware } from './middlewares'
 import uiReducers, { initialState as uiInitState, UIState } from './ui'
 import ucReducers, { initialState as ucInitState, UCState } from './useCases'
@@ -21,7 +24,10 @@ const reducers: ReducerMap<keyof StoreState> = {
   entities: entitiesReducers,
 }
 
-const rootReducer = <S extends StoreState, A extends Action>(state: S | undefined, action: A) => {
+const rootReducer = <S extends StoreState, A extends Action>(
+  state: S | undefined,
+  action: A,
+) => {
   if (action.type === 'RESET_STORE') {
     state = undefined
   }
@@ -29,12 +35,17 @@ const rootReducer = <S extends StoreState, A extends Action>(state: S | undefine
   return combineReducers(reducers)(state, action)
 }
 
-const middlewares = !process.env.PRODUCTION ? [printMiddleware] : []
+const middlewares = !process.env.PRODUCTION
+  ? [printMiddleware]
+  : [printMiddleware]
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat([...middlewares, errorMiddleware]),
+    getDefaultMiddleware({ serializableCheck: false }).concat([
+      ...middlewares,
+      errorMiddleware,
+    ]),
   // [
   //   ...getDefaultMiddleware({ serializableCheck: false }),
   //   ...middlewares,

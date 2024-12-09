@@ -26,7 +26,16 @@ export const useStyles = (theme: Theme) =>
       overflowAnchor: 'none',
     },
     list: { width: '100%' },
-    avatar: { width: theme.spacing(6), height: theme.spacing(6), marginRight: theme.spacing(2) },
-    linearProgress: { bottom: 0, margin: 0, width: '100%', position: 'absolute' },
+    avatar: {
+      width: theme.spacing(6),
+      height: theme.spacing(6),
+      marginRight: theme.spacing(2),
+    },
+    linearProgress: {
+      bottom: 0,
+      margin: 0,
+      width: '100%',
+      position: 'absolute',
+    },
     searchTextField: { width: '100%' },
   })

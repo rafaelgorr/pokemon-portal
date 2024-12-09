@@ -1,4 +1,10 @@
-import { AvatarProps, Box, BoxProps, SvgIconProps, Typography } from '@mui/material'
+import {
+  AvatarProps,
+  Box,
+  BoxProps,
+  SvgIconProps,
+  Typography,
+} from '@mui/material'
 import List from '@mui/material/List'
 import { useTheme } from '@mui/system'
 import React from 'react'
@@ -38,12 +44,26 @@ const DrawerItems = (props: Props) => {
     toggleDrawer && toggleDrawer()
   }
 
-  const miniItemComponent = (label: string, path: string, Icon: DrawerItem['Icon']) => {
+  const miniItemComponent = (
+    label: string,
+    path: string,
+    Icon: DrawerItem['Icon'],
+  ) => {
     const isCurrPath = isCurrentPath(location, path)
     return (
-      <Box key={path} sx={styles.miniListItem} id={label} onClick={handleClick(path)}>
-        <Icon color={isCurrPath ? 'primary' : 'info'} sx={styles.miniItemIcon} />
-        <Typography sx={isCurrPath ? styles.miniItemLabelSelected : styles.miniItemLabel}>
+      <Box
+        key={path}
+        sx={styles.miniListItem}
+        id={label}
+        onClick={handleClick(path)}
+      >
+        <Icon
+          color={isCurrPath ? 'primary' : 'info'}
+          sx={styles.miniItemIcon}
+        />
+        <Typography
+          sx={isCurrPath ? styles.miniItemLabelSelected : styles.miniItemLabel}
+        >
           {label}
         </Typography>
       </Box>
@@ -52,7 +72,9 @@ const DrawerItems = (props: Props) => {
 
   return (
     <List sx={styles.list}>
-      {drawerListItems.map((item) => miniItemComponent(item.label, item.path, item.Icon))}
+      {drawerListItems.map((item) =>
+        miniItemComponent(item.label, item.path, item.Icon),
+      )}
     </List>
   )
 }

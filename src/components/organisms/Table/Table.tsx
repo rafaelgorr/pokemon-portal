@@ -109,7 +109,9 @@ function Table<T extends TableRow>(props: Props<T>) {
     setPage(newPage)
   }
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setRowsPerPage(Number(event.target.value))
     setPage(0)
   }
@@ -120,7 +122,11 @@ function Table<T extends TableRow>(props: Props<T>) {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ ...sx, ...styles.tablePaper }} elevation={elevation}>
+    <TableContainer
+      component={Paper}
+      sx={{ ...sx, ...styles.tablePaper }}
+      elevation={elevation}
+    >
       <Box sx={styles.tableContent}>
         <MuiTable
           size={props.size}
@@ -139,7 +145,10 @@ function Table<T extends TableRow>(props: Props<T>) {
             {progress ??
               emptyData ??
               (rowsPerPage > 0
-                ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ? data.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage,
+                  )
                 : data
               ).map((row, i) => {
                 const rowSelected =
@@ -178,8 +187,13 @@ function Table<T extends TableRow>(props: Props<T>) {
                     </MuiRow>
                     {isRowCollapsible && (
                       <MuiRow>
-                        <TableCell sx={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                          <Collapse in={collapses[row.id]}>{renderCollapse?.(row)}</Collapse>
+                        <TableCell
+                          sx={{ paddingBottom: 0, paddingTop: 0 }}
+                          colSpan={6}
+                        >
+                          <Collapse in={collapses[row.id]}>
+                            {renderCollapse?.(row)}
+                          </Collapse>
                         </TableCell>
                       </MuiRow>
                     )}

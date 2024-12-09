@@ -22,7 +22,9 @@ import { IntersectionObserverParams } from './useIntersectionObserver'
 
 // import ReactVirtual from './Virtualize/ReactVirtual'
 
-const getFuseOptions = <T extends object>(...keys: string[]): IFuseOptions<T> => ({
+const getFuseOptions = <T extends object>(
+  ...keys: string[]
+): IFuseOptions<T> => ({
   shouldSort: false,
   threshold: 0.1,
   location: 0,
@@ -57,7 +59,9 @@ type Props<Item extends Record<string, unknown>> = Item extends { id: string }
   ? BaseProps<Item>
   : BaseProps<Item> & { selectorKey: keyof Item }
 
-const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
+const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(
+  props: Props<T>,
+) => {
   const styles = useStyles(useTheme())
 
   const {
@@ -74,10 +78,17 @@ const ListWithSearch = <T extends Record<string, unknown>>(props: Props<T>) => {
     // infiniteScrollProps,
   } = props
 
-  const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } = listItemProps
+  const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } =
+    listItemProps
 
-  const fuseOptions: IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
-  const fuse = useMemo(() => new Fuse(listItems as T[], fuseOptions), [listItems])
+  const fuseOptions: IFuseOptions<T> = useMemo(
+    () => getFuseOptions(...fuseKeys),
+    [],
+  )
+  const fuse = useMemo(
+    () => new Fuse(listItems as T[], fuseOptions),
+    [listItems],
+  )
 
   const [search, setSearch] = useState('')
 
