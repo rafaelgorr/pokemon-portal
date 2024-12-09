@@ -27,19 +27,18 @@ const SentinelReactVirtual = (props: Props) => {
   })
 
   const virtualItems = rowVirtualizer.getVirtualItems()
-  const space = useMemo(
-    () =>
-      virtualItems.length > 0
-        ? {
-            top: virtualItems[0].start,
-            bottom: rowVirtualizer.getTotalSize() - virtualItems[virtualItems.length - 1].end,
-          }
-        : {
-            top: 0,
-            bottom: 0,
-          },
-    [rowVirtualizer, virtualItems.length],
-  )
+  const space = useMemo(() => {
+    const lastVirtualItem = virtualItems.at(-1)
+    return virtualItems.length > 0 && lastVirtualItem
+      ? {
+          top: virtualItems.at(0)?.start,
+          bottom: rowVirtualizer.getTotalSize() - lastVirtualItem.end,
+        }
+      : {
+          top: 0,
+          bottom: 0,
+        }
+  }, [rowVirtualizer.getVirtualItems(), virtualItems.length])
 
   return (
     <div
