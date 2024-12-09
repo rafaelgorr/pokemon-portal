@@ -1,9 +1,7 @@
 import Fuse, { IFuseOptions } from 'fuse.js'
 import { useMemo, useState } from 'react'
 
-export const getFuseOptions = (
-  ...keys: (keyof Record<string, any>)[]
-): IFuseOptions<Record<string, any>> => ({
+export const getFuseOptions = (...keys: (keyof Record<string, any>)[]): IFuseOptions<Record<string, any>> => ({
   shouldSort: false,
   threshold: 0.4,
   location: 0,
@@ -21,10 +19,7 @@ type Input<T extends Record<string, any>> = {
 export const useFuse = <T extends Record<string, any>>(input: Input<T>) => {
   const { items, fuseKeys } = input
 
-  const fuseOptions: IFuseOptions<T> = useMemo(
-    () => getFuseOptions(...(fuseKeys as string[])),
-    [],
-  )
+  const fuseOptions: IFuseOptions<T> = useMemo(() => getFuseOptions(...(fuseKeys as string[])), [])
   const fuse = useMemo(() => new Fuse(items, fuseOptions), [items])
 
   // const [isPending, startTransation] = useTransition()

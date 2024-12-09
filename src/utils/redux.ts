@@ -5,9 +5,7 @@ type ActionType<Type, Payload> = {
   type: Type
   payload: Payload
 }
-export const getTypesActions = <Actions extends Record<string, unknown>>(
-  actions: Actions,
-) => {
+export const getTypesActions = <Actions extends Record<string, unknown>>(actions: Actions) => {
   type Types = {
     [key in keyof Actions]: string
   }
@@ -17,19 +15,12 @@ export const getTypesActions = <Actions extends Record<string, unknown>>(
 }
 
 export type { ActionType }
-export type ThunkActionsTypes = Record<
-  keyof Omit<AsyncThunk<unknown, unknown, any>, 'typePrefix'>,
-  string
->
+export type ThunkActionsTypes = Record<keyof Omit<AsyncThunk<unknown, unknown, any>, 'typePrefix'>, string>
 
-export const getTypesThunkActions = <Actions extends Record<string, unknown>>(
-  actions: Actions,
-) => {
+export const getTypesThunkActions = <Actions extends Record<string, unknown>>(actions: Actions) => {
   return Object.keys(actions).reduce(
     (acc, curr) => {
-      const thunkAction = actions[
-        curr as keyof Actions
-      ] as unknown as ReturnType<typeof createAsyncThunk>
+      const thunkAction = actions[curr as keyof Actions] as unknown as ReturnType<typeof createAsyncThunk>
 
       const types: ThunkActionsTypes = {
         pending: thunkAction.pending.type,
@@ -47,9 +38,7 @@ export const getTypesThunkActions = <Actions extends Record<string, unknown>>(
   )
 }
 
-export const getActionTypes = <Actions extends Record<string, unknown>>(
-  actions: Actions,
-) => {
+export const getActionTypes = <Actions extends Record<string, unknown>>(actions: Actions) => {
   type Types = {
     [key in keyof Actions]: string
   }

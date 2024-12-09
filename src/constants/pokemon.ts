@@ -21,10 +21,7 @@ export const TYPE_COLORS = {
   fairy: '#D685AD',
 } as const
 
-export const TYPE_ID_COLORS: Record<
-  string,
-  StandardCSSProperties['backgroundColor']
-> = {
+export const TYPE_ID_COLORS: Record<string, StandardCSSProperties['backgroundColor']> = {
   '1': '#A8A77A',
   '2': '#C22E28',
   '3': '#A98FF3',

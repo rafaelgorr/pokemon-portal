@@ -1,9 +1,6 @@
 import { useAppSelector } from '@pokemon-portal/store'
 import { selectors as pokemonSelectors } from '@pokemon-portal/store/entities/move'
-import {
-  actions,
-  selectors as ucSelectors,
-} from '@pokemon-portal/store/useCases/move'
+import { actions, selectors as ucSelectors } from '@pokemon-portal/store/useCases/move'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 

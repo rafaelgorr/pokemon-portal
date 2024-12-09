@@ -15,7 +15,6 @@ export const isUcFetching = (ucName: keyof State['fetching']) =>
     (fetching) => fetching[ucName],
   )
 
-export const getGettedIds = (state: StoreState) =>
-  state.useCases.ability.gettedIds
+export const getGettedIds = (state: StoreState) => state.useCases.ability.gettedIds
 
 export const getFetched = (state: StoreState) => state.useCases.ability.fetched

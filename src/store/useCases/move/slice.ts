@@ -30,9 +30,7 @@ export default createSlice({
       state.gettedIds[action.payload.id] = action.payload.name
     })
 
-    entries(types).forEach(([ucType, actionType]) =>
-      addTypeMatcher({ [ucType]: actionType }, builder),
-    )
+    entries(types).forEach(([ucType, actionType]) => addTypeMatcher({ [ucType]: actionType }, builder))
     builder.addDefaultCase((state) => {
       state.fetching = keys(types).reduce(
         (ftch, type) => ({ ...ftch, [type]: false }),

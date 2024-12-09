@@ -1,7 +1,4 @@
-import {
-  DomainListPokemon,
-  DomainPokemon,
-} from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
+import { DomainListPokemon, DomainPokemon } from '@pokemon-portal/src/api/interfaces/domain/Pokemon'
 import { fulfilledActions as pokemonFulfilledActions } from '@pokemon-portal/src/store/useCases/pokemon'
 import { EntityState, createEntityAdapter, createSlice } from '@reduxjs/toolkit'
 

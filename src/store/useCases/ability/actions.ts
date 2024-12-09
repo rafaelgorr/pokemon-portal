@@ -6,26 +6,17 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit'
 export const prefix = 'useCases/pokemon'
 
 export const actions = {
-  getAbilities: createAsyncThunk(
-    `${prefix}/getAbilities`,
-    async (input: api.GetAbilities['input'], thunkApi) => {
-      try {
-        const result = await api.getAbilities(input)
-        return result
-      } catch (e) {
-        return thunkApi.rejectWithValue(e)
-      }
-    },
-  ),
+  getAbilities: createAsyncThunk(`${prefix}/getAbilities`, async (input: api.GetAbilities['input'], thunkApi) => {
+    try {
+      const result = await api.getAbilities(input)
+      return result
+    } catch (e) {
+      return thunkApi.rejectWithValue(e)
+    }
+  }),
   getAbilityById: createAsyncThunk(
     `${prefix}/getAbilityById`,
-    async (
-      input: WithSuccess<
-        api.GetAbilityById['input'],
-        api.GetAbilityById['output']
-      >,
-      thunkApi,
-    ) => {
+    async (input: WithSuccess<api.GetAbilityById['input'], api.GetAbilityById['output']>, thunkApi) => {
       try {
         const result = await api.getAbilityById(input)
         input?.onSuccess?.(result)
@@ -39,10 +30,6 @@ export const actions = {
 export const types = getTypesThunkActions(actions)
 
 export const fulfilledActions = {
-  getAbilities: createAction<api.GetAbilities['output']>(
-    types.getAbilities.fulfilled,
-  ),
-  getAbilityById: createAction<api.GetAbilityById['output']>(
-    types.getAbilityById.fulfilled,
-  ),
+  getAbilities: createAction<api.GetAbilities['output']>(types.getAbilities.fulfilled),
+  getAbilityById: createAction<api.GetAbilityById['output']>(types.getAbilityById.fulfilled),
 }

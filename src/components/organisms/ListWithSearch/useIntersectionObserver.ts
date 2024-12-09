@@ -6,9 +6,7 @@ export type IntersectionObserverParams = {
   loaderCount: number
 }
 
-export const useIntersectionObserver = (
-  params?: IntersectionObserverParams,
-) => {
+export const useIntersectionObserver = (params?: IntersectionObserverParams) => {
   const intersectObsRef = useRef<IntersectionObserver | null>(null)
 
   const loaderRef = useRef(null)
@@ -17,16 +15,12 @@ export const useIntersectionObserver = (
 
   useEffect(() => {
     if (params) {
-      const options: IntersectionObserverParams['interObserverOptions'] =
-        params.interObserverOptions ?? {
-          root: parentRef.current,
-          rootMargin: '20px',
-          threshold: 1,
-        }
-      intersectObsRef.current = new IntersectionObserver(
-        params.interObserverCallback,
-        options,
-      )
+      const options: IntersectionObserverParams['interObserverOptions'] = params.interObserverOptions ?? {
+        root: parentRef.current,
+        rootMargin: '20px',
+        threshold: 1,
+      }
+      intersectObsRef.current = new IntersectionObserver(params.interObserverCallback, options)
 
       return () => intersectObsRef.current?.disconnect()
     }

@@ -12,8 +12,7 @@ export const keys: typeof Object.keys = <T>(obj?: T): string[] => {
   return Object.keys(obj ?? {})
 }
 
-export const extractNumbers = (str?: string): string =>
-  str ? str.replace(/\D/g, '') : ''
+export const extractNumbers = (str?: string): string => (str ? str.replace(/\D/g, '') : '')
 export const extractLetters = (str?: string): string =>
   str
     ? str
@@ -22,18 +21,17 @@ export const extractLetters = (str?: string): string =>
         .trim()
     : ''
 
-export const capitalizeFirstLetter = (string = '') =>
-  string.charAt(0).toUpperCase() + string.slice(1)
+export const capitalizeFirstLetter = (string = '') => string.charAt(0).toUpperCase() + string.slice(1)
 
 export type ValueOf<T> = T[keyof T]
 
 export type RequiredBy<T, K extends keyof T> = Pick<T, K> & Partial<Omit<T, K>>
 
-export type ArrayElement<ArrayType extends readonly unknown[]> =
-  ArrayType extends readonly (infer ElementType)[] ? ElementType : never
+export type ArrayElement<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[]
+  ? ElementType
+  : never
 
-export const filterLetters = (str?: string): string =>
-  str ? str.replace(/[A-Za-z]/g, '') : ''
+export const filterLetters = (str?: string): string => (str ? str.replace(/[A-Za-z]/g, '') : '')
 
 export type WithEntityState<T> = { [k in keyof T]: EntityState<T[k], string> }
 export type WithEntityAdapter<T> = {
@@ -61,13 +59,9 @@ type Join<K, P> = K extends string | number
   : never
 
 export type NestedKeyOf<ObjectType extends Record<string, unknown>> = {
-  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends Record<
-    string,
-    unknown
-  >
+  [Key in keyof ObjectType & (string | number)]: ObjectType[Key] extends Record<string, unknown>
     ? `${Key}` | Join<Key, NestedKeyOf<ObjectType[Key]>>
     : `${Key}`
 }[keyof ObjectType & (string | number)]
 
-export const capitalFirstLatter = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1)
+export const capitalFirstLatter = (str: string) => str.charAt(0).toUpperCase() + str.slice(1)

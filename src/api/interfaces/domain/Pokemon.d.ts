@@ -38,5 +38,4 @@ export type DomainPokemon = {
   species: DomainPokemonSpecies
 }
 
-export interface DomainListPokemon
-  extends RequiredBy<DomainPokemon, 'id' | 'name'> {}
+export interface DomainListPokemon extends RequiredBy<DomainPokemon, 'id' | 'name'> {}

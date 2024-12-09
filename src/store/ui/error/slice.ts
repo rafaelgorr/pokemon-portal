@@ -13,8 +13,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     setError: (state, action: PayloadAction<string | object>) => {
-      if (action.payload instanceof Object)
-        state.error = JSON.stringify(action.payload)
+      if (action.payload instanceof Object) state.error = JSON.stringify(action.payload)
       else state.error = action.payload
     },
   },

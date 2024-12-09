@@ -14,5 +14,4 @@ export const isUcFetching = (ucName: keyof State['fetching']) =>
     (state: StoreState) => state.useCases.pokemon.fetching,
     (fetching) => fetching[ucName],
   )
-export const getGettedIds = (state: StoreState) =>
-  state.useCases.pokemon.gettedIds
+export const getGettedIds = (state: StoreState) => state.useCases.pokemon.gettedIds

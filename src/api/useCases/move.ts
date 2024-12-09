@@ -28,9 +28,7 @@ export type GetPokemonMove = {
   output: DomainMove
 }
 
-export const getMoveById = async (
-  input: GetPokemonMove['input'],
-): Promise<GetPokemonMove['output']> => {
+export const getMoveById = async (input: GetPokemonMove['input']): Promise<GetPokemonMove['output']> => {
   const move = await moveClient.getMoveById(Number(input.id))
 
   return mapMoveToDomain(move)

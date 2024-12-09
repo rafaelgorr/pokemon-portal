@@ -8,10 +8,10 @@
   "scripts": {
     "dev": "webpack serve",
     "serve": "ts-node ./server",
-    "build": "yarn clean  && webpack --env production --config webpack.config.js --progress",
-    "clean": "rimraf ./dist",
+    "build": "npm run clean  && webpack --env production --config webpack.config.js --progress",
+    "clean": "rm -rf ./dist",
     "test": "jest ./__test__",
-    "test:watch": "yarn test --watch",
+    "test:watch": "npm run test --watch",
     "watch": "webpack --watch",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },

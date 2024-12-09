@@ -1,8 +1,5 @@
 import { StoreState } from '@pokemon-portal/store'
-import {
-  actions as drawerActions,
-  selectors as drawerSelectors,
-} from '@pokemon-portal/store/ui/drawer'
+import { actions as drawerActions, selectors as drawerSelectors } from '@pokemon-portal/store/ui/drawer'
 import {
   actions as systemActions,
   selectors as systemSelectors,

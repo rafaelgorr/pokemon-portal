@@ -11,7 +11,7 @@ type ExtendedProps = Record<string, unknown>
 interface Props extends ExtendedProps {
   itemsLength: number
   renderItem: (
-    virtualItem: VirtualItem<HTMLDivElement>,
+    virtualItem: VirtualItem,
     ref?: React.LegacyRef<HTMLDivElement>,
   ) => React.ReactNode
   renderLoader?: () => React.ReactChild | null

@@ -1,29 +1,12 @@
-import {
-  capitalFirstLatter,
-  capitalizeFirstLetter,
-} from '@pokemon-portal/src/utils/methods'
-import {
-  FlavorText,
-  NamedAPIResource,
-  Pokemon,
-  PokemonMove,
-  PokemonSpecies,
-  PokemonType,
-} from 'pokenode-ts'
+import { capitalFirstLatter, capitalizeFirstLetter } from '@pokemon-portal/src/utils/methods'
+import { FlavorText, NamedAPIResource, Pokemon, PokemonMove, PokemonSpecies, PokemonType } from 'pokenode-ts'
 
 import { mapPokemonAbilityToDomain } from './ability'
 import { getIdFromUrl } from './shared'
 import { DomainPokemonSpeciesFlavorTextEntry } from '../../interfaces'
-import {
-  DomainListPokemon,
-  DomainPokemon,
-  DomainPokemonMove,
-  DomainPokemonType,
-} from '../../interfaces/domain/Pokemon'
+import { DomainListPokemon, DomainPokemon, DomainPokemonMove, DomainPokemonType } from '../../interfaces/domain/Pokemon'
 
-export const mapListPokemonToDomain = (
-  input: NamedAPIResource,
-): DomainListPokemon => ({
+export const mapListPokemonToDomain = (input: NamedAPIResource): DomainListPokemon => ({
   id: getIdFromUrl(input.url),
   name: capitalFirstLatter(input.name),
 })
@@ -45,9 +28,7 @@ const mapPokemonSpeciesFlavorTextEntryToDomain = (
   version: capitalizeFirstLetter(speciesFTE.version?.name),
 })
 
-const mapPokemonSpeciesToDomain = (
-  pkmSpecies: PokemonSpecies,
-): Required<DomainPokemon>['species'] => ({
+const mapPokemonSpeciesToDomain = (pkmSpecies: PokemonSpecies): Required<DomainPokemon>['species'] => ({
   id: pkmSpecies.id.toString(),
   name: pkmSpecies.name,
   flavorTextEntries: pkmSpecies.flavor_text_entries
@@ -55,10 +36,7 @@ const mapPokemonSpeciesToDomain = (
     .map(mapPokemonSpeciesFlavorTextEntryToDomain),
 })
 
-export const mapPokemonToDomain = (
-  pkm: Pokemon,
-  pkmSpecies: PokemonSpecies,
-): Required<DomainPokemon> => ({
+export const mapPokemonToDomain = (pkm: Pokemon, pkmSpecies: PokemonSpecies): Required<DomainPokemon> => ({
   id: pkm.id.toString(),
   name: capitalFirstLatter(pkm.name),
   types: pkm.types.map(mapPokemonTypeToDomain),

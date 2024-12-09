@@ -1,5 +1,4 @@
-const baseUrl =
-  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
+const baseUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
 const others = {
   dreamWorld: 'other/dream-world',
@@ -55,29 +54,20 @@ const generations = {
 }
 type Generations = typeof generations
 type GenerationsKeys = keyof Generations
-type Game<
-  G extends Generations,
-  K extends GenerationsKeys,
-> = keyof G[K]['games']
+type Game<G extends Generations, K extends GenerationsKeys> = keyof G[K]['games']
 
 const getters = {
   getSprite: (pokemonId: string) => `${baseUrl}/${pokemonId}.png`,
   getShinySprite: (pokemonId: string) => `${baseUrl}/shiny/${pokemonId}.png`,
-  getOtherSprite: (pokemonId?: string) =>
-    `${baseUrl}/${getBaseUrl('officialArtwork')}/${pokemonId}.png`,
-  getGenerationSprite: <
-    G extends Generations,
-    K extends GenerationsKeys,
-  >(input: {
+  getOtherSprite: (pokemonId?: string) => `${baseUrl}/${getBaseUrl('officialArtwork')}/${pokemonId}.png`,
+  getGenerationSprite: <G extends Generations, K extends GenerationsKeys>(input: {
     number: K
     game: Game<G, K>
     pokemonId: string
   }) => {
     const { game, number, pokemonId } = input
     const generation = generations[number]
-    const gamePath = Object.entries(generation.games).find(
-      ([k]) => k === game,
-    )?.[1]
+    const gamePath = Object.entries(generation.games).find(([k]) => k === game)?.[1]
 
     return `${baseUrl}/${generation.path}/${gamePath}/${pokemonId}.png`
   },
