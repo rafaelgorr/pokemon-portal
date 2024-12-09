@@ -126,7 +126,7 @@ const fileLoader = {
   type: 'asset/resource',
   generator: {
     filename: (pathdata) =>
-      pathdata.filename.endsWith('.ttf') ?? pathdata.filename.endsWith('.txt')
+      (pathdata.filename.endsWith('.ttf') ?? pathdata.filename.endsWith('.txt'))
         ? 'fonts/[hash][ext]'
         : pathdata.filename.endsWith('.json')
           ? 'json/[hash][ext]'
@@ -196,6 +196,7 @@ const makeCommonPlugins = (env) => [
   }),
   new ESLintPlugin({
     extensions: ['ts', 'tsx'],
+    configType: 'flat',
   }),
   // new webpack.ProvidePlugin({
   //   process: 'process/browser',
@@ -275,9 +276,7 @@ const output = (env) => ({
  */
 const optimization = (env) => ({
   minimize: env.production,
-  minimizer: env.production
-    ? [`...`, /*new TerserPlugin({ parallel: TERSER_WORKERS })*/ new CssMinimizerPlugin()]
-    : [],
+  minimizer: env.production ? [`...`, /*new TerserPlugin({ parallel: TERSER_WORKERS })*/ new CssMinimizerPlugin()] : [],
   usedExports: true,
   runtimeChunk: 'single',
   splitChunks: {
