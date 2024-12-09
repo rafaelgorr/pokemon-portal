@@ -15,16 +15,14 @@ import { NestedKeyOf } from '@pokemon-portal/src/utils/methods'
 import Fuse, { IFuseOptions } from 'fuse.js'
 import React, { useMemo, useState } from 'react'
 
-import { ListItem, ListItemProps } from './ListItem'
+import { ListItemButton, ListItemButtonProps } from './ListItemButton'
 import SentinelReactVirtual from './Virtualize/SentinelReactVirtual'
 import { useStyles } from './styles'
 import { IntersectionObserverParams } from './useIntersectionObserver'
 
 // import ReactVirtual from './Virtualize/ReactVirtual'
 
-const getFuseOptions = <T extends object>(
-  ...keys: string[]
-): IFuseOptions<T> => ({
+const getFuseOptions = <T extends object>(...keys: string[]): IFuseOptions<T> => ({
   shouldSort: false,
   threshold: 0.1,
   location: 0,
@@ -38,10 +36,10 @@ type BaseProps<Item extends Record<string, unknown>> = {
   listItems: Item[]
   fetching?: boolean
   listItemProps: {
-    getPrimary: (it: Item) => ListItemProps['primary']
-    getSecondary?: (it: Item) => ListItemProps['secondary']
-    getSecondaryAction?: (it: Item) => ListItemProps['secondaryAction']
-    getAvatarSrc?: (it: Item) => ListItemProps['avatarSrc']
+    getPrimary: (it: Item) => ListItemButtonProps['primary']
+    getSecondary?: (it: Item) => ListItemButtonProps['secondary']
+    getSecondaryAction?: (it: Item) => ListItemButtonProps['action']
+    getAvatarSrc?: (it: Item) => ListItemButtonProps['avatarSrc']
   }
   selectedItem?: Item
   handleItemClick(item: Item): () => void
@@ -59,9 +57,7 @@ type Props<Item extends Record<string, unknown>> = Item extends { id: string }
   ? BaseProps<Item>
   : BaseProps<Item> & { selectorKey: keyof Item }
 
-const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(
-  props: Props<T>,
-) => {
+const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(props: Props<T>) => {
   const styles = useStyles(useTheme())
 
   const {
@@ -78,17 +74,10 @@ const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(
     // infiniteScrollProps,
   } = props
 
-  const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } =
-    listItemProps
+  const { getPrimary, getSecondary, getSecondaryAction, getAvatarSrc } = listItemProps
 
-  const fuseOptions: IFuseOptions<T> = useMemo(
-    () => getFuseOptions(...fuseKeys),
-    [],
-  )
-  const fuse = useMemo(
-    () => new Fuse(listItems as T[], fuseOptions),
-    [listItems],
-  )
+  const fuseOptions: IFuseOptions<T> = useMemo(() => getFuseOptions(...fuseKeys), [])
+  const fuse = useMemo(() => new Fuse(listItems as T[], fuseOptions), [listItems])
 
   const [search, setSearch] = useState('')
 
@@ -170,7 +159,7 @@ const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(
           //     </React.Fragment>
           //   )
           return (
-            <ListItem
+            <ListItemButton
               key={virtualItem.key}
               row-index={virtualItem.index}
               ref={ref as any}
@@ -179,7 +168,8 @@ const ListWithSearch = <T extends Record<string, unknown> & { id: string }>(
               onClick={handleItemClick(item)}
               selected={selectedItem?.[selectorKey] === item[selectorKey]}
               id={item[selectorKey] as string}
-              secondaryAction={getSecondaryAction?.(item)}
+              action={getSecondaryAction?.(item)}
+              // secondaryAction={getSecondaryAction?.(item)}
               avatarSrc={getAvatarSrc?.(item)}
               // sx={{ height: rows[virtualItem.index] }}
               sx={{ height: virtualItem.size }}
